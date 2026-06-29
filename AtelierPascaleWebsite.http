@@ -1,0 +1,6 @@
+@AtelierPascaleWebsite_HostAddress = http://localhost:5107
+
+GET {{AtelierPascaleWebsite_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
