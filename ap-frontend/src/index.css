@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@theme {
+    --color-ap-ivory: #F7F3ED;
+    --color-ap-tan: #E3D4BF;
+    --color-ap-beige: #DBC7AD;
+    --color-ap-brown: #7F6753;
+}
