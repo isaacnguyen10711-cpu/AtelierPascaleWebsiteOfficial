@@ -1,16 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { Link } from 'react-router-dom'
 
 function App() {
-  
+
 
   return (
     <div>
-      <nav className=" shadow-md">
-        <div className="mx-auto px-4 py-4 flex items-center justify-between">
-          Home
+      <nav className="bg-ap-beige shadow-md">
+        <div className="mx-auto px-4 py-4 flex items-center gap-4 text-white font-medium md:gap-6 lg:gap-8">
+          <Link to="/">
+            Home
+          </Link>
+          <Link to="/products/lacquer">
+            Lacquer
+          </Link>
+          <Link to="/products/art">
+            Art
+          </Link>
         </div>
       </nav>
     </div>

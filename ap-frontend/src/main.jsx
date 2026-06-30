@@ -8,7 +8,7 @@ import Login from './customerPages/LoginPage.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <div className=" min-h-screen bg-ap-ivory">
+      <div className=" min-h-screen bg-ap-tan">
         <App />
         <Routes>
           <Route path="/login" element={<Login />} />
