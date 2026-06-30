@@ -8,9 +8,12 @@ using AtelierPascaleWebsite.Data;
 public class UsersController : ControllerBase
 {
     private readonly DatabaseContext _context;
-    public UsersController(DatabaseContext context)
+    private readonly IConfiguration _configuration;
+
+    public UsersController(DatabaseContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
 
     // GET: api/User
@@ -96,4 +99,5 @@ public class UsersController : ControllerBase
     {
         return _context.Users.Any(e => e.Id == id);
     }
+
 }
