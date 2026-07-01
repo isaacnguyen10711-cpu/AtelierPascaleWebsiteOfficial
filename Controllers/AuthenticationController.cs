@@ -99,7 +99,7 @@ namespace AtelierPascaleWebsite.Controllers
                 Role = "User", // Default role
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Age = request.Age
+                DateOfBirth = request.DateOfBirth
             };
             var passwordHasher = new PasswordHasher<User>();
             newUser.PasswordHash = passwordHasher.HashPassword(newUser, request.Password);

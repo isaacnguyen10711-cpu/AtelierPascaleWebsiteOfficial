@@ -11,7 +11,7 @@ public class User
     public string Role { get; set; } = "Customer";
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-    public int? Age { get; set; }
+    public DateTime? DateOfBirth { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

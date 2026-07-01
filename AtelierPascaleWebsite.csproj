@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="ap-frontend\src\adminPages\" />
-    <Folder Include="ap-frontend\src\customerPages\" />
   </ItemGroup>
 
 </Project>
