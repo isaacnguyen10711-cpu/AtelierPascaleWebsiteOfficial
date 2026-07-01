@@ -49,7 +49,7 @@ namespace AtelierPascaleWebsite.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
-                new Claim(ClaimTypes.Email, userAccount.Email), 
+                new Claim(ClaimTypes.Email, userAccount.Email),
                 new Claim(ClaimTypes.Role, userAccount.Role)
             };
 
@@ -77,28 +77,33 @@ namespace AtelierPascaleWebsite.Controllers
 
             });
         }
-    }
 
-    [HttpPost("register")]
-    public async Task<ActionResult> Register([FromBody] User request)
+        [HttpPost("register")]
+        public async Task<ActionResult> Register([FromBody] RegisterRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
             {
                 return BadRequest("Email and password are required.");
             }
+
             var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+
             if (existingUser != null)
             {
                 return Conflict("A user with this email already exists.");
             }
-            var passwordHasher = new PasswordHasher<User>();
-            var hashedPassword = passwordHasher.HashPassword(null, request.Password);
+
             var newUser = new User
             {
                 Email = request.Email,
-                PasswordHash = hashedPassword,
-                Role = "User" // Default role
+                Role = "User", // Default role
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Age = request.Age
             };
+            var passwordHasher = new PasswordHasher<User>();
+            newUser.PasswordHash = passwordHasher.HashPassword(newUser, request.Password);
+
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
             return Ok("User registered successfully.");
@@ -106,3 +111,4 @@ namespace AtelierPascaleWebsite.Controllers
 
 
     }
+}
