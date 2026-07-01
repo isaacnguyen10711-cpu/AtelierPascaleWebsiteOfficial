@@ -3,6 +3,10 @@
 
 @import "tailwindcss";
 
+body {
+    background-color: var(--color-ap-tan);
+}
+
 @theme {
     --color-ap-tan: #F7F3ED;
     --color-ap-beige: #CAAE91;
