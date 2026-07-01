@@ -1,26 +1,18 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import NavBar from './components/NavBar.jsx'
+import HomePage from './customerPages/HomePage.jsx'
+import LoginPage from './customerPages/LoginPage.jsx'
 
 function App() {
-
-
   return (
-    <div>
-      <nav className="bg-ap-beige shadow-md">
-        <div className="mx-auto px-4 py-4 flex items-center gap-4 text-white font-medium md:gap-6 lg:gap-8">
-          <Link to="/">
-            Home
-          </Link>
-          <Link to="/products/lacquer">
-            Lacquer
-          </Link>
-          <Link to="/products/art">
-            Art
-          </Link>
-        </div>
-      </nav>
-    </div>
+    <>
+      <NavBar />
 
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </>
   )
 }
 
