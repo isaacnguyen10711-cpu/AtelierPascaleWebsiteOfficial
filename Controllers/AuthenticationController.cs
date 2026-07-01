@@ -40,10 +40,10 @@ namespace AtelierPascaleWebsite.Controllers
                 return Unauthorized("Invalid email or password.");
             }
 
-            var issuer = _configuration["Jwt:Issuer"];
-            var audience = _configuration["Jwt:Audience"];
-            var key = _configuration["Jwt:Key"];
-            var tokenValidityInMinutes = _configuration.GetValue<int>("Jwt:Token:TokenValidityInMinutes");
+            var issuer = _configuration["JwtConfig:Issuer"];
+            var audience = _configuration["JwtConfig:Audience"];
+            var key = _configuration["JwtConfig:Key"];
+            var tokenValidityInMinutes = _configuration.GetValue<int>("JwtConfig:TokenValidityInMinutes");
             var tokenExpiryTimeStamp = DateTime.UtcNow.AddMinutes(tokenValidityInMinutes);
 
             var claims = new[]
