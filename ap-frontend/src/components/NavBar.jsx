@@ -3,10 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import { House, Menu, X } from 'lucide-react'
 
 function NavBar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   const location = useLocation()
   const isLoginPage = location.pathname === '/login'
   const isLoggedIn = Boolean(localStorage.getItem('token'))
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const linkHover = isLoginPage ? 'hover:text-gray-500' : 'hover:text-gray-300'
 
   function handleLogout() {
@@ -48,8 +49,8 @@ function NavBar() {
           <Link className={linkHover} to="/products/gifts">
             Gifts
           </Link>
-          <Link className={linkHover} to="/products/jewellry">
-            Jewellry
+          <Link className={linkHover} to="/products/jewelry">
+            Jewelry
           </Link>
           <Link className={linkHover} to="/products/art">
             Art
@@ -81,8 +82,8 @@ function NavBar() {
             <Link className={linkHover} to="/products/gifts" onClick={closeMenu}>
               Gifts
             </Link>
-            <Link className={linkHover} to="/products/jewellry" onClick={closeMenu}>
-              Jewellry
+            <Link className={linkHover} to="/products/jewelry" onClick={closeMenu}>
+              Jewelry
             </Link>
             <Link className={linkHover} to="/products/art" onClick={closeMenu}>
               Art

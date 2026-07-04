@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom'
 
 const images = {
   newArrival: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background6.jpg',
-  lacquer: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/LacquerBackground.jpg',
+  homeDecor: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/LacquerBackground.jpg',
+  gifts: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background5.jpg',
+  jewelry: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background6.jpg',
   art: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background3%20edited.jpg',
 }
 
@@ -29,10 +31,10 @@ function HomePage() {
             New Arrival
           </h2>
 
-          <div className="grid gap-15 w-[90%] mx-auto md:grid-cols-2">
+          <div className="mx-auto grid w-[90%] gap-15 md:grid-cols-2">
             <div>
               <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
-              <h3 className="mt-5 font-['Tangerine'] mx-auto text-4xl font-bold">Latest Pieces</h3>
+              <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold">Latest Pieces</h3>
               <p className="mt-2 leading-7 text-ap-brown">
                 Recently added pieces selected for quiet rooms, warm shelves, and slow-looking corners.
               </p>
@@ -40,78 +42,117 @@ function HomePage() {
 
             <div>
               <img src={images.art} alt="Featured art arrival" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
-              <h3 className="mt-5 font-['Tangerine'] mx-auto text-4xl font-bold">Collected Forms</h3>
-              <p className="mt-2 leading-7 text-ap-brown/80">
+              <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold">Collected Forms</h3>
+              <p className="mt-2 leading-7 text-ap-brown">
                 A soft introduction to the newest textures, surfaces, and handmade details.
               </p>
             </div>
           </div>
 
           <div className="mx-auto mt-10 max-w-[90%] text-center md:max-w-[40%] lg:max-w-[50%]">
-            <img src={images.lacquer} alt="Centered new arrival feature" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
-            <Link to="/products" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
+            <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
+            <Link to="/products/new-arrival" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
               Discover More
             </Link>
           </div>
         </section>
 
-        <section id="lacquer" className="mx-auto mt-25 max-w-6xl">
-          <h2 className="mb-12 text-center font-['Tangerine'] text-6xl font-bold md:text-7xl">
-            Lacquer Impression
-          </h2>
+        <section id="home-decor" className="mx-auto mt-28 grid max-w-6xl gap-4 md:grid-cols-2 md:items-center">
+          <div>
+            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown">Timeless Elegance</p>
+            <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
+              Home Decor
+            </h2>
+            <p className="mt-6 leading-8 text-ap-brown">
+              Objects and finishes chosen to bring warmth, stillness, and character into everyday rooms.
+            </p>
+            <Link to="/products/home-decor" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
+              Explore
+            </Link>
+          </div>
 
-          <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-            <img src={images.lacquer} alt="Lacquer detail" className="mx-auto h-[180px] w-full object-cover object-center md:h-[250px] lg:h-[350px]" />
-            <img src={images.newArrival} alt="Lacquer styled piece" className="mx-auto h-[180px] w-full object-cover object-center md:h-[340px] lg:h-[460px]" />
-            <img src={images.lacquer} alt="Lacquer surface" className="mx-auto h-[180px] w-full object-cover object-center md:self-end md:mt-16 md:h-[250px] lg:h-[350px]" />
-            <img src={images.art} alt="Lacquer arrangement" className="mx-auto h-[180px] object-cover object-center md:h-[250px] lg:h-[350px]" />
+          <div className="grid gap-4 md:grid-cols-[5fr_4fr]">
+            <img src={images.homeDecor} alt="Home decor collection" className="mx-auto h-[240px] w-full object-cover object-center md:h-[320px] lg:h-[420px]" />
+            <img src={images.gifts} alt="Home decor detail" className="mx-auto h-[220px] w-full object-cover object-center md:mt-10 md:h-[270px] lg:h-[350px]" />
+          </div>
+        </section>
+
+        <section id="gifts" className="mx-auto mt-28 max-w-6xl">
+          <div className="mb-10 text-center">
+            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown">Thoughtful Gestures</p>
+            <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
+              Gifts
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl leading-8 text-ap-brown">
+              Small pieces with presence, made for celebrations, quiet gratitude, and personal keepsakes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <img src={images.gifts} alt="Gift collection detail" className="mx-auto h-[180px] w-full object-cover object-center md:h-[250px] lg:h-[350px]" />
+            <img src={images.newArrival} alt="Gift collection piece" className="mx-auto h-[180px] w-full object-cover object-center md:h-[320px] lg:h-[430px]" />
+            <img src={images.homeDecor} alt="Gift collection surface" className="mx-auto h-[180px] w-full object-cover object-center md:self-center md:h-[250px] lg:h-[350px]" />
+            <img src={images.art} alt="Gift collection arrangement" className="mx-auto h-[180px] w-full object-cover object-center md:h-[250px] lg:h-[350px]" />
           </div>
 
           <div className="text-center">
-            <Link to="/products/lacquer" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
-              Explore Lacquer
+            <Link to="/products/gifts" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
+              Explore
             </Link>
           </div>
         </section>
 
-        <section className="mx-auto mt-28 grid max-w-6xl gap-10 md:grid-cols-[3fr_4fr] md:items-center">
-          <div className="">
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown">Timeless Elegance</p>
+        <section id="jewelry" className="mx-auto mt-28 grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
+          <div className="md:order-2">
+            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown">Personal Details</p>
             <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
-              Made for Stillness
+              Jewelry
             </h2>
             <p className="mt-6 leading-8 text-ap-brown">
-              A quiet study of shapes, finishes, and objects that bring warmth into everyday spaces.
+              Delicate accents and expressive forms selected for everyday wear and meaningful moments.
             </p>
+            <Link to="/products/jewellry" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
+              Explore
+            </Link>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            <img src={images.newArrival} alt="Timeless elegance feature" className="mx-auto h-[260px] w-full object-cover object-center md:h-[320px] lg:h-[540px]" />
-            <img src={images.lacquer} alt="Timeless lacquer feature" className="mx-auto h-[220px] w-full object-cover object-center md:h-[270px] md:mt-10 lg:h-[350px] lg:mt-10" />
+          <div className="md:order-1">
+            <img src={images.jewelry} alt="Jewelry collection" className="mx-auto h-[260px] w-full object-cover object-center md:h-[340px] lg:h-[460px]" />
           </div>
         </section>
 
         <section id="art" className="mx-auto mt-28 max-w-6xl pb-10">
-          <div className="mb-12 max-w-2xl">
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown/70">Moments Become Art</p>
-            <h2 className="font-['Tangerine'] text-6xl font-bold md:text-7xl">
-              Art
-            </h2>
-            <p className="mt-6 text-ap-brown">
-              Expressive pieces arranged with space to breathe, made to be discovered slowly.
-            </p>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div>
+              <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown">Moments Become Art</p>
+              <h2 className="font-['Tangerine'] text-6xl font-bold md:text-7xl">
+                Art
+              </h2>
+              <p className="mt-6 leading-8 text-ap-brown">
+                Expressive pieces arranged with space to breathe, made to be discovered slowly.
+              </p>
+              <Link to="/products/art" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
+                Explore
+              </Link>
+            </div>
+
+            <div>
+              <img src={images.art} alt="Art collection piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+            </div>
+
+            <div>
+              <img src={images.newArrival} alt="Art collection arrangement" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+            </div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3 md:items-end">
-            <img src={images.art} alt="Art collection piece" className="mx-auto h-[240px] w-[80%] object-cover object-center md:h-[260px] lg:h-[460px]" />
-            <img src={images.newArrival} alt="Art collection arrangement" className="mx-auto h-[260px] w-[80%] object-cover object-center" />
-            <img src={images.art} alt="Art collection detail" className="mx-auto h-[260px] w-[80%] object-cover object-center md:h-[320px] lg:h-[540px]" />
-          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div>
+              <img src={images.homeDecor} alt="Art styling piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+            </div>
 
-          <div className="mt-10 text-center">
-            <Link to="/products/art" className="inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
-              Explore Art
-            </Link>
+            <div>
+              <img src={images.gifts} alt="Art detail piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+            </div>
           </div>
         </section>
       </main>
@@ -120,7 +161,5 @@ function HomePage() {
 }
 
 export default HomePage
-
-
 
 
