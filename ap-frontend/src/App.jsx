@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar.jsx'
 import HomePage from './customerPages/HomePage.jsx'
 import LoginPage from './customerPages/LoginPage.jsx'
+import Footer from './components/Footer.jsx'
 
 function App() {
   return (
@@ -12,8 +13,11 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
+
+      <Footer />
     </>
   )
 }
 
 export default App
+
