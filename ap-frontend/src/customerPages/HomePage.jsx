@@ -33,7 +33,7 @@ function HomePage() {
             <div>
               <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
               <h3 className="mt-5 font-['Tangerine'] mx-auto text-4xl font-bold">Latest Pieces</h3>
-              <p className="mt-2 leading-7 text-ap-brown/80">
+              <p className="mt-2 leading-7 text-ap-brown">
                 Recently added pieces selected for quiet rooms, warm shelves, and slow-looking corners.
               </p>
             </div>
@@ -67,27 +67,27 @@ function HomePage() {
             <img src={images.art} alt="Lacquer arrangement" className="mx-auto h-[180px] object-cover object-center md:h-[250px] lg:h-[350px]" />
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="text-center">
             <Link to="/products/lacquer" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
               Explore Lacquer
             </Link>
           </div>
         </section>
 
-        <section className="mx-auto mt-28 grid max-w-6xl gap-12 md:flex md:flex-row md:items-center">
-          <div>
-            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown/70">Timeless Elegance</p>
+        <section className="mx-auto mt-28 grid max-w-6xl gap-10 md:grid-cols-[3fr_4fr] md:items-center">
+          <div className="">
+            <p className="mb-4 text-sm uppercase tracking-[0.3em] text-ap-brown">Timeless Elegance</p>
             <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
               Made for Stillness
             </h2>
-            <p className="mt-6 leading-8 text-ap-brown/80">
+            <p className="mt-6 leading-8 text-ap-brown">
               A quiet study of shapes, finishes, and objects that bring warmth into everyday spaces.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
-            <img src={images.newArrival} alt="Timeless elegance feature" className="mx-auto h-[260px] w-[80%] object-cover object-center md:h-[320px] lg:h-[540px]" />
-            <img src={images.lacquer} alt="Timeless lacquer feature" className="mx-auto h-[220px] w-[80%] object-cover object-center md:mt-24 md:h-[320px] lg:h-[220px]" />
+            <img src={images.newArrival} alt="Timeless elegance feature" className="mx-auto h-[260px] w-full object-cover object-center md:h-[320px] lg:h-[540px]" />
+            <img src={images.lacquer} alt="Timeless lacquer feature" className="mx-auto h-[220px] w-full object-cover object-center md:h-[270px] md:mt-10 lg:h-[350px] lg:mt-10" />
           </div>
         </section>
 
@@ -97,7 +97,7 @@ function HomePage() {
             <h2 className="font-['Tangerine'] text-6xl font-bold md:text-7xl">
               Art
             </h2>
-            <p className="mt-6 leading-8 text-ap-brown/80">
+            <p className="mt-6 text-ap-brown">
               Expressive pieces arranged with space to breathe, made to be discovered slowly.
             </p>
           </div>
@@ -120,6 +120,7 @@ function HomePage() {
 }
 
 export default HomePage
+
 
 
 
