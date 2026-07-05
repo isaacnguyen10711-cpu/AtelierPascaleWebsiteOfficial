@@ -55,6 +55,9 @@ function NavBar() {
           <Link className={linkHover} to="/products/art">
             Art
           </Link>
+          <Link className={linkHover} to="/about">
+            About
+          </Link>
         </div>
 
         <div className="justify-self-end">
@@ -87,6 +90,9 @@ function NavBar() {
             </Link>
             <Link className={linkHover} to="/products/art" onClick={closeMenu}>
               Art
+            </Link>
+            <Link className={linkHover} to="/about" onClick={closeMenu}>
+              About
             </Link>
           </div>
         </div>
