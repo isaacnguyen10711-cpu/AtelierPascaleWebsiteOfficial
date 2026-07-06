@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -35,7 +35,7 @@ function LoginPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="min-w-xs px-8 py-6 bg-white rounded-lg shadow-lg md:min-w-md lg:min-w-xl">
+      <div className="w-[85%] max-w-xs px-8 py-6 bg-white rounded-lg shadow-lg md:max-w-md lg:max-w-xl">
         <h2 className="text-lg font-bold text-center text-black md:text-xl lg:text-2xl">Login</h2>
         <form className="space-y-2 md:space-y-3 lg:space-y-4" onSubmit={handleLogin}>
           <div className="space-y-4">
@@ -79,3 +79,7 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+
+
+

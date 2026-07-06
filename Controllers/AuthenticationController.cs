@@ -96,10 +96,7 @@ namespace AtelierPascaleWebsite.Controllers
             var newUser = new User
             {
                 Email = request.Email,
-                Role = "User", // Default role
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                DateOfBirth = request.DateOfBirth
+                Role = "Customer", // Default role
             };
             var passwordHasher = new PasswordHasher<User>();
             newUser.PasswordHash = passwordHasher.HashPassword(newUser, request.Password);
