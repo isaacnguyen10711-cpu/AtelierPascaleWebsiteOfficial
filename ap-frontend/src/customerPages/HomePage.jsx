@@ -111,7 +111,7 @@ function HomePage() {
             <p className="mt-6 leading-8 text-ap-brown">
               Delicate accents and expressive forms selected for everyday wear and meaningful moments.
             </p>
-            <Link to="/products/jewelry" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
+            <Link to="/products/jewellry" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
               Explore
             </Link>
           </div>
@@ -161,3 +161,5 @@ function HomePage() {
 }
 
 export default HomePage
+
+

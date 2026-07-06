@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import { Camera, Mail, MapPin, Phone } from 'lucide-react'
 
 function Footer() {
@@ -28,7 +28,7 @@ function Footer() {
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em]">Service</h3>
           <div className="flex flex-col gap-3">
             <Link to="/products/gifts" className="hover:text-ap-beige">Gifts</Link>
-            <Link to="/products/jewelry" className="hover:text-ap-beige">Jewelry</Link>
+            <Link to="/products/jewellry" className="hover:text-ap-beige">Jewelry</Link>
             <Link to="/login" className="hover:text-ap-beige">Account</Link>
             <Link to="/cart" className="hover:text-ap-beige">Shopping Bag</Link>
           </div>
@@ -66,3 +66,4 @@ function Footer() {
 }
 
 export default Footer
+
