@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar.jsx'
 import HomePage from './customerPages/HomePage.jsx'
 import LoginPage from './customerPages/LoginPage.jsx'
+import RegisterPage from './customerPages/RegisterPage.jsx'
+import ProductPage from './customerPages/ProductPage.jsx'
 import Footer from './components/Footer.jsx'
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/products/:categoryName" element={<ProductPage />} />
       </Routes>
 
       <Footer />
@@ -20,4 +24,3 @@ function App() {
 }
 
 export default App
-
