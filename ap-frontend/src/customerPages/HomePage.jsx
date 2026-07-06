@@ -12,7 +12,7 @@ function HomePage() {
   return (
     <>
       <section className="relative min-h-screen">
-        <div className="bg-home" />
+        <div className="absolute bg-home" />
 
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
           <h1 className="pr-15 font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
@@ -27,7 +27,7 @@ function HomePage() {
 
       <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
         <section id="new-arrival" className="mx-auto max-w-5xl">
-          <h2 className="mb-10 mt-[-2rem] text-center font-['Tangerine'] text-6xl font-bold md:text-7xl">
+          <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-6xl font-bold md:text-7xl">
             New Arrival
           </h2>
 
