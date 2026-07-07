@@ -9,32 +9,30 @@ function ProductPage() {
 
   const { categoryName } = useParams();
 
-  useEffect(() => {
-    async function loadProducts() {
-      const categoryResponse = await fetch(`https://localhost:7215/api/Categories`);
-      const categoryData = await categoryResponse.json();
+  // Fetch products based on the categoryName from the URL
+  async function loadProducts() {
+    const categoryResponse = await fetch(`https://localhost:7215/api/Categories`);
+    const categoryData = await categoryResponse.json();
 
-      const selectedCategory = categoryData.find((cat) => cat.name.toLowerCase().replaceAll(' ', '-') === categoryName.toLowerCase());
+    const selectedCategory = categoryData.find((cat) => cat.name.toLowerCase().replaceAll(' ', '-') === categoryName.toLowerCase());
 
-      // Prevent setting category if selectedCategory is undefined
-      if (!selectedCategory) {
-        setCategory('');
-        setProducts([]);
-        return;
-      }
-
-      setCategory(selectedCategory.name);
-
-      console.log('categoryName from URL:', categoryName);
-      console.log('categories from API:', categoryData);
-
-      const productResponse = await fetch(`https://localhost:7215/api/products`);
-      const productData = await productResponse.json();
-
-      const productsByCategory = productData.filter((product) => product.categoryId === selectedCategory.id);
-      setProducts(productsByCategory);
+    // Prevent setting category if selectedCategory is undefined
+    if (!selectedCategory) {
+      setCategory('');
+      setProducts([]);
+      return;
     }
 
+    setCategory(selectedCategory.name);
+
+    const productResponse = await fetch(`https://localhost:7215/api/products`);
+    const productData = await productResponse.json();
+
+    const productsByCategory = productData.filter((product) => product.categoryId === selectedCategory.id);
+    setProducts(productsByCategory);
+  }
+
+  useEffect(() => {
     loadProducts();
   }, [categoryName]);
 
@@ -46,26 +44,29 @@ function ProductPage() {
 
   return (
     <>
-    <div className="relative min-h-screen">
-      <div className={categoryBackground} />
-      <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
-        <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
-          {category}
-        </h1>
-      </div> 
-      {products.length > 0 ? (
-        <div>
-          {products.map((product) => (
-            <div key={product.id}>
-              <h2>{product.name}</h2>
-              <p>{product.description}</p>
-              <p>{product.price}</p>
-            </div>
-          ))}
+      <div className="relative min-h-screen">
+        <div className={categoryBackground} />
+        <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
+          <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
+            {category}
+          </h1>
         </div>
-      ) : (
-        <p>No products found.</p>
-      )}
+        {/* Lists out products */} 
+        {products.length > 0 ? (
+          <div className="border border-ap-brown flex flex-col-2 md:flex-col-4 gap-4 ">
+            <div>
+              {products.map((product) => (
+                <div key={product.id} className="space-y-2 md:space-y-4">
+                  <h2>{product.name}</h2>
+                  <p>{product.description}</p>
+                  <p>{product.price}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p>No products found.</p>
+        )}
       </div>
     </>
   );

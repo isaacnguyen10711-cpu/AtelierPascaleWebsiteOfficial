@@ -14,6 +14,7 @@ function Footer() {
           </p>
         </div>
 
+        {/* Section includes links to different pages */}
         <div>
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em]">Explore</h3>
           <div className="flex flex-col gap-3">
@@ -34,6 +35,7 @@ function Footer() {
           </div>
         </div>
 
+        {/* Section includes contact information */}
         <div>
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em]">Atelier</h3>
           <div className="flex flex-col gap-3">

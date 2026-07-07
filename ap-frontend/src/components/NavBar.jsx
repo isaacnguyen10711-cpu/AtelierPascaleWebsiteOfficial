@@ -7,6 +7,7 @@ function NavBar() {
 
   const location = useLocation()
   const isAuthenticationPage = location.pathname === '/login' || location.pathname === '/register'
+  // Used for changing the login button to logout button if the user is logged in
   const isLoggedIn = Boolean(localStorage.getItem('token'))
   const linkHover = isAuthenticationPage ? 'hover:text-gray-500' : 'hover:text-gray-300'
 
@@ -22,6 +23,7 @@ function NavBar() {
   return (
     <nav className="absolute left-0 top-0 z-50 w-full border-b border-white bg-transparent shadow-md">
       <div className={`mx-auto grid grid-cols-[25%_50%_25%] items-center px-4 py-4 font-medium text-sm ${isAuthenticationPage ? 'text-black' : 'text-white'} md:text-base lg:text-lg`}>
+        {/* Display a menu section which contains the category menu if its on mobile view */} 
         <div className="md:hidden">
           <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)} className={linkHover}>
             {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}

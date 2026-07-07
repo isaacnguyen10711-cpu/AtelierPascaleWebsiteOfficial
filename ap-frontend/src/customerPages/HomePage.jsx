@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 
 const images = {
-  newArrival: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background6.jpg',
-  homeDecor: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/LacquerBackground.jpg',
-  gifts: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background5.jpg',
-  jewelry: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background6.jpg',
-  art: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Background3%20edited.jpg',
+  newArrival: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/NewArrivalbg.jpg',
+  homeDecor: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/HomeDecorbg.jpg',
+  gifts: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Giftsbg.jpg',
+  jewelry: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Jewelrybg.jpg',
+  art: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Artbg.jpg',
 }
 
 function HomePage() {
@@ -14,12 +14,13 @@ function HomePage() {
       <section className="relative min-h-screen">
         <div className="absolute bg-home" />
 
+        {/* Stack 2 h1 in flex-col and push them to the end */}
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
-          <h1 className="pr-15 font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
+          <h1 className="pr-15 font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
             Atelier
           </h1>
 
-          <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:mt-[0.2rem] md:text-[5rem] lg:mt-[0.5rem] lg:text-[7rem]">
+          <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] md:mt-[0.2rem] md:text-[5rem] lg:mt-[0.5rem] lg:text-[7rem]">
             Pascale
           </h1>
         </div>
@@ -27,11 +28,11 @@ function HomePage() {
 
       <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
         <section id="new-arrival" className="mx-auto max-w-5xl">
-          <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-6xl font-bold md:text-7xl">
+          <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
             New Arrival
           </h2>
 
-          <div className="mx-auto grid w-[90%] gap-15 md:grid-cols-2">
+          <div className="mx-auto mt-5 grid w-[90%] gap-15 md:grid-cols-2">
             <div>
               <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
               <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold">Latest Pieces</h3>
@@ -51,7 +52,7 @@ function HomePage() {
 
           <div className="mx-auto mt-10 max-w-[90%] text-center md:max-w-[40%] lg:max-w-[50%]">
             <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
-            <Link to="/products/new-arrival" className="mt-8 inline-block border border-ap-brown px-8 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
+            <Link to="/products/new-arrival" className="mt-8 inline-block border border-ap-brown px-7 py-3 text-sm uppercase tracking-[0.2em] hover:bg-ap-brown hover:text-ap-tan">
               Discover More
             </Link>
           </div>
