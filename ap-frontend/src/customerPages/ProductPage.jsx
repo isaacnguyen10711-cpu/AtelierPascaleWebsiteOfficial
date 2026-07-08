@@ -1,7 +1,5 @@
-import React from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+﻿import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
@@ -9,30 +7,33 @@ function ProductPage() {
 
   const { categoryName } = useParams();
 
-  // Fetch products based on the categoryName from the URL
-  async function loadProducts() {
-    const categoryResponse = await fetch(`https://localhost:7215/api/Categories`);
-    const categoryData = await categoryResponse.json();
+  useEffect(() => {
+    async function loadProducts() {
+      const categoryResponse = await fetch('https://localhost:7215/api/Categories');
+      const categoryData = await categoryResponse.json();
 
-    const selectedCategory = categoryData.find((cat) => cat.name.toLowerCase().replaceAll(' ', '-') === categoryName.toLowerCase());
+      const selectedCategory = categoryData.find(
+        (cat) => cat.name.toLowerCase().replaceAll(' ', '-') === categoryName.toLowerCase()
+      );
 
-    // Prevent setting category if selectedCategory is undefined
-    if (!selectedCategory) {
-      setCategory('');
-      setProducts([]);
-      return;
+      if (!selectedCategory) {
+        setCategory('');
+        setProducts([]);
+        return;
+      }
+
+      setCategory(selectedCategory.name);
+
+      const productResponse = await fetch('https://localhost:7215/api/products');
+      const productData = await productResponse.json();
+
+      const productsByCategory = productData.filter(
+        (product) => product.categoryId === selectedCategory.id
+      );
+
+      setProducts(productsByCategory);
     }
 
-    setCategory(selectedCategory.name);
-
-    const productResponse = await fetch(`https://localhost:7215/api/products`);
-    const productData = await productResponse.json();
-
-    const productsByCategory = productData.filter((product) => product.categoryId === selectedCategory.id);
-    setProducts(productsByCategory);
-  }
-
-  useEffect(() => {
     loadProducts();
   }, [categoryName]);
 
@@ -44,30 +45,37 @@ function ProductPage() {
 
   return (
     <>
-      <div className="relative min-h-screen">
+      <section className="relative min-h-screen">
         <div className={categoryBackground} />
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
           <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
             {category}
           </h1>
         </div>
-        {/* Lists out products */} 
+      </section>
+
+      <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
         {products.length > 0 ? (
-          <div className="border border-ap-brown flex flex-col-2 md:flex-col-4 gap-4 ">
-            <div>
-              {products.map((product) => (
-                <div key={product.id} className="space-y-2 md:space-y-4">
-                  <h2>{product.name}</h2>
-                  <p>{product.description}</p>
-                  <p>{product.price}</p>
-                </div>
-              ))}
-            </div>
+          <div className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {products.map((product) => (
+              <div key={product.id} className="space-y-3">
+                {product.images?.[0]?.imageUrl && (
+                  <img
+                    src={product.images[0].imageUrl}
+                    alt={product.name}
+                    className="h-[220px] w-full object-cover object-center md:h-[260px]"
+                  />
+                )}
+                <h2 className="font-['Tangerine'] text-4xl font-bold">{product.name}</h2>
+                <p className="leading-7">{product.description}</p>
+                <p>${Number(product.price).toFixed(2)}</p>
+              </div>
+            ))}
           </div>
         ) : (
-          <p>No products found.</p>
+          <p className="text-center">No products found.</p>
         )}
-      </div>
+      </main>
     </>
   );
 }

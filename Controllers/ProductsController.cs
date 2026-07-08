@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
+using AtelierPascaleWebsite.Models.DTOs;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -15,9 +16,24 @@ public class ProductsController : ControllerBase
 
     // GET: api/Product
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct()
     {
-        return await _context.Products.ToListAsync();
+        return await _context.Products
+            .Include(p => p.Images)
+            .Select(p => new ProductDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                CategoryId = p.CategoryId,
+                Images = p.Images.Select(i => new ProductImageDTO
+                {
+                    Id = i.Id,
+                    ImageUrl = i.ImageUrl
+                }).ToList()
+            })
+            .ToListAsync();
     }
 
     // GET: api/Product/5
