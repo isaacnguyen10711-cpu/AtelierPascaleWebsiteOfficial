@@ -8,11 +8,17 @@ function ProductDetailsPage() {
 
   useEffect(() => {
     async function loadProduct() {
-      const response = await fetch('https://localhost:7215/api/products');
-      const products = await response.json();
-      const selectedProduct = products.find((item) => item.id === Number(productId));
+      const response = await fetch(`https://localhost:7215/api/products/${productId}`);
 
-      setProduct(selectedProduct ?? null);
+      if (!response.ok) {
+        setProduct(null);
+        setIsLoading(false);
+        return;
+      }
+
+      const selectedProduct = await response.json();
+
+      setProduct(selectedProduct);
       setIsLoading(false);
     }
 
@@ -84,3 +90,4 @@ function ProductDetailsPage() {
 }
 
 export default ProductDetailsPage;
+

@@ -38,9 +38,25 @@ public class ProductsController : ControllerBase
 
     // GET: api/Product/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Product>> GetProduct(int id)
+    public async Task<ActionResult<ProductDTO>> GetProduct(int id)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products
+            .Include(p => p.Images)
+            .Where(p => p.Id == id)
+            .Select(p => new ProductDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                CategoryId = p.CategoryId,
+                Images = p.Images.Select(i => new ProductImageDTO
+                {
+                    Id = i.Id,
+                    ImageUrl = i.ImageUrl
+                }).ToList()
+            })
+            .FirstOrDefaultAsync();
 
         if (product == null)
         {
@@ -113,3 +129,4 @@ public class ProductsController : ControllerBase
         return _context.Products.Any(e => e.Id == id);
     }
 }
+
