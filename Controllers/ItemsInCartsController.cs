@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
+﻿using AtelierPascaleWebsite.Data;
 using AtelierPascaleWebsite.Models;
-using AtelierPascaleWebsite.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -19,52 +20,20 @@ public class ItemsInCartsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ItemsInCart>>> GetItemsInCart()
     {
-        return await _context.ItemsInCarts.ToListAsync();
-    }
-
-    // GET: api/ItemsInCart/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<ItemsInCart>> GetItemsInCart(int id)
-    {
-        var itemsincart = await _context.ItemsInCarts.FindAsync(id);
-
-        if (itemsincart == null)
+        if (User.IsInRole("Admin"))
         {
-            return NotFound();
+            return await _context.ItemsInCarts.ToListAsync();
         }
 
-        return itemsincart;
-    }
-
-    // PUT: api/ItemsInCart/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutItemsInCart(int? id, ItemsInCart itemsincart)
-    {
-        if (id != itemsincart.Id)
+        else
         {
-            return BadRequest();
+            var userId = GetCurrentUserId();
+            var itemsInCart = await _context.ItemsInCarts
+                .Include(i => i.ShoppingCart)
+                .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == userId)
+                .ToListAsync();
+            return itemsInCart;
         }
-
-        _context.Entry(itemsincart).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ItemsInCartExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
-        return NoContent();
     }
 
     // POST: api/ItemsInCart
@@ -72,6 +41,29 @@ public class ItemsInCartsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ItemsInCart>> PostItemsInCart(ItemsInCart itemsincart)
     {
+        // Get the current user's shopping cart
+        var shoppingCart = await _context.ShoppingCarts
+            .Include(sc => sc.ItemsInCarts)
+            .FirstOrDefaultAsync(sc => sc.UserId == GetCurrentUserId());
+
+        if (shoppingCart == null)
+        {
+            return NotFound();
+        }
+
+        // Get the existing item in the shopping cart if there is one already
+        var existingItem = shoppingCart.ItemsInCarts.FirstOrDefault(i => i.ProductId == itemsincart.ProductId);
+
+        if (existingItem != null)
+        {
+            existingItem.Quantity += 1;
+            await _context.SaveChangesAsync();
+            return Ok(existingItem);
+        }
+
+        // If the item is not already in the shopping cart, add it to the user's  shopping cart
+        itemsincart.ShoppingCartId = shoppingCart.Id;
+
         _context.ItemsInCarts.Add(itemsincart);
         await _context.SaveChangesAsync();
 
@@ -82,7 +74,12 @@ public class ItemsInCartsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteItemsInCart(int? id)
     {
-        var itemsincart = await _context.ItemsInCarts.FindAsync(id);
+        // Load the item in the shopping cart and check if it belongs to the current user
+        var itemsincart = await _context.ItemsInCarts
+            .Include(i => i.ShoppingCart)
+            .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == GetCurrentUserId())
+            .FirstOrDefaultAsync(i => i.Id == id);
+
         if (itemsincart == null)
         {
             return NotFound();
@@ -94,9 +91,9 @@ public class ItemsInCartsController : ControllerBase
         return NoContent();
     }
 
-    private bool ItemsInCartExists(int? id)
+    private int GetCurrentUserId()
     {
-        return _context.ItemsInCarts.Any(e => e.Id == id);
+        return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
     }
 }
 
