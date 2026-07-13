@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
@@ -12,6 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 namespace AtelierPascaleWebsite.Controllers
 {
     [ApiController]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class AuthenticationController : ControllerBase
     {
@@ -109,3 +111,5 @@ namespace AtelierPascaleWebsite.Controllers
 
     }
 }
+
+

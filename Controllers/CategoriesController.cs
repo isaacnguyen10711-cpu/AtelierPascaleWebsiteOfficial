@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
@@ -36,6 +37,7 @@ public class CategoriesController : ControllerBase
 
     // PUT: api/Category/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutCategory(int? id, Category category)
     {
@@ -67,6 +69,7 @@ public class CategoriesController : ControllerBase
 
     // POST: api/Category
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<Category>> PostCategory(Category category)
     {
@@ -77,6 +80,7 @@ public class CategoriesController : ControllerBase
     }
 
     // DELETE: api/Category/5
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCategory(int? id)
     {
@@ -97,3 +101,5 @@ public class CategoriesController : ControllerBase
         return _context.Categories.Any(e => e.Id == id);
     }
 }
+
+

@@ -1,10 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ItemsInCartsController : ControllerBase
 {
     private readonly DatabaseContext _context;
@@ -97,3 +99,5 @@ public class ItemsInCartsController : ControllerBase
         return _context.ItemsInCarts.Any(e => e.Id == id);
     }
 }
+
+

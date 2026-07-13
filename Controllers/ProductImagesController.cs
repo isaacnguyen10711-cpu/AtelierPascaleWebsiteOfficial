@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
@@ -36,6 +37,7 @@ public class ProductImagesController : ControllerBase
 
     // PUT: api/ProductImage/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutProductImage(int? id, ProductImage productimage)
     {
@@ -67,6 +69,7 @@ public class ProductImagesController : ControllerBase
 
     // POST: api/ProductImage
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<ProductImage>> PostProductImage(ProductImage productimage)
     {
@@ -77,6 +80,7 @@ public class ProductImagesController : ControllerBase
     }
 
     // DELETE: api/ProductImage/5
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProductImage(int? id)
     {
@@ -97,3 +101,5 @@ public class ProductImagesController : ControllerBase
         return _context.ProductImages.Any(e => e.Id == id);
     }
 }
+
+
