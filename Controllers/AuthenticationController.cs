@@ -55,7 +55,7 @@ namespace AtelierPascaleWebsite.Controllers
                 new Claim(ClaimTypes.Role, userAccount.Role)
             };
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -105,6 +105,17 @@ namespace AtelierPascaleWebsite.Controllers
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
+
+            // Create a shopping cart for the new user
+            var shoppingCart = new ShoppingCart
+            {
+                UserId = newUser.Id,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.ShoppingCarts.Add(shoppingCart);
+            await _context.SaveChangesAsync();
+
             return Ok("User registered successfully.");
         }
 

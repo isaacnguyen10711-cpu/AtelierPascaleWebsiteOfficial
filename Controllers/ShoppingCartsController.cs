@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
+using System.Security.Claims;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -16,6 +17,7 @@ public class ShoppingCartsController : ControllerBase
     }
 
     // GET: api/ShoppingCart
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ShoppingCart>>> GetShoppingCart()
     {
@@ -33,70 +35,18 @@ public class ShoppingCartsController : ControllerBase
             return NotFound();
         }
 
+        // Check if the user is an admin or the owner of the shopping cart
+        if (!User.IsInRole("Admin") && shoppingcart.UserId != GetCurrentUserId())
+        {
+            return Forbid();
+        }
+
         return shoppingcart;
     }
 
-    // PUT: api/ShoppingCart/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutShoppingCart(int? id, ShoppingCart shoppingcart)
+    private int GetCurrentUserId()
     {
-        if (id != shoppingcart.Id)
-        {
-            return BadRequest();
-        }
-
-        _context.Entry(shoppingcart).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ShoppingCartExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
-        return NoContent();
-    }
-
-    // POST: api/ShoppingCart
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPost]
-    public async Task<ActionResult<ShoppingCart>> PostShoppingCart(ShoppingCart shoppingcart)
-    {
-        _context.ShoppingCarts.Add(shoppingcart);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction("GetShoppingCart", new { id = shoppingcart.Id }, shoppingcart);
-    }
-
-    // DELETE: api/ShoppingCart/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteShoppingCart(int? id)
-    {
-        var shoppingcart = await _context.ShoppingCarts.FindAsync(id);
-        if (shoppingcart == null)
-        {
-            return NotFound();
-        }
-
-        _context.ShoppingCarts.Remove(shoppingcart);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
-
-    private bool ShoppingCartExists(int? id)
-    {
-        return _context.ShoppingCarts.Any(e => e.Id == id);
+        return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
     }
 }
 
