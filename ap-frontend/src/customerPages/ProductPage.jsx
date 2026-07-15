@@ -56,7 +56,7 @@ function ProductPage() {
 
       <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
         {products.length > 0 ? (
-          <div className="mx-auto grid grid-cols-2 max-w-6xl gap-8  lg:grid-cols-4">
+          <div className="mx-auto grid grid-cols-2 max-w-6xl gap-8 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
               <div key={product.id} className="space-y-3">
                 {product.images?.[0]?.imageUrl && (
@@ -64,13 +64,13 @@ function ProductPage() {
                     <img
                       src={product.images[0].imageUrl}
                       alt={product.name}
-                      className="h-[220px] w-full object-cover object-center md:h-[260px] lg:h-[300px] hover:scale-105 transition duration-300"
+                      className="h-[160px] w-full object-cover object-center md:h-[230px] lg:h-[300px] hover:scale-105 transition duration-300"
                     />
                   </Link>
                 )}
-                <h2 className="font-['Tangerine'] text-4xl font-bold">{product.name}</h2>
-                <p className="leading-7">{product.description}</p>
-                <p>${Number(product.price).toFixed(2)}</p>
+                <h2 className="font-['Tangerine'] mt-4 text-3xl font-bold md:text-4xl">{product.name}</h2>
+                <p className="leading-7 text-base md:text-lg">{product.description}</p>
+                <p className="text-base md:text-lg">${Number(product.price).toFixed(2)}</p>
               </div>
             ))}
           </div>
