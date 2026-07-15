@@ -43,7 +43,7 @@ function AdminProductDetailsPage() {
 
     // Create an updated product object with the new values
     const updatedProduct = {
-      id: product.id,
+      id: productId,
       name: newName,
       description: newDescription,
       price: Number(newPrice),
@@ -51,7 +51,7 @@ function AdminProductDetailsPage() {
     }
 
     // Send a PUT request to update the product details
-    const response = await fetch(`https://localhost:7215/api/products/${product.id}`, {
+    const response = await fetch(`https://localhost:7215/api/products/${productId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ function AdminProductDetailsPage() {
 
     // Send a DELETE request to delete the product
     const token = localStorage.getItem('token')
-    const response = await fetch(`https://localhost:7215/api/products/${product.id}`, {
+    const response = await fetch(`https://localhost:7215/api/products/${productId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -125,7 +125,7 @@ function AdminProductDetailsPage() {
           Admin Product Details
         </h1>
 
-        <form onSubmit={handleSaveNewData} className="mt-10 space-y-6 border border-ap-brown bg-ap-pale p-6 md:p-8">
+        <form onSubmit={handleSaveNewData} className="mt-10 rounded-md space-y-6 border border-ap-brown bg-ap-pale p-6 md:p-8">
           <div>
             <label htmlFor="name" className="block text-sm uppercase tracking-widest">Name</label>
             <input
@@ -133,7 +133,7 @@ function AdminProductDetailsPage() {
               value={newName}
               onChange={(event) => setNewName(event.target.value)}
               disabled={!isEditing}
-              className="mt-2 w-full border border-ap-brown bg-ap-tan px-4 py-3 disabled:bg-ap-pale"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
             />
           </div>
 
@@ -145,7 +145,7 @@ function AdminProductDetailsPage() {
               onChange={(event) => setNewDescription(event.target.value)}
               disabled={!isEditing}
               rows="6"
-              className="mt-2 w-full border border-ap-brown bg-ap-tan px-4 py-3 disabled:bg-ap-pale"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
             />
           </div>
 
@@ -159,7 +159,7 @@ function AdminProductDetailsPage() {
                 value={newPrice}
                 onChange={(event) => setNewPrice(event.target.value)}
                 disabled={!isEditing}
-                className="mt-2 w-full border border-ap-brown bg-ap-tan px-4 py-3 disabled:bg-ap-pale"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
               />
             </div>
 
@@ -171,7 +171,7 @@ function AdminProductDetailsPage() {
                 value={newCategoryId}
                 onChange={(event) => setNewCategoryId(event.target.value)}
                 disabled={!isEditing}
-                className="mt-2 w-full border border-ap-brown bg-ap-tan px-4 py-3 disabled:bg-ap-pale"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
               />
             </div>
           </div>

@@ -44,6 +44,7 @@ public class ProductsController : ControllerBase
         var product = await _context.Products
             .Include(p => p.Images)
             .Where(p => p.Id == id)
+            // Create a new ProductDTO object to return to prevent exposing the entity directly and to avoid circular references
             .Select(p => new ProductDTO
             {
                 Id = p.Id,
@@ -71,14 +72,20 @@ public class ProductsController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutProduct(int? id, Product product)
+    public async Task<IActionResult> PutProduct(int? id, ProductUpdateDTO product)
     {
         if (id != product.Id)
         {
             return BadRequest();
         }
 
-        _context.Entry(product).State = EntityState.Modified;
+        var existingProduct = _context.Products.FirstOrDefault(p => p.Id == id);
+
+        // Update the properties of the existing product with the values from the DTO
+        existingProduct?.Name = product.Name;
+        existingProduct?.Description = product.Description;
+        existingProduct?.Price = product.Price;
+        existingProduct?.CategoryId = product.categoryId;
 
         try
         {
