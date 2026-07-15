@@ -22,8 +22,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ap-frontend\src\adminPages\" />
-  </ItemGroup>
-
 </Project>
