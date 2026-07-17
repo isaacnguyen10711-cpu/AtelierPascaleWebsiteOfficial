@@ -110,7 +110,7 @@ public class ProductsController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public async Task<ActionResult<ProductDTO>> PostProduct(ProductCreateDTO product)
+    public async Task<ActionResult<ProductCreateDTO>> PostProduct(ProductCreateDTO product)
     {
         var categoryExists = await _context.Categories.AnyAsync(c => c.Id == product.CategoryId);
         if (!categoryExists)

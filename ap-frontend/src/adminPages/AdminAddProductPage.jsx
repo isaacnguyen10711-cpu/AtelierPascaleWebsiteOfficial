@@ -90,7 +90,7 @@ function AdminAddProductPage() {
                 type="number"
                 name="categoryId"
                 id="categoryId"
-                onChange={(e) => setCategoryId(e.target.value)}
+                onChange={(e) => setCategoryId(e.target.value)} 
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
             </div>

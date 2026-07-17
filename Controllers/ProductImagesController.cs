@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
+using AtelierPascaleWebsite.Models.DTOs;
 using AtelierPascaleWebsite.Data;
 
 [Route("api/[controller]")]
@@ -16,14 +17,21 @@ public class ProductImagesController : ControllerBase
 
     // GET: api/ProductImage
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductImage>>> GetProductImage()
+    public async Task<ActionResult<IEnumerable<ProductImageDTO>>> GetProductImage()
     {
-        return await _context.ProductImages.ToListAsync();
+        return await _context.ProductImages
+            .Select(pi => new ProductImageDTO
+            {
+                Id = pi.Id,
+                ProductId = pi.ProductId,
+                ImageUrl = pi.ImageUrl
+            })
+            .ToListAsync();
     }
 
     // GET: api/ProductImage/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<ProductImage>> GetProductImage(int id)
+    public async Task<ActionResult<ProductImageDTO>> GetProductImage(int id)
     {
         var productimage = await _context.ProductImages.FindAsync(id);
 
@@ -32,21 +40,34 @@ public class ProductImagesController : ControllerBase
             return NotFound();
         }
 
-        return productimage;
+        return new ProductImageDTO
+        {
+            Id = productimage.Id,
+            ProductId = productimage.ProductId,
+            ImageUrl = productimage.ImageUrl
+        };
     }
 
     // PUT: api/ProductImage/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutProductImage(int? id, ProductImage productimage)
+    public async Task<IActionResult> PutProductImage(int? id, ProductImageDTO productimage)
     {
         if (id != productimage.Id)
         {
             return BadRequest();
         }
 
-        _context.Entry(productimage).State = EntityState.Modified;
+        var existingProductImage = await _context.ProductImages.FindAsync(id);
+        if (existingProductImage == null) {
+            return NotFound();
+        }
+
+        existingProductImage.ProductId = productimage.ProductId;
+        existingProductImage.ImageUrl = productimage.ImageUrl;
+
+        _context.Entry(existingProductImage).State = EntityState.Modified;
 
         try
         {
@@ -71,12 +92,19 @@ public class ProductImagesController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public async Task<ActionResult<ProductImage>> PostProductImage(ProductImage productimage)
+    public async Task<ActionResult<ProductImageDTO>> PostProductImage(ProductImageDTO productimage)
     {
-        _context.ProductImages.Add(productimage);
+
+        var newProductImage = new ProductImage
+        {
+            ProductId = productimage.ProductId,
+            ImageUrl = productimage.ImageUrl
+        };
+
+        _context.ProductImages.Add(newProductImage);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetProductImage", new { id = productimage.Id }, productimage);
+        return CreatedAtAction("GetProductImage", new { id = newProductImage.Id }, newProductImage);
     }
 
     // DELETE: api/ProductImage/5
