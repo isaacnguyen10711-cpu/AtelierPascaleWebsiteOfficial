@@ -7,6 +7,7 @@ import ProductPage from './customerPages/ProductPage.jsx'
 import ProductDetailsPage from './customerPages/ProductDetailsPage.jsx'
 import AdminProductDetailsPage from './adminPages/AdminProductDetailsPage.jsx'
 import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
+import AdminAddProductImagesPage from './adminPages/AdminAddProductImagesPage.jsx'
 import Footer from './components/Footer.jsx'
 import GetUserRole from './components/GetUserRole.jsx'
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/products/:categoryName/:productId" element={<ProductDetailsPage />} />
         <Route path="/admin/products/:categoryName/:productId" element={<AdminProductDetailsPage />} />
         <Route path="/admin/add-product" element={<AdminAddProductPage />} />
+        <Route path="/admin/add-product-image" element={<AdminAddProductImagesPage />} />
       </Routes>
 
       <Footer />
@@ -33,3 +35,4 @@ function App() {
 }
 
 export default App
+
