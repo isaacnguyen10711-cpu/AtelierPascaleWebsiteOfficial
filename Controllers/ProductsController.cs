@@ -110,12 +110,26 @@ public class ProductsController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public async Task<ActionResult<Product>> PostProduct(Product product)
+    public async Task<ActionResult<ProductDTO>> PostProduct(ProductCreateDTO product)
     {
-        _context.Products.Add(product);
+        var categoryExists = await _context.Categories.AnyAsync(c => c.Id == product.CategoryId);
+        if (!categoryExists)
+        {
+            return BadRequest("Invalid category ID.");
+        }
+
+        var newProduct = new Product
+        {
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price,
+            CategoryId = product.CategoryId
+        };
+
+        _context.Products.Add(newProduct);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+        return CreatedAtAction("GetProduct", new { id = newProduct.Id }, newProduct);
     }
 
     // DELETE: api/Product/5
@@ -140,6 +154,7 @@ public class ProductsController : ControllerBase
         return _context.Products.Any(e => e.Id == id);
     }
 }
+
 
 
 
