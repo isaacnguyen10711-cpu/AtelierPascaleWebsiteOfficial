@@ -95,6 +95,12 @@ public class ProductImagesController : ControllerBase
     public async Task<ActionResult<ProductImageDTO>> PostProductImage(ProductImageDTO productimage)
     {
 
+        var productExists = await _context.Products.AnyAsync(p => p.Id == productimage.ProductId);
+        if (!productExists)
+        {
+            return NotFound();
+        }
+
         var newProductImage = new ProductImage
         {
             ProductId = productimage.ProductId,
