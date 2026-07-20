@@ -1,6 +1,6 @@
 ﻿import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { House, Menu, X } from 'lucide-react'
+import { House, Menu, X, ShoppingCart } from 'lucide-react'
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -63,7 +63,10 @@ function NavBar() {
           </Link>
         </div>
 
-        <div className="justify-self-end">
+        <div className="justify-self-end flex flex-row items-center">
+        <Link to="/cart">
+            <ShoppingCart className={`mr-4 h-5 w-5 ${isBlackTextPage ? 'text-black' : 'text-white'} md:mr-4 md:h-6 md:w-6 lg:mr-6 lg:h-7 lg:w-7`} />
+          </Link>
           {isLoggedIn ? (
             <button onClick={handleLogout} className={linkHover}>
               Log out
