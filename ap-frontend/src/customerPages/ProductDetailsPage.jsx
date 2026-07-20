@@ -26,6 +26,25 @@ function ProductDetailsPage() {
     loadProductDetails()
   }, [productId])
 
+  const handleAddToCart = async () => {
+    // Implement the logic to add the product to the cart
+    const response = await fetch('https://localhost:7215/api/ItemsInCarts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId: product.id, quantity: 1 }),
+    })
+
+    if (response.ok) {
+      // Optionally, you can show a success message or update the cart state
+      console.log('Product added to cart')
+    } else {
+      // Handle error
+      console.error('Failed to add product to cart')
+    }
+  }
+
   if (isLoading) {
     return (
       <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">

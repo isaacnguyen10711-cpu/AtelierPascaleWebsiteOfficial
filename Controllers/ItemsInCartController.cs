@@ -4,42 +4,47 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using AtelierPascaleWebsite.Models.DTOs;
 
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class ItemsInCartsController : ControllerBase
+public class ItemsInCartController : ControllerBase
 {
     private readonly DatabaseContext _context;
-    public ItemsInCartsController(DatabaseContext context)
+    public ItemsInCartController(DatabaseContext context)
     {
         _context = context;
     }
 
     // GET: api/ItemsInCart
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ItemsInCart>>> GetItemsInCart()
+    public async Task<ActionResult<IEnumerable<ItemsInCartDTO>>> GetItemsInCart()
     {
-        if (User.IsInRole("Admin"))
-        {
-            return await _context.ItemsInCarts.ToListAsync();
-        }
+        var userId = GetCurrentUserId();
+        var itemsInCart = await _context.ItemsInCarts
+            .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == userId)
+            .Select(p => new ItemsInCartDTO
+            {
+                Id = p.Id,
+                ProductId = p.Product!.Id,
+                ProductName = p.Product.Name,
+                Price = p.Product.Price,
+                Quantity = p.Quantity,
+                ProductImageUrl = p.Product.Images
+                .Select(i => i.ImageUrl)
+                .FirstOrDefault() ?? string.Empty,
+            })
+            .ToListAsync();
 
-        else
-        {
-            var userId = GetCurrentUserId();
-            var itemsInCart = await _context.ItemsInCarts
-                .Include(i => i.ShoppingCart)
-                .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == userId)
-                .ToListAsync();
-            return itemsInCart;
-        }
+        return itemsInCart;
     }
+
 
     // POST: api/ItemsInCart
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<ItemsInCart>> PostItemsInCart(ItemsInCart itemsincart)
+    public async Task<ActionResult<ItemsInCart>> PostItemsInCart(ItemsInCartAddDTO itemsincart)
     {
         // Get the current user's shopping cart
         var shoppingCart = await _context.ShoppingCarts
@@ -62,12 +67,17 @@ public class ItemsInCartsController : ControllerBase
         }
 
         // If the item is not already in the shopping cart, add it to the user's  shopping cart
-        itemsincart.ShoppingCartId = shoppingCart.Id;
+        var newItem = new ItemsInCart
+        {
+            ShoppingCartId = shoppingCart.Id,
+            ProductId = itemsincart.ProductId,
+            Quantity = 1
+        };
 
-        _context.ItemsInCarts.Add(itemsincart);
+        _context.ItemsInCarts.Add(newItem);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetItemsInCart", new { id = itemsincart.Id }, itemsincart);
+        return CreatedAtAction("GetItemsInCart", new { id = newItem.Id }, newItem);
     }
 
     // DELETE: api/ItemsInCart/5

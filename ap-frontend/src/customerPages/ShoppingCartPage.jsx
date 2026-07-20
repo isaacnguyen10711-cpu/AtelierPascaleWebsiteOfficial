@@ -1,22 +1,22 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 function ShoppingCartPage() {
-  const cartItems = [
-    {
-      id: 1,
-      name: 'Ceramic Vase',
-      price: 48,
-      quantity: 1,
-      imageUrl: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/HomeDecorbg.jpg',
-    },
-    {
-      id: 2,
-      name: 'Gold Accent Necklace',
-      price: 86,
-      quantity: 2,
-      imageUrl: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Jewelrybg.jpg',
-    },
-  ]
+  const [cartItems, setCartItems] = useState([])
+
+  useEffect(() => {
+    const loadCartItems = async () => {
+      const response = await fetch('https://localhost:7215/api/ItemsInCart', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      const data = await response.json()
+      setCartItems(data)
+    }
+
+    loadCartItems()
+  }, [])
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
@@ -43,15 +43,15 @@ function ShoppingCartPage() {
             {cartItems.map((item) => (
               <div key={item.id} className="grid grid-cols-[2fr_3fr] gap-4 border-b border-ap-brown pb-5 md:grid-cols-[1fr_2fr] md:gap-5 lg:grid-cols-[1fr_3fr] lg:pb-6">
                 <img
-                  src={item.imageUrl}
-                  alt={item.name}
+                  src={item.productImageUrl}
+                  alt={item.productName}
                   className="aspect-square w-full object-cover object-center"
                 />
 
                 <div className="flex flex-col justify-between gap-4 md:flex-row md:gap-5 lg:gap-6">
                   <div>
                     <h2 className="font-['Tangerine'] text-4xl font-bold md:text-4xl lg:text-5xl">
-                      {item.name}
+                      {item.productName}
                     </h2>
                     <p className="mt-2 text-xs uppercase tracking-widest md:text-sm">
                       Quantity: {item.quantity}
@@ -101,6 +101,7 @@ function ShoppingCartPage() {
 }
 
 export default ShoppingCartPage
+
 
 
 
