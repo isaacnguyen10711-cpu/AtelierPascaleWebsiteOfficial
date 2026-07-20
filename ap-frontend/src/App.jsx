@@ -5,6 +5,7 @@ import LoginPage from './customerPages/LoginPage.jsx'
 import RegisterPage from './customerPages/RegisterPage.jsx'
 import ProductPage from './customerPages/ProductPage.jsx'
 import ProductDetailsPage from './customerPages/ProductDetailsPage.jsx'
+import ShoppingCartPage from './customerPages/ShoppingCartPage.jsx'
 import AdminProductEditPage from './adminPages/AdminProductEditPage.jsx'
 import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
 import AdminAddProductImagesPage from './adminPages/AdminAddProductImagesPage.jsx'
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} /> 
+        <Route path="/cart" element={<ShoppingCartPage />} />
         <Route path="/products/:categoryName" element={<ProductPage />} />
         <Route path="/products/:categoryName/:productId" element={role == "Customer" ? < ProductDetailsPage /> : <AdminProductEditPage/>} />
         <Route path="/admin/add-product" element={<AdminAddProductPage />} />
@@ -34,4 +36,5 @@ function App() {
 }
 
 export default App
+
 

@@ -7,7 +7,7 @@ function NavBar() {
 
   const location = useLocation()
   const isProductDetailsPage = location.pathname.startsWith('/products/') && location.pathname.split('/').length === 4
-  const isBlackTextPage = location.pathname === '/login' || location.pathname === '/register' || isProductDetailsPage
+  const isBlackTextPage = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/cart' || isProductDetailsPage
   // Used for changing the login button to logout button if the user is logged in
   const isLoggedIn = Boolean(localStorage.getItem('token'))
   const linkHover = isBlackTextPage ? 'hover:text-gray-500' : 'hover:text-gray-300'
