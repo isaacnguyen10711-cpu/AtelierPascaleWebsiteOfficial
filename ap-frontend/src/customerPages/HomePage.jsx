@@ -8,6 +8,13 @@ const images = {
   art: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Artbg.jpg',
 }
 
+const artImages = [
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 1.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 2.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 3.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 4.jpg'
+]
+
 function HomePage() {
   return (
     <>
@@ -138,21 +145,21 @@ function HomePage() {
             </div>
 
             <div>
-              <img src={images.art} alt="Art collection piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+              <img src={artImages[0]} alt="Art collection piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
             </div>
 
             <div>
-              <img src={images.newArrival} alt="Art collection arrangement" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+              <img src={artImages[1]} alt="Art collection arrangement" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
             </div>
           </div>
 
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             <div>
-              <img src={images.homeDecor} alt="Art styling piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+              <img src={artImages[2]} alt="Art styling piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
             </div>
 
             <div>
-              <img src={images.gifts} alt="Art detail piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
+              <img src={artImages[3] } alt="Art detail piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
             </div>
           </div>
         </section>

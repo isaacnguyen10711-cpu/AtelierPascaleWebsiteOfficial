@@ -1,9 +1,11 @@
 ﻿import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import GetUserRole from '../components/GetUserRole.jsx';
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState('');
+  const role = GetUserRole();
 
   const { categoryName } = useParams();
 
@@ -68,6 +70,9 @@ function ProductPage() {
                     />
                   </Link>
                 )}
+                {role == "Admin" ? (
+                  <h2 className="mt-4 text-lg font-bold md:text-xl lg:text-2xl">Product Id: {product.id}</h2>
+                ) : null}
                 <h2 className="font-['Tangerine'] mt-4 text-3xl font-bold md:text-4xl">{product.name}</h2>
                 <p className="leading-7 text-base md:text-lg">{product.description}</p>
                 <p className="text-base md:text-lg">${Number(product.price).toFixed(2)}</p>

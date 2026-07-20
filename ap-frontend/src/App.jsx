@@ -5,7 +5,7 @@ import LoginPage from './customerPages/LoginPage.jsx'
 import RegisterPage from './customerPages/RegisterPage.jsx'
 import ProductPage from './customerPages/ProductPage.jsx'
 import ProductDetailsPage from './customerPages/ProductDetailsPage.jsx'
-import AdminProductDetailsPage from './adminPages/AdminProductDetailsPage.jsx'
+import AdminProductEditPage from './adminPages/AdminProductEditPage.jsx'
 import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
 import AdminAddProductImagesPage from './adminPages/AdminAddProductImagesPage.jsx'
 import Footer from './components/Footer.jsx'
@@ -23,8 +23,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} /> 
         <Route path="/products/:categoryName" element={<ProductPage />} />
-        <Route path="/products/:categoryName/:productId" element={<ProductDetailsPage />} />
-        <Route path="/admin/products/:categoryName/:productId" element={<AdminProductDetailsPage />} />
+        <Route path="/products/:categoryName/:productId" element={role == "Customer" ? < ProductDetailsPage /> : <AdminProductEditPage/>} />
         <Route path="/admin/add-product" element={<AdminAddProductPage />} />
         <Route path="/admin/add-product-image" element={<AdminAddProductImagesPage />} />
       </Routes>
