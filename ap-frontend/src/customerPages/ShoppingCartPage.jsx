@@ -38,14 +38,14 @@ function ShoppingCartPage() {
           </Link>
         </div>
 
-        <div className="grid gap-7 pt-7 md:grid-cols-[3fr_1fr] md:gap-8 md:pt-9 lg:gap-10 lg:pt-10">
+        <div className="grid gap-7 pt-7 md:grid-cols-[5fr_2fr] md:gap-8 md:pt-9 lg:gap-10 lg:pt-10">
           <section className="space-y-5 md:space-y-6">
             {cartItems.map((item) => (
-              <div key={item.id} className="grid gap-4 border-b border-ap-brown pb-5 md:grid-cols-[120px_1fr] md:gap-5 lg:grid-cols-[145px_1fr] lg:pb-6">
+              <div key={item.id} className="grid grid-cols-[2fr_3fr] gap-4 border-b border-ap-brown pb-5 md:grid-cols-[1fr_2fr] md:gap-5 lg:grid-cols-[1fr_3fr] lg:pb-6">
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="h-[150px] w-full object-cover object-center md:h-[125px] lg:h-[145px]"
+                  className="aspect-square w-full object-cover object-center"
                 />
 
                 <div className="flex flex-col justify-between gap-4 md:flex-row md:gap-5 lg:gap-6">
@@ -101,5 +101,6 @@ function ShoppingCartPage() {
 }
 
 export default ShoppingCartPage
+
 
 
