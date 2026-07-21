@@ -32,8 +32,9 @@ function ProductDetailsPage() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      body: JSON.stringify({ productId: product.id }),
     })
 
     if (response.ok) {

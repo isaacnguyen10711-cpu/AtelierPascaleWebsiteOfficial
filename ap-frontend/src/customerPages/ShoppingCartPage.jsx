@@ -8,7 +8,8 @@ function ShoppingCartPage() {
     const loadCartItems = async () => {
       const response = await fetch('https://localhost:7215/api/ItemsInCart', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
         }
       })
       const data = await response.json()

@@ -24,6 +24,7 @@ public class ItemsInCartController : ControllerBase
         var userId = GetCurrentUserId();
         var itemsInCart = await _context.ItemsInCarts
             .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == userId)
+            // Include the related Product and its Images
             .Select(p => new ItemsInCartDTO
             {
                 Id = p.Id,
@@ -40,6 +41,25 @@ public class ItemsInCartController : ControllerBase
         return itemsInCart;
     }
 
+
+    // PUT: api/ItemsInCart/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutItemsInCart(int id, ItemsInCartUpdateDTO itemsincart)
+    {
+        // Load the item in the shopping cart and check if it belongs to the current user
+        var existingItem = await _context.ItemsInCarts
+            .Include(i => i.ShoppingCart)
+            .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == GetCurrentUserId())
+            .FirstOrDefaultAsync(i => i.Id == id);
+        if (existingItem == null)
+        {
+            return NotFound();
+        }
+
+        existingItem.Quantity = itemsincart.Quantity;
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
 
     // POST: api/ItemsInCart
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
