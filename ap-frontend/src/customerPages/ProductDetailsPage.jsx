@@ -43,11 +43,10 @@ function ProductDetailsPage() {
     })
 
     if (response.ok) {
-      // Optionally, you can show a success message or update the cart state
-      console.log('Product added to cart')
+      alert('Product added to cart successfully!')
     } else {
       // Handle error
-      console.error('Failed to add product to cart')
+      alert('Failed to add product to cart. Please try again.')
     }
   }
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { Trash2 } from 'lucide-react'
+import { Trash2, Plus, Minus } from 'lucide-react'
 
 function ShoppingCartPage() {
   const [cartItems, setCartItems] = useState([])
@@ -89,15 +89,15 @@ function ShoppingCartPage() {
                     <p className="mt-2 text-xs uppercase tracking-widest md:text-sm">
                       Quantity: {item.quantity}
                     </p>
-                    <button className="mt-4 text-xs hover:text-ap-beige md:text-sm"
+                    <button className="mt-4 hover:text-ap-beige"
                       onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>
-                      -
+                      <Minus className="inline-block w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     </button>
-                    <button className="mt-4 text-xs hover:text-ap-beige md:text-sm"
+                    <button className="mt-4 hover:text-ap-beige"
                       onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>
-                      +
+                      <Plus className="inline-block w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     </button>
-                    <button className="mt-4 ml-2 text-xs hover:text-ap-beige md:text-sm"
+                    <button className="mt-4 ml-2 hover:text-ap-beige"
                       onClick={() => handleRemoveItem(item.id)}>
                       <Trash2 className="inline-block w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     </button>
