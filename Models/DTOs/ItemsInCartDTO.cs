@@ -1,4 +1,4 @@
-﻿namespace AtelierPascaleWebsite.Models.DTOs
+namespace AtelierPascaleWebsite.Models.DTOs
 {
     public class ItemsInCartDTO
     {
@@ -11,3 +11,5 @@
 
     }
 }
+
+

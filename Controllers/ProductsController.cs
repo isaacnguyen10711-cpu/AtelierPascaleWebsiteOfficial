@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
@@ -110,7 +110,7 @@ public class ProductsController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public async Task<ActionResult<ProductCreateDTO>> PostProduct(ProductCreateDTO product)
+    public async Task<ActionResult<ProductDTO>> PostProduct(ProductCreateDTO product)
     {
         var categoryExists = await _context.Categories.AnyAsync(c => c.Id == product.CategoryId);
         if (!categoryExists)
@@ -129,7 +129,15 @@ public class ProductsController : ControllerBase
         _context.Products.Add(newProduct);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetProduct", new { id = newProduct.Id }, newProduct);
+        return CreatedAtAction("GetProduct", new { id = newProduct.Id }, new ProductDTO
+        {
+            Id = newProduct.Id,
+            Name = newProduct.Name,
+            Description = newProduct.Description,
+            Price = newProduct.Price,
+            CategoryId = newProduct.CategoryId,
+            Images = new List<ProductImageDTO>()
+        });
     }
 
     // DELETE: api/Product/5
@@ -154,6 +162,8 @@ public class ProductsController : ControllerBase
         return _context.Products.Any(e => e.Id == id);
     }
 }
+
+
 
 
 

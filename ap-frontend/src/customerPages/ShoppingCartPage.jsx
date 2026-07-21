@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { Trash2 } from 'lucide-react'
 
 function ShoppingCartPage() {
   const [cartItems, setCartItems] = useState([])
@@ -18,6 +19,37 @@ function ShoppingCartPage() {
 
     loadCartItems()
   }, [])
+
+  async function handleUpdateQuantity(itemId, newQuantity) {
+    const response = await fetch(`https://localhost:7215/api/ItemsInCart/${itemId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ quantity: newQuantity })
+    })
+
+    if (response.ok) {
+      setCartItems(cartItems.map((item) => (
+        item.id === itemId ? { ...item, quantity: newQuantity } : item
+      )))
+    }
+  }
+
+  async function handleRemoveItem(itemId) {
+    const response = await fetch(`https://localhost:7215/api/ItemsInCart/${itemId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (response.ok) {
+      setCartItems(cartItems.filter((item) => item.id !== itemId))
+    }
+  }
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
@@ -57,8 +89,17 @@ function ShoppingCartPage() {
                     <p className="mt-2 text-xs uppercase tracking-widest md:text-sm">
                       Quantity: {item.quantity}
                     </p>
-                    <button className="mt-4 text-xs uppercase tracking-widest hover:text-ap-beige md:text-sm">
-                      Remove
+                    <button className="mt-4 text-xs hover:text-ap-beige md:text-sm"
+                      onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>
+                      -
+                    </button>
+                    <button className="mt-4 text-xs hover:text-ap-beige md:text-sm"
+                      onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>
+                      +
+                    </button>
+                    <button className="mt-4 ml-2 text-xs hover:text-ap-beige md:text-sm"
+                      onClick={() => handleRemoveItem(item.id)}>
+                      <Trash2 className="inline-block w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     </button>
                   </div>
 
@@ -102,6 +143,8 @@ function ShoppingCartPage() {
 }
 
 export default ShoppingCartPage
+
+
 
 
 

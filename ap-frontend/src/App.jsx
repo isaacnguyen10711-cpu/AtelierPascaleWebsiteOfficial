@@ -25,7 +25,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} /> 
         <Route path="/cart" element={<ShoppingCartPage />} />
         <Route path="/products/:categoryName" element={<ProductPage />} />
-        <Route path="/products/:categoryName/:productId" element={role == "Customer" ? < ProductDetailsPage /> : <AdminProductEditPage/>} />
+        <Route path="/products/:categoryName/:productId" element={role == "Admin" ? < AdminProductEditPage /> : <ProductDetailsPage />} />
         <Route path="/admin/add-product" element={<AdminAddProductPage />} />
         <Route path="/admin/add-product-image" element={<AdminAddProductImagesPage />} />
       </Routes>

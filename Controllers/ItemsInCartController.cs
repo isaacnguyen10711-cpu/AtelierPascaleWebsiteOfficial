@@ -1,4 +1,4 @@
-﻿using AtelierPascaleWebsite.Data;
+using AtelierPascaleWebsite.Data;
 using AtelierPascaleWebsite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,15 +21,14 @@ public class ItemsInCartController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ItemsInCartDTO>>> GetItemsInCart()
     {
-        var userId = GetCurrentUserId();
         var itemsInCart = await _context.ItemsInCarts
-            .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == userId)
+            .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == GetCurrentUserId())
             // Include the related Product and its Images
             .Select(p => new ItemsInCartDTO
             {
                 Id = p.Id,
                 ProductId = p.Product!.Id,
-                ProductName = p.Product.Name,
+                ProductName = p.Product!.Name,
                 Price = p.Product.Price,
                 Quantity = p.Quantity,
                 ProductImageUrl = p.Product.Images
@@ -40,7 +39,6 @@ public class ItemsInCartController : ControllerBase
 
         return itemsInCart;
     }
-
 
     // PUT: api/ItemsInCart/5
     [HttpPut("{id}")]
@@ -64,8 +62,14 @@ public class ItemsInCartController : ControllerBase
     // POST: api/ItemsInCart
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<ItemsInCart>> PostItemsInCart(ItemsInCartAddDTO itemsincart)
+    public async Task<ActionResult<ItemsInCartDTO>> PostItemsInCart(ItemsInCartAddDTO itemsincart)
     {
+        var product = await _context.Products.FindAsync(itemsincart.ProductId);
+        if (product == null)
+        {
+            return NotFound("Product not found.");
+        }
+
         // Get the current user's shopping cart
         var shoppingCart = await _context.ShoppingCarts
             .Include(sc => sc.ItemsInCarts)
@@ -73,7 +77,7 @@ public class ItemsInCartController : ControllerBase
 
         if (shoppingCart == null)
         {
-            return NotFound();
+            return NotFound("Shopping cart not found.");
         }
 
         // Get the existing item in the shopping cart if there is one already
@@ -83,7 +87,17 @@ public class ItemsInCartController : ControllerBase
         {
             existingItem.Quantity += 1;
             await _context.SaveChangesAsync();
-            return Ok(existingItem);
+            return Ok(new ItemsInCartDTO
+            {
+                Id = existingItem.Id,
+                ProductId = product.Id,
+                ProductName = product.Name,
+                Price = product.Price,
+                Quantity = existingItem.Quantity,
+                ProductImageUrl = product.Images
+                    .Select(i => i.ImageUrl)
+                    .FirstOrDefault() ?? string.Empty
+            });
         }
 
         // If the item is not already in the shopping cart, add it to the user's  shopping cart
@@ -97,7 +111,17 @@ public class ItemsInCartController : ControllerBase
         _context.ItemsInCarts.Add(newItem);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetItemsInCart", new { id = newItem.Id }, newItem);
+        return Ok(new ItemsInCartDTO
+        {
+            Id = newItem.Id,
+            ProductId = product.Id,
+            ProductName = product.Name,
+            Price = product.Price,
+            Quantity = newItem.Quantity,
+            ProductImageUrl = product.Images
+                .Select(i => i.ImageUrl)
+                .FirstOrDefault() ?? string.Empty
+        });
     }
 
     // DELETE: api/ItemsInCart/5
@@ -126,5 +150,9 @@ public class ItemsInCartController : ControllerBase
         return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
     }
 }
+
+
+
+
 
 

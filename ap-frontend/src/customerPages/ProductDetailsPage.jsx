@@ -27,8 +27,13 @@ function ProductDetailsPage() {
   }, [productId])
 
   const handleAddToCart = async () => {
+    // Add this check to prevent crash while product is still null
+    if (!product) {
+      console.error('Product not found')
+      return
+    }
     // Implement the logic to add the product to the cart
-    const response = await fetch('https://localhost:7215/api/ItemsInCarts', {
+    const response = await fetch('https://localhost:7215/api/ItemsInCart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -112,7 +117,8 @@ function ProductDetailsPage() {
             {product.description}
           </p>
 
-          <button className="mt-10 w-full bg-ap-brown px-8 py-4 text-sm uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white">
+          <button className="mt-10 w-full bg-ap-brown px-8 py-4 text-sm uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white"
+            onClick={handleAddToCart}>
             Add To Cart
           </button>
 
