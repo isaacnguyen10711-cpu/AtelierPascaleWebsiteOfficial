@@ -45,8 +45,7 @@ namespace AtelierPascaleWebsite.Controllers
             var issuer = _configuration["JwtConfig:Issuer"];
             var audience = _configuration["JwtConfig:Audience"];
             var key = _configuration["JwtConfig:Key"];
-            var tokenValidityInMinutes = _configuration.GetValue<int>("JwtConfig:TokenValidityInMinutes");
-            var tokenExpiryTimeStamp = DateTime.UtcNow.AddMinutes(tokenValidityInMinutes);
+            var tokenExpiryTimeStamp = DateTime.UtcNow.AddMinutes(_configuration.GetValue<int>("JwtConfig:TokenValidityInMinutes"));
 
             var claims = new[]
             {
