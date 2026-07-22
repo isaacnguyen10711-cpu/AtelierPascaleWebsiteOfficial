@@ -74,7 +74,7 @@ namespace AtelierPascaleWebsite.Controllers
             {
                 Email = userAccount.Email,
                 AccessToken = accessToken,
-                ExpiresIn = tokenValidityInMinutes
+                ExpiresIn = _configuration.GetValue<int>("JwtConfig:TokenValidityInMinutes")
 
             });
         }

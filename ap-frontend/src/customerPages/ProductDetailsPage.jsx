@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import GetUserToken from '../components/GetUserToken'
 
 function ProductDetailsPage() {
   const [product, setProduct] = useState(null)  
@@ -44,7 +45,11 @@ function ProductDetailsPage() {
 
     if (response.ok) {
       alert('Product added to cart successfully!')
-    } else {
+    }
+    else if (!GetUserToken()) {
+      alert("Please log in first to add this item to your cart")
+    }
+    else {
       // Handle error
       alert('Failed to add product to cart. Please try again.')
     }
