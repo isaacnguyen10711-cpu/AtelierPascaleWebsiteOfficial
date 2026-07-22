@@ -31,9 +31,13 @@ function ShoppingCartPage() {
     })
 
     if (response.ok) {
-      setCartItems(cartItems.map((item) => (
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
-      )))
+      if (newQuantity <= 0) {
+        handleRemoveItem(itemId)
+      } else {
+        setCartItems(cartItems.map((item) => (
+          item.id === itemId ? { ...item, quantity: newQuantity } : item
+        )))
+      }
     }
   }
 
