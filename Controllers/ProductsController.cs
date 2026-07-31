@@ -72,12 +72,30 @@ public class ProductsController : ControllerBase
     [HttpGet("category/{categoryName}")] 
     public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByCategory(string categoryName)
     {
+        if (string.IsNullOrWhiteSpace(categoryName))
+        {
+            return BadRequest("Category name cannot be empty.");
+        }
+
         // Compare the category name by converting it to lowercase and replace hyphens with spaces
         var formattedCategoryName = categoryName.Replace("-", " ").Trim().ToLower();
 
-        var products = await _context.Products
+        var productsQuery = _context.Products
             .Include(p => p.Images)
-            .Where(p => p.Category.Name.ToLower() == formattedCategoryName)
+            .AsQueryable();
+
+        if (formattedCategoryName == "new arrival")
+        {
+            productsQuery = productsQuery
+                .Where(p => p.IsNewArrival);
+        }
+        else
+        {
+            productsQuery = productsQuery
+                .Where(p => p.Category.Name.ToLower() == formattedCategoryName);
+        }
+
+        var products = await productsQuery
             .Select(p => new ProductDTO
             {
                 Id = p.Id,
