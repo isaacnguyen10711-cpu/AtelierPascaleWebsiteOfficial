@@ -68,6 +68,37 @@ public class ProductsController : ControllerBase
         return product;
     }
 
+    // Filter products by category name
+    [HttpGet("category/{categoryName}")] 
+    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByCategory(string categoryName)
+    {
+        // Compare the category name by converting it to lowercase and replace hyphens with spaces
+        var formattedCategoryName = categoryName.Replace("-", " ").Trim().ToLower();
+
+        var products = await _context.Products
+            .Include(p => p.Images)
+            .Where(p => p.Category.Name.ToLower() == formattedCategoryName)
+            .Select(p => new ProductDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                CategoryId = p.CategoryId,
+                Images = p.Images.Select(i => new ProductImageDTO
+                {
+                    Id = i.Id,
+                    ImageUrl = i.ImageUrl
+                }).ToList()
+            })
+            .ToListAsync();
+        if (!products.Any())
+        {
+            return NotFound();
+        }
+        return products;
+    }
+
     // PUT: api/Product/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]

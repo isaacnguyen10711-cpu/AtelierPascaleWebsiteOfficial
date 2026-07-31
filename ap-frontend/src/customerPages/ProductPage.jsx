@@ -4,36 +4,22 @@ import GetUserRole from '../components/GetUserRole.jsx';
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState('');
   const role = GetUserRole();
 
   const { categoryName } = useParams();
 
   useEffect(() => {
     async function loadProducts() {
-      const categoryResponse = await fetch('https://localhost:7215/api/Categories');
-      const categoryData = await categoryResponse.json();
+      const response = await fetch(`http://localhost:7215/api/products/category/${categoryName}`);
 
-      const selectedCategory = categoryData.find(
-        (cat) => cat.name.toLowerCase().replaceAll(' ', '-') === categoryName.toLowerCase()
-      );
-
-      if (!selectedCategory) {
-        setCategory('');
-        setProducts([]);
+      if (!response.ok) {
+        console.error('Failed to fetch products:', response.statusText);
         return;
       }
 
-      setCategory(selectedCategory.name);
-
-      const productResponse = await fetch('https://localhost:7215/api/products');
-      const productData = await productResponse.json();
-
-      const productsByCategory = productData.filter(
-        (product) => product.categoryId === selectedCategory.id
-      );
-
-      setProducts(productsByCategory);
+      const data = await response.json();
+      setProducts(data);
+      setCategory()
     }
 
     loadProducts();
@@ -45,13 +31,14 @@ function ProductPage() {
         : categoryName === 'jewelry' ? 'bg-jewelry'
           : categoryName === 'art' ? 'bg-art' : '';
 
+
   return (
     <>
       <section className="relative min-h-screen">
         <div className={categoryBackground} />
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
           <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
-            {category}
+            {categoryName.replaceAll('-', ' ')}
           </h1>
         </div>
       </section>
