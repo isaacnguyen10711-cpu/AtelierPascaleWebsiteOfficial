@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using AtelierPascaleWebsite.Models.DTOs;
 
 
 namespace AtelierPascaleWebsite.Controllers

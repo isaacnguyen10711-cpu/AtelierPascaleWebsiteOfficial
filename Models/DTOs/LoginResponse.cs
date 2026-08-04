@@ -1,4 +1,4 @@
-﻿namespace AtelierPascaleWebsite.Models
+﻿namespace AtelierPascaleWebsite.Models.DTOs
 {
     public class LoginResponse
     {
