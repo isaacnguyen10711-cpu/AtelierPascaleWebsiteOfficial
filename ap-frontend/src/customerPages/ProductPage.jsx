@@ -10,6 +10,7 @@ function ProductPage() {
 
   useEffect(() => {
     async function loadProducts() {
+      setProducts([])
       const response = await fetch(`https://localhost:7215/api/products/category/${categoryName}`);
 
       if (!response.ok) {
