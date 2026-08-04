@@ -70,7 +70,7 @@ public class OrdersController : ControllerBase
     // POST: api/Order
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Order>> PostOrder(OrderCreateDTO order)
+    public async Task<ActionResult<OrderResponseDTO>> PostOrder(OrderCreateDTO order)
     {
         // Get the user's shopping cart to calculate the total price of the order
         var shoppingCart = await _context.ShoppingCarts
@@ -119,7 +119,11 @@ public class OrdersController : ControllerBase
         _context.ItemsInCarts.RemoveRange(shoppingCart.ItemsInCarts);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetOrder", new { id = confirmedOrder.Id }, confirmedOrder);
+        return CreatedAtAction("GetOrder", new { id = confirmedOrder.Id }, new OrderResponseDTO
+        {
+            OrderId = confirmedOrder.Id,
+            OrderDate = confirmedOrder.OrderDate
+        });
     }
 
     // DELETE: api/Order/5
