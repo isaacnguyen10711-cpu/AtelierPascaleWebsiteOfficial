@@ -49,6 +49,7 @@ public class ItemsInCartController : ControllerBase
             .Include(i => i.ShoppingCart)
             .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == GetCurrentUserId())
             .FirstOrDefaultAsync(i => i.Id == id);
+
         if (existingItem == null)
         {
             return NotFound();

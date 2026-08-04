@@ -21,5 +21,6 @@ public class Product
     public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 
     public ICollection<ItemsInCart> ItemsInCarts { get; set; } = new List<ItemsInCart>();
+    public ICollection<ItemInOrder> ItemsInOrders { get; set; } = new List<ItemInOrder>();
 
 }

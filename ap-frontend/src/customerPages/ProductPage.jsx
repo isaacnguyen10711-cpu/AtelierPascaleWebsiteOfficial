@@ -10,7 +10,7 @@ function ProductPage() {
 
   useEffect(() => {
     async function loadProducts() {
-      const response = await fetch(`http://localhost:7215/api/products/category/${categoryName}`);
+      const response = await fetch(`https://localhost:7215/api/products/category/${categoryName}`);
 
       if (!response.ok) {
         console.error('Failed to fetch products:', response.statusText);
@@ -19,7 +19,6 @@ function ProductPage() {
 
       const data = await response.json();
       setProducts(data);
-      setCategory()
     }
 
     loadProducts();

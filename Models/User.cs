@@ -16,5 +16,6 @@ public class User
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public ShoppingCart? ShoppingCart { get; set; }
+    public ICollection<Order> Orders { get; set; } = new List<Order>();
 
 }
