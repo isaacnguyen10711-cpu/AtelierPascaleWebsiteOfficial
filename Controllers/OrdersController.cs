@@ -70,7 +70,7 @@ public class OrdersController : ControllerBase
     // POST: api/Order
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<OrderResponseDTO>> PostOrder(OrderCreateDTO order)
+    public async Task<ActionResult<OrderResponseDTO>> PostOrder(OrderCreateRequestDTO order)
     {
         // Get the user's shopping cart to calculate the total price of the order
         var shoppingCart = await _context.ShoppingCarts
@@ -104,6 +104,7 @@ public class OrdersController : ControllerBase
         _context.Orders.Add(confirmedOrder);
         await _context.SaveChangesAsync();
 
+        // Add items from the shopping cart into the ItemsInOrder table directly after creating the order
         foreach (var item in shoppingCart.ItemsInCarts)
         {
             var itemInOrder = new ItemInOrder

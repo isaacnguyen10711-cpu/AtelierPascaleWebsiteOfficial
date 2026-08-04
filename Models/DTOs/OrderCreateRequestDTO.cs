@@ -1,6 +1,6 @@
 ﻿namespace AtelierPascaleWebsite.Models.DTOs
 {
-    public class OrderCreateDTO
+    public class OrderCreateRequestDTO
     {
         public int UserId { get; set; }
         public User? User { get; set; }

@@ -19,12 +19,12 @@ public class ItemsInCartController : ControllerBase
 
     // GET: api/ItemsInCart
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ItemsInCartDTO>>> GetItemsInCart()
+    public async Task<ActionResult<IEnumerable<ItemsInCartResponseDTO>>> GetItemsInCart()
     {
         var itemsInCart = await _context.ItemsInCarts
             .Where(i => i.ShoppingCart != null && i.ShoppingCart.UserId == GetCurrentUserId())
             // Include the related Product and its Images
-            .Select(p => new ItemsInCartDTO
+            .Select(p => new ItemsInCartResponseDTO
             {
                 Id = p.Id,
                 ProductId = p.Product!.Id,
@@ -42,7 +42,7 @@ public class ItemsInCartController : ControllerBase
 
     // PUT: api/ItemsInCart/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutItemsInCart(int id, ItemsInCartUpdateDTO itemsincart)
+    public async Task<IActionResult> PutItemsInCart(int id, ItemsInCartUpdateRequestDTO itemsincart)
     {
         // Load the item in the shopping cart and check if it belongs to the current user
         var existingItem = await _context.ItemsInCarts
@@ -63,7 +63,7 @@ public class ItemsInCartController : ControllerBase
     // POST: api/ItemsInCart
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<ItemsInCartDTO>> PostItemsInCart(ItemsInCartAddDTO itemsincart)
+    public async Task<ActionResult<ItemsInCartResponseDTO>> PostItemsInCart(ItemsInCartCreateRequestDTO itemsincart)
     {
         var product = await _context.Products.FindAsync(itemsincart.ProductId);
         if (product == null)
@@ -88,7 +88,7 @@ public class ItemsInCartController : ControllerBase
         {
             existingItem.Quantity += 1;
             await _context.SaveChangesAsync();
-            return Ok(new ItemsInCartDTO
+            return Ok(new ItemsInCartResponseDTO
             {
                 Id = existingItem.Id,
                 ProductId = product.Id,
@@ -112,7 +112,7 @@ public class ItemsInCartController : ControllerBase
         _context.ItemsInCarts.Add(newItem);
         await _context.SaveChangesAsync();
 
-        return Ok(new ItemsInCartDTO
+        return Ok(new ItemsInCartResponseDTO
         {
             Id = newItem.Id,
             ProductId = product.Id,

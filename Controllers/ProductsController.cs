@@ -17,11 +17,11 @@ public class ProductsController : ControllerBase
 
     // GET: api/Product
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct()
+    public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetProduct()
     {
         return await _context.Products
             .Include(p => p.Images)
-            .Select(p => new ProductDTO
+            .Select(p => new ProductResponseDTO
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -39,13 +39,13 @@ public class ProductsController : ControllerBase
 
     // GET: api/Product/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<ProductDTO>> GetProduct(int id)
+    public async Task<ActionResult<ProductResponseDTO>> GetProduct(int id)
     {
         var product = await _context.Products
             .Include(p => p.Images)
             .Where(p => p.Id == id)
             // Create a new ProductDTO object to return to prevent exposing the entity directly and to avoid circular references
-            .Select(p => new ProductDTO
+            .Select(p => new ProductResponseDTO
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -70,7 +70,7 @@ public class ProductsController : ControllerBase
 
     // Filter products by category name
     [HttpGet("category/{categoryName}")] 
-    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByCategory(string categoryName)
+    public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetProductsByCategory(string categoryName)
     {
         if (string.IsNullOrWhiteSpace(categoryName))
         {
@@ -96,7 +96,7 @@ public class ProductsController : ControllerBase
         }
 
         var products = await productsQuery
-            .Select(p => new ProductDTO
+            .Select(p => new ProductResponseDTO
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -121,7 +121,7 @@ public class ProductsController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutProduct(int? id, ProductUpdateDTO product)
+    public async Task<IActionResult> PutProduct(int? id, ProductUpdateRequestDTO product)
     {
         if (id != product.Id)
         {
@@ -159,7 +159,7 @@ public class ProductsController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public async Task<ActionResult<ProductDTO>> PostProduct(ProductCreateDTO product)
+    public async Task<ActionResult<ProductResponseDTO>> PostProduct(ProductCreateRequestDTO product)
     {
         var categoryExists = await _context.Categories.AnyAsync(c => c.Id == product.CategoryId);
         if (!categoryExists)
@@ -178,7 +178,7 @@ public class ProductsController : ControllerBase
         _context.Products.Add(newProduct);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetProduct", new { id = newProduct.Id }, new ProductDTO
+        return CreatedAtAction("GetProduct", new { id = newProduct.Id }, new ProductResponseDTO
         {
             Id = newProduct.Id,
             Name = newProduct.Name,

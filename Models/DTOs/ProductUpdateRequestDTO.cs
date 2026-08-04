@@ -1,6 +1,6 @@
 ﻿namespace AtelierPascaleWebsite.Models.DTOs
 {
-    public class ProductUpdateDTO
+    public class ProductUpdateRequestDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

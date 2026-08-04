@@ -1,6 +1,6 @@
 ﻿namespace AtelierPascaleWebsite.Models.DTOs
 {
-    public class ItemsInCartUpdateDTO
+    public class ItemsInCartUpdateRequestDTO
     {
         public int Quantity { get; set; }
     }
