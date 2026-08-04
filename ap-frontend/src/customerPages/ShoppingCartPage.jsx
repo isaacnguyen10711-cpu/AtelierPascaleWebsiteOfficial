@@ -135,10 +135,11 @@ function ShoppingCartPage() {
               <p>Total</p>
               <p>${Number(subtotal).toFixed(2)}</p>
             </div>
-
-            <button className="mt-6 w-full bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white md:mt-7 md:px-6 md:text-sm">
+            <Link to="/checkout">
+              <button className="mt-6 w-full bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white hover:cursor-pointer md:mt-7 md:px-6 md:text-sm">
               Checkout
-            </button>
+              </button>
+            </Link>
           </section>
         </div>
       </section>
@@ -147,6 +148,7 @@ function ShoppingCartPage() {
 }
 
 export default ShoppingCartPage
+
 
 
 

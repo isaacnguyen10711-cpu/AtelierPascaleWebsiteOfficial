@@ -30,6 +30,11 @@ function ProductPage() {
         : categoryName === 'jewelry' ? 'bg-jewelry'
           : categoryName === 'art' ? 'bg-art' : '';
 
+  const categoryTitle = categoryName === 'new-arrival' ? 'New Arrival'
+    : categoryName === 'home-decor' ? 'Home Decor'
+      : categoryName === 'gifts' ? 'Gifts'
+        : categoryName === 'jewelry' ? 'Jewelry'
+          : categoryName === 'art' ? 'Art' : '';
 
   return (
     <>
@@ -37,7 +42,7 @@ function ProductPage() {
         <div className={categoryBackground} />
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
           <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
-            {categoryName.replaceAll('-', ' ')}
+            {categoryTitle}
           </h1>
         </div>
       </section>
