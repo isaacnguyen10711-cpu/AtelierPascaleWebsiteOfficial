@@ -69,7 +69,7 @@ function CheckoutPage() {
 
         <div className="grid gap-6 pt-6 md:grid-cols-[3fr_2fr] md:gap-8 md:pt-8 lg:gap-10 lg:pt-10">
           <section className="space-y-5 lg:space-y-7">
-            <div className="border border-ap-brown bg-ap-pale rounded p-4 md:p-6 lg:p-7">
+            <div className="border border-ap-brown bg-ap-pale rounded p-4 transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-6 lg:p-7">
               <h2 className="text-xs uppercase tracking-widest md:text-sm">
                 Contact Details
               </h2>
@@ -80,26 +80,26 @@ function CheckoutPage() {
                   placeholder="First name"
                   value={firstName}
                   onChange={(event) => setFirstName(event.target.value)}
-                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <input
                   type="text"
                   placeholder="Last name"
                   value={lastName}
                   onChange={(event) => setLastName(event.target.value)}
-                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <input
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:col-span-2 md:text-sm lg:text-base"
+                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:col-span-2 md:text-sm lg:text-base"
                 />
               </div>
             </div>
 
-            <div className="border border-ap-brown bg-ap-pale rounded p-4 md:p-6 lg:p-7">
+            <div className="border border-ap-brown bg-ap-pale rounded p-4 transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-6 lg:p-7">
               <h2 className="text-xs uppercase tracking-widest md:text-sm">
                 Delivery Address
               </h2>
@@ -110,7 +110,7 @@ function CheckoutPage() {
                   placeholder="Address"
                   value={address}
                   onChange={(event) => setAddress(event.target.value)}
-                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <div className="grid gap-3 md:grid-cols-3">
                   <input
@@ -118,27 +118,27 @@ function CheckoutPage() {
                     placeholder="City"
                     value={city}
                     onChange={(event) => setCity(event.target.value)}
-                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                   <input
                     type="text"
                     placeholder="State"
                     value={state}
                     onChange={(event) => setState(event.target.value)}
-                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                   <input
                     type="text"
                     placeholder="Postcode"
                     value={postcode}
                     onChange={(event) => setPostcode(event.target.value)}
-                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="rounded border border-ap-brown bg-ap-pale p-4 md:p-6 lg:p-7">
+            <div className="rounded border border-ap-brown bg-ap-pale p-4 transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-6 lg:p-7">
               <h2 className="text-xs uppercase tracking-widest md:text-sm">
                 Payment
               </h2>
@@ -147,25 +147,25 @@ function CheckoutPage() {
                 <input
                   type="text"
                   placeholder="Card number"
-                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                  className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <div className="grid gap-3 md:grid-cols-2">
                   <input
                     type="text"
                     placeholder="MM / YY"
-                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                   <input
                     type="text"
                     placeholder="CVC"
-                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none focus:border-ap-beige md:text-sm lg:text-base"
+                    className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                 </div>
               </div>
             </div>
           </section>
 
-          <section className="h-fit rounded border border-ap-brown bg-ap-pale p-4 md:sticky md:top-24 md:p-6 lg:top-28 lg:p-7">
+          <section className="h-fit rounded border border-ap-brown bg-ap-pale p-4 transition duration-300 hover:shadow-lg md:sticky md:top-24 md:p-6 lg:top-28 lg:p-7">
             <h2 className="text-xs uppercase tracking-widest md:text-sm">
               Order Summary
             </h2>
@@ -173,7 +173,7 @@ function CheckoutPage() {
             <div className="mt-4 space-y-4 border-b border-ap-brown pb-4">
               {cartItems.length > 0 ? (
                 cartItems.map((item) => (
-                  <div key={item.id} className="grid grid-cols-[1fr_5fr_1fr] gap-3 md:grid-cols-[1fr_4fr_1fr] lg:grid-cols-[1fr_3fr_1fr]">
+                  <div key={item.id} className="grid grid-cols-[1fr_5fr_1fr] gap-3 transition duration-200 hover:translate-x-1 md:grid-cols-[1fr_4fr_1fr] lg:grid-cols-[1fr_3fr_1fr]">
                     <img
                       src={item.productImageUrl}
                       alt={item.productName}
@@ -189,9 +189,9 @@ function CheckoutPage() {
                           Qty: {item.quantity}
                         </p>
                       </div>
-                      </div>
+                    </div>
 
-                      <div>
+                    <div>
                       <p className="text-xs font-medium md:text-sm lg:text-base">
                         ${Number(item.price * item.quantity).toFixed(2)}
                       </p>
@@ -223,12 +223,12 @@ function CheckoutPage() {
 
             <button
               onClick={handlePlaceOrder}
-              className="mt-5 w-full rounded bg-ap-brown px-4 py-3 text-xs uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white md:text-sm lg:px-6 lg:py-4"
+              className="mt-5 w-full rounded bg-ap-brown px-4 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-200 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 hover:cursor-pointer md:text-sm lg:px-6 lg:py-4"
             >
               Place Order
             </button>
 
-            <Link to="/cart" className="mt-4 block text-center text-xs uppercase tracking-widest hover:text-ap-beige md:text-sm">
+            <Link to="/cart" className="mt-4 block text-center text-xs uppercase tracking-widest transition duration-200 hover:text-ap-beige md:text-sm">
               Back To Cart
             </Link>
           </section>
