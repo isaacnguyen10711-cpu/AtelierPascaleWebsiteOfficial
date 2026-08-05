@@ -1,6 +1,47 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 function CheckoutPage() {
+  const [cartItems, setCartItems] = useState([]);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [postcode, setPostcode] = useState('');
+
+  const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+
+  useEffect(() => {
+    const loadCartItems = async () => {
+      const response = await fetch('https://localhost:7215/api/ItemsInCart', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      const data = await response.json()
+      setCartItems(data)
+    }
+
+    loadCartItems()
+  }, [])
+
+  const handlePlaceOrder = async () => {
+    const response = await fetch(`https://localhost:7215/api/order`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
+
   return (
     <main className="min-h-screen bg-ap-tan px-5 py-22 text-ap-brown sm:px-8 sm:py-24 md:px-10 md:py-28 lg:px-16 lg:py-32">
       <section className="mx-auto max-w-5xl lg:max-w-6xl">
@@ -102,15 +143,53 @@ function CheckoutPage() {
               Order Summary
             </h2>
 
+            <div className="mt-4 space-y-4 border-b border-ap-brown pb-4 sm:mt-5 sm:space-y-5 sm:pb-5">
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => (
+                  <div key={item.id} className="grid grid-cols-[1fr_3fr] gap-3 sm:grid-cols-[1fr_4fr] sm:gap-4 md:grid-cols-[1fr_3fr] lg:grid-cols-[1fr_4fr]">
+                    <img
+                      src={item.productImageUrl}
+                      alt={item.productName}
+                      className="h-18 w-18 object-cover object-center sm:h-20 sm:w-20 md:h-18 md:w-18 lg:h-20 lg:w-20"
+                    />
+
+                    <div className="flex flex-col justify-between gap-2">
+                      <div>
+                        <h3 className="text-sm font-medium sm:text-base md:text-sm lg:text-base">
+                          {item.productName}
+                        </h3>
+                        <p className="mt-1 text-xs uppercase tracking-widest sm:text-xs md:text-xs lg:text-sm">
+                          Qty: {item.quantity}
+                        </p>
+                      </div>
+
+                      <p className="text-xs font-medium sm:text-sm md:text-sm lg:text-base">
+                        ${Number(item.price * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-xs uppercase tracking-widest sm:text-sm">
+                  Your cart is empty
+                </p>
+              )}
+            </div>
+
             <div className="mt-4 space-y-3 border-b border-ap-brown pb-4 text-xs sm:mt-5 sm:pb-5 sm:text-sm md:text-sm lg:text-base">
               <div className="flex justify-between gap-5 sm:gap-6">
                 <p>Subtotal</p>
-                <p>Calculated from cart</p>
+                <p>${Number(subtotal).toFixed(2)}</p>
               </div>
               <div className="flex justify-between gap-5 sm:gap-6">
                 <p>Shipping</p>
                 <p>Calculated later</p>
               </div>
+            </div>
+
+            <div className="mt-4 flex justify-between gap-5 text-sm font-medium sm:mt-5 sm:gap-6 sm:text-base md:text-base lg:text-lg">
+              <p>Total</p>
+              <p>${Number(subtotal).toFixed(2)}</p>
             </div>
 
             <button className="mt-5 w-full bg-ap-brown px-4 py-3 text-xs uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white sm:mt-6 sm:px-5 md:text-sm lg:px-6 lg:py-4">
