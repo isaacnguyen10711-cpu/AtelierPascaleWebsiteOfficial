@@ -54,6 +54,7 @@ function ProductPage() {
             {products.map((product) => (
               <div key={product.id} className="group transition duration-300 hover:-translate-y-1">
                 {product.images?.[0]?.imageUrl && (
+                  // Add overflow-hidden to prevent larger images get overflowed
                   <Link to={`/products/${categoryName}/${product.id}`} className="block overflow-hidden rounded">
                     <img
                       src={product.images[0].imageUrl}

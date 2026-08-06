@@ -67,7 +67,7 @@ function ProductDetailsPage() {
     return (
       <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">
         <p>Product not found.</p>
-        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 hover:bg-ap-brown hover:text-ap-tan">
+        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 transition duration-200 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0">
           Back To Products
         </Link>
       </main>
@@ -81,7 +81,7 @@ function ProductDetailsPage() {
     <main className="min-h-screen bg-ap-tan text-ap-brown">
       <section className="grid min-h-screen md:grid-cols-[5fr_4fr]">
         <div className="px-6 pb-12 pt-23 md:px-5 lg:px-15">
-          <Link to={`/products/${categoryName}`} className="mb-6 inline-block text-sm uppercase tracking-widest hover:text-ap-beige">
+          <Link to={`/products/${categoryName}`} className="mb-6 inline-block text-sm uppercase tracking-widest transition duration-200 hover:text-ap-beige">
             Back To Products
           </Link>
 
@@ -89,12 +89,13 @@ function ProductDetailsPage() {
           <div>
             {images.length > 0 ? (
               images.map((image) => (
-                <img
-                  key={image.id}
-                  src={image.imageUrl}
-                  alt={product.name}
-                  className="h-[400px] w-full object-cover object-center md:h-[540px] lg:h-[600px]"
-                />
+                <div key={image.id} className="overflow-hidden rounded">
+                  <img
+                    src={image.imageUrl}
+                    alt={product.name}
+                    className="h-[400px] w-full object-cover object-center transition duration-500 hover:scale-105 md:h-[540px] lg:h-[600px]"
+                  />
+                </div>
               ))
             ) : (
               <div className="flex h-[520px] items-center justify-center border border-ap-brown bg-ap-tan">
@@ -121,14 +122,14 @@ function ProductDetailsPage() {
             {product.description}
           </p>
 
-          <button className="mt-10 w-full bg-ap-brown px-8 py-4 text-sm uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white hover:cursor-pointer"
+          <button className="mt-10 w-full cursor-pointer rounded bg-ap-brown px-8 py-4 text-sm uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0"
             onClick={handleAddToCart}>
             Add To Cart
           </button>
 
           {/* Additional information section */ }
           <section className="mt-12 border-t border-ap-brown">
-            <div className="border-b border-ap-brown py-5">
+            <div className="border-b border-ap-brown py-5 transition duration-300 hover:translate-x-1">
               <h2 className="text-sm uppercase tracking-widest">Product Details</h2>
               <div className="mt-4 space-y-2 text-xs md:text-sm">
                 <p>Category: {categoryName.replaceAll('-', ' ')}</p>
@@ -137,14 +138,14 @@ function ProductDetailsPage() {
               </div>
             </div>
 
-            <div className="border-b border-ap-brown py-5">
+            <div className="border-b border-ap-brown py-5 transition duration-300 hover:translate-x-1">
               <h2 className="text-sm uppercase tracking-widest">Care</h2>
               <p className="mt-4 text-sm leading-7">
                 Keep this piece away from direct heat and moisture. Clean gently with a soft, dry cloth.
               </p>
             </div>
 
-            <div className="py-5 text-sm leading-7">
+            <div className="py-5 text-sm leading-7 transition duration-300 hover:translate-x-1">
               <p>Delivery: Carefully packed and prepared for dispatch.</p>
               <p>Returns: Contact Atelier Pascale for order support.</p>
             </div>
