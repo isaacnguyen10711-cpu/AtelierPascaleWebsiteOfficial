@@ -121,7 +121,7 @@ function ProductDetailsPage() {
             {product.description}
           </p>
 
-          <button className="mt-10 w-full bg-ap-brown px-8 py-4 text-sm uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white"
+          <button className="mt-10 w-full bg-ap-brown px-8 py-4 text-sm uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white hover:cursor-pointer"
             onClick={handleAddToCart}>
             Add To Cart
           </button>

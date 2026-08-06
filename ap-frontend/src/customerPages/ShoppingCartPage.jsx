@@ -70,7 +70,7 @@ function ShoppingCartPage() {
             </p>
           </div>
 
-          <Link to="/products/new-arrival" className="text-xs uppercase tracking-widest hover:text-ap-beige md:text-sm">
+          <Link to="/products/new-arrival" className="text-xs uppercase tracking-widest transition duration-200 hover:text-ap-beige md:text-sm">
             Continue Shopping
           </Link>
         </div>
@@ -78,12 +78,14 @@ function ShoppingCartPage() {
         <div className="grid gap-7 pt-7 md:grid-cols-[5fr_2fr] md:gap-8 md:pt-9 lg:gap-10 lg:pt-10">
           <section className="space-y-5 md:space-y-6">
             {cartItems.map((item) => (
-              <div key={item.id} className="grid grid-cols-[2fr_3fr] gap-4 border-b border-ap-brown pb-5 md:grid-cols-[1fr_2fr] md:gap-5 lg:grid-cols-[1fr_3fr] lg:pb-6">
-                <img
-                  src={item.productImageUrl}
-                  alt={item.productName}
-                  className="aspect-square w-full object-cover object-center"
-                />
+              <div key={item.id} className="grid grid-cols-[2fr_3fr] gap-4 border-b border-ap-brown pb-5 transition duration-300 hover:translate-x-1 md:grid-cols-[1fr_2fr] md:gap-5 lg:grid-cols-[1fr_3fr] lg:pb-6">
+                <div className="overflow-hidden rounded">
+                  <img
+                    src={item.productImageUrl}
+                    alt={item.productName}
+                    className="aspect-square w-full object-cover object-center transition duration-300 hover:scale-105"
+                  />
+                </div>
 
                 <div className="flex flex-col justify-between gap-4 md:flex-row md:gap-5 lg:gap-6">
                   <div>
@@ -93,15 +95,15 @@ function ShoppingCartPage() {
                     <p className="mt-2 text-xs uppercase tracking-widest md:text-sm">
                       Quantity: {item.quantity}
                     </p>
-                    <button className="mt-4 hover:text-ap-beige"
+                    <button className="mt-4 cursor-pointer transition duration-200 hover:-translate-y-1 hover:text-ap-beige active:translate-y-0"
                       onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}>
                       <Minus className="inline-block w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     </button>
-                    <button className="mt-4 hover:text-ap-beige"
+                    <button className="mt-4 cursor-pointer transition duration-200 hover:-translate-y-1 hover:text-ap-beige active:translate-y-0"
                       onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}>
                       <Plus className="inline-block w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     </button>
-                    <button className="mt-4 ml-2 hover:text-ap-beige"
+                    <button className="mt-4 ml-2 cursor-pointer transition duration-200 hover:-translate-y-1 hover:text-ap-beige active:translate-y-0"
                       onClick={() => handleRemoveItem(item.id)}>
                       <Trash2 className="inline-block w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                     </button>
@@ -115,7 +117,7 @@ function ShoppingCartPage() {
             ))}
           </section>
 
-          <section className="h-fit border border-ap-brown bg-ap-pale p-4 md:p-5 lg:p-6">
+          <section className="h-fit rounded border border-ap-brown bg-ap-pale p-4 transition duration-300 hover:shadow-lg md:sticky md:top-24 md:p-5 lg:top-28 lg:p-6">
             <h2 className="text-xs uppercase tracking-widest md:text-sm">
               Order Summary
             </h2>
@@ -136,7 +138,7 @@ function ShoppingCartPage() {
               <p>${Number(subtotal).toFixed(2)}</p>
             </div>
             <Link to="/checkout">
-              <button className="mt-6 w-full bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white hover:cursor-pointer md:mt-7 md:px-6 md:text-sm">
+              <button className="mt-6 w-full cursor-pointer rounded bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-200 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:mt-7 md:px-6 md:text-sm">
               Checkout
               </button>
             </Link>
