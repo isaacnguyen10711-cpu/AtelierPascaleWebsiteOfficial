@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar.jsx'
 import HomePage from './customerPages/HomePage.jsx'
 import LoginPage from './customerPages/LoginPage.jsx'
@@ -25,7 +25,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} /> 
         <Route path="/cart" element={<ShoppingCartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/checkout" element={role == "Customer" ? <CheckoutPage /> : <Navigate to="/" replace />} />
         <Route path="/products/:categoryName" element={<ProductPage />} />
         <Route path="/products/:categoryName/:productId" element={role == "Admin" ? < AdminProductEditPage /> : <ProductDetailsPage />} />
         <Route path="/admin/add-product" element={<AdminAddProductPage />} />

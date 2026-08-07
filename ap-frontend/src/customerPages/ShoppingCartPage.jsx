@@ -138,7 +138,10 @@ function ShoppingCartPage() {
               <p>${Number(subtotal).toFixed(2)}</p>
             </div>
             <Link to="/checkout">
-              <button className="mt-6 w-full cursor-pointer rounded bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-200 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:mt-7 md:px-6 md:text-sm">
+              <button
+                className="mt-6 w-full cursor-pointer rounded bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-200 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:mt-7 md:px-6 md:text-sm"
+                disabled={cartItems.length === 0}
+              >
               Checkout
               </button>
             </Link>
