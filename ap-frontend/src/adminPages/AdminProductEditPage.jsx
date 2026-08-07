@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 function AdminProductDetailsPage() {
@@ -107,7 +107,7 @@ function AdminProductDetailsPage() {
     return (
       <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">
         <p>Product not found.</p>
-        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 hover:bg-ap-brown hover:text-ap-tan">
+        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0">
           Back To Products
         </Link>
       </main>
@@ -117,7 +117,7 @@ function AdminProductDetailsPage() {
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
       <section className="mx-auto max-w-3xl">
-        <Link to={`/products/${categoryName}`} className="mb-8 inline-block text-sm uppercase tracking-widest hover:text-ap-beige">
+        <Link to={`/products/${categoryName}`} className="mb-8 inline-block text-sm uppercase tracking-widest transition duration-300 hover:text-ap-beige">
           Back To Products
         </Link>
 
@@ -125,7 +125,7 @@ function AdminProductDetailsPage() {
           Admin Product Details
         </h1>
 
-        <form onSubmit={handleSaveNewData} className="mt-10 rounded-md space-y-6 border border-ap-brown bg-ap-pale p-6 md:p-8">
+        <form onSubmit={handleSaveNewData} className="mt-10 space-y-6 rounded-md border border-ap-brown bg-ap-pale p-6 transition duration-300 hover:shadow-lg md:p-8">
           <div>
             <label htmlFor="name" className="block text-sm uppercase tracking-widest">Name</label>
             <input
@@ -133,7 +133,7 @@ function AdminProductDetailsPage() {
               value={newName}
               onChange={(event) => setNewName(event.target.value)}
               disabled={!isEditing}
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
             />
           </div>
 
@@ -145,7 +145,7 @@ function AdminProductDetailsPage() {
               onChange={(event) => setNewDescription(event.target.value)}
               disabled={!isEditing}
               rows="6"
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
             />
           </div>
 
@@ -159,7 +159,7 @@ function AdminProductDetailsPage() {
                 value={newPrice}
                 onChange={(event) => setNewPrice(event.target.value)}
                 disabled={!isEditing}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
               />
             </div>
 
@@ -171,7 +171,7 @@ function AdminProductDetailsPage() {
                 value={newCategoryId}
                 onChange={(event) => setNewCategoryId(event.target.value)}
                 disabled={!isEditing}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 disabled:bg-ap-pale"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
               />
             </div>
           </div>
@@ -180,21 +180,21 @@ function AdminProductDetailsPage() {
             <button
               type="button"
               onClick={() => setIsEditing(true)}
-              className="border border-ap-brown px-8 py-3 text-sm uppercase tracking-widest hover:bg-ap-brown hover:text-ap-tan"
+              className="cursor-pointer border border-ap-brown px-8 py-3 text-sm uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0"
             >
               Edit
             </button>
             <button
               type="submit"
               disabled={!isEditing}
-              className="bg-ap-brown px-8 py-3 text-sm uppercase tracking-widest text-ap-tan hover:bg-ap-beige hover:text-white disabled:bg-ap-beige"
+              className="cursor-pointer bg-ap-brown px-8 py-3 text-sm uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 disabled:cursor-not-allowed disabled:bg-ap-beige disabled:hover:translate-y-0"
             >
               Save
             </button>
             <button
               type="button"
               onClick={handleDelete}
-              className="border border-ap-brown px-8 py-3 text-sm uppercase tracking-widest hover:bg-ap-brown hover:text-ap-tan"
+              className="cursor-pointer border border-ap-brown px-8 py-3 text-sm uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0"
             >
               Delete
             </button>

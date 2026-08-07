@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 
@@ -45,7 +45,7 @@ function AdminAddProductPage() {
           Admin Add New Product
         </h1>
         <div>
-          <form onSubmit={handleAddProduct} className="mt-4 space-y-4 md:mt-5 md:space-y-4 lg:mt-6 lg:space-y-5">
+          <form onSubmit={handleAddProduct} className="mt-4 space-y-4 rounded-md border border-ap-brown bg-ap-pale p-6 transition duration-300 hover:shadow-lg md:mt-5 md:space-y-4 md:p-8 lg:mt-6 lg:space-y-5">
             <div>
               <label htmlFor="name" className="block text-sm font-medium uppercase tracking-widest md:text-base lg:text-base">
                 Name
@@ -55,7 +55,7 @@ function AdminAddProductPage() {
                 name="name"
                 id="name"
                 onChange={(e) => setName(e.target.value)}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
 
             </div>
@@ -67,7 +67,7 @@ function AdminAddProductPage() {
                 name="description"
                 id="description"
                 onChange={(e) => setDescription(e.target.value)}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-4 text-sm md:px-4 md:py-4 md:text-base lg:px-5 lg:py-5 lg:text-base"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-4 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-4 md:text-base lg:px-5 lg:py-5 lg:text-base"
               />
             </div>
             <div>
@@ -79,7 +79,7 @@ function AdminAddProductPage() {
                 name="price"
                 id="price"
                 onChange={(e) => setPrice(e.target.value)}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
             </div>
             <div>
@@ -91,13 +91,13 @@ function AdminAddProductPage() {
                 name="categoryId"
                 id="categoryId"
                 onChange={(e) => setCategoryId(e.target.value)} 
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
             </div>
             <div>
               <button
                 type="submit"
-                className="bg-ap-brown text-ap-tan rounded-md px-4 py-2 hover:bg-ap-beige hover:text-white md:text-sm md:px-4 md:py-2 lg:text-base lg:px-5 lg:py-3"
+                className="cursor-pointer rounded-md bg-ap-brown px-4 py-2 text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:px-4 md:py-2 md:text-sm lg:px-5 lg:py-3 lg:text-base"
               >
                 Add Product
               </button>

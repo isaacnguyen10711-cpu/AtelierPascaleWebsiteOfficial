@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 
 function AdminAddProductImagesPage() {
   const [productId, setProductId] = useState('')
@@ -40,7 +40,7 @@ function AdminAddProductImagesPage() {
         </h1>
 
         <div>
-          <form onSubmit={handleAddProductImage} className="mt-4 space-y-4 md:mt-5 md:space-y-4 lg:mt-6 lg:space-y-5">
+          <form onSubmit={handleAddProductImage} className="mt-4 space-y-4 rounded-md border border-ap-brown bg-ap-pale p-6 transition duration-300 hover:shadow-lg md:mt-5 md:space-y-4 md:p-8 lg:mt-6 lg:space-y-5">
             <div>
               <label htmlFor="productId" className="block text-sm font-medium uppercase tracking-widest md:text-base lg:text-base">
                 Product ID
@@ -51,7 +51,7 @@ function AdminAddProductImagesPage() {
                 id="productId"
                 value={productId}
                 onChange={(event) => setProductId(event.target.value)}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
             </div>
 
@@ -65,14 +65,14 @@ function AdminAddProductImagesPage() {
                 id="imageUrl"
                 value={imageUrl}
                 onChange={(event) => setImageUrl(event.target.value)}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
             </div>
 
             <div>
               <button
                 type="submit"
-                className="rounded-md bg-ap-brown px-4 py-2 text-ap-tan hover:bg-ap-beige hover:text-white md:px-4 md:py-2 md:text-sm lg:px-5 lg:py-3 lg:text-base"
+                className="cursor-pointer rounded-md bg-ap-brown px-4 py-2 text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:px-4 md:py-2 md:text-sm lg:px-5 lg:py-3 lg:text-base"
               >
                 Add Product Image
               </button>
