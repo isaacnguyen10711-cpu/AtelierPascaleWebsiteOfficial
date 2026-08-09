@@ -4,6 +4,7 @@ import GetUserRole from '../components/GetUserRole.jsx';
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
+  const [sortBy, setSortBy] = useState('');
   const role = GetUserRole();
 
   const { categoryName } = useParams();
@@ -11,7 +12,7 @@ function ProductPage() {
   useEffect(() => {
     async function loadProducts() {
       setProducts([])
-      const response = await fetch(`https://localhost:7215/api/products/category/${categoryName}`);
+      const response = await fetch(`https://localhost:7215/api/products/category/${categoryName}?sortBy=${sortBy}`);
 
       if (!response.ok) {
         console.error('Failed to fetch products:', response.statusText);
@@ -23,7 +24,7 @@ function ProductPage() {
     }
 
     loadProducts();
-  }, [categoryName]);
+  }, [categoryName, sortBy]);
 
   const categoryBackground = categoryName === 'new-arrival' ? 'bg-new-arrival'
     : categoryName === 'home-decor' ? 'bg-home-decor'
@@ -49,6 +50,21 @@ function ProductPage() {
       </section>
 
       <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
+        <div className="mx-auto mb-10 flex max-w-6xl justify-end">
+          <select
+            value={sortBy}
+            onChange={(event) => setSortBy(event.target.value)}
+            className="cursor-pointer border border-ap-brown bg-ap-tan px-3 py-2 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale focus:bg-ap-pale md:text-base"
+          >
+            <option value="">Sort by</option>
+            <option value="price-low-to-high">Price: Low to High</option>
+            <option value="price-high-to-low">Price: High to Low</option>
+            <option value="name-a-to-z">Name: A to Z</option>
+            <option value="name-z-to-a">Name: Z to A</option>
+            <option value="newest">Newest</option>
+          </select>
+        </div>
+
         {products.length > 0 ? (
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-7 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-10">
             {products.map((product) => (
