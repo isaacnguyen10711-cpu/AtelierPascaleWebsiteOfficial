@@ -38,6 +38,16 @@ function ProductPage() {
         : categoryName === 'jewelry' ? 'Jewelry'
           : categoryName === 'art' ? 'Art' : '';
 
+  const productLayout = categoryName === 'art'
+    ? {
+      gridColumns: 'md:grid-cols-2 lg:grid-cols-3',
+      imageSize: 'aspect-[7/5]'
+    }
+    : {
+      gridColumns: 'md:grid-cols-3 lg:grid-cols-4',
+      imageSize: 'aspect-[5/6]'
+    };
+
   return (
     <>
       <section className="relative min-h-screen">
@@ -66,7 +76,7 @@ function ProductPage() {
         </div>
 
         {products.length > 0 ? (
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-7 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-10">
+          <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-7 md:gap-8 lg:gap-10 ${productLayout.gridColumns}`}>
             {products.map((product) => (
               <div key={product.id} className="group transition duration-300 hover:-translate-y-1">
                 <Link to={`/products/${categoryName}/${product.id}`} className="block">
@@ -76,10 +86,10 @@ function ProductPage() {
                       <img
                         src={product.images[0].imageUrl}
                         alt={product.name}
-                        className="h-[160px] w-full object-cover object-center transition duration-500 group-hover:scale-105 md:h-[230px] lg:h-[300px]"
+                        className={`w-full object-cover object-center transition duration-500 group-hover:scale-105 ${productLayout.imageSize}`}
                       />
                     ) : (
-                      <div className="flex h-[160px] w-full items-center justify-center border border-ap-brown bg-ap-pale px-4 text-center text-xs uppercase tracking-widest md:h-[230px] md:text-sm lg:h-[300px]">
+                      <div className={`flex w-full items-center justify-center border border-ap-brown bg-ap-pale text-xs uppercase tracking-widest md:text-sm ${productLayout.imageSize}`}>
                         No image available
                       </div>
                     )}

@@ -67,10 +67,10 @@ function HomePage() {
             New Arrival
           </h2>
 
-          <div className="mx-auto mt-5 grid w-[90%] gap-10 md:mt-7 md:grid-cols-2 md:gap-12 lg:mt-9 lg:gap-15">
+          <div className="mx-auto mt-5 grid w-[80%] gap-10 md:mt-7 md:grid-cols-2 md:gap-12 lg:mt-9 lg:gap-15">
             <div className="transition duration-300 hover:-translate-y-1">
               <div className="overflow-hidden rounded">
-                <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
+                <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[170px] w-full object-cover object-center md:h-[220px] lg:h-[270px]" />
               </div>
               <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold transition duration-300 hover:text-ap-beige md:text-5xl lg:text-6xl">Latest Pieces</h3>
               <p className="mt-2 text-sm leading-7 text-ap-brown md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -80,7 +80,7 @@ function HomePage() {
 
             <div className="transition duration-300 hover:-translate-y-1">
               <div className="overflow-hidden rounded">
-                <img src={images.art} alt="Featured art arrival" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
+                <img src={images.art} alt="Featured art arrival" className="mx-auto h-[170px] w-full object-cover object-center md:h-[230px] lg:h-[270px]" />
               </div>
               <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold transition duration-300 hover:text-ap-beige md:text-5xl lg:text-6xl">Collected Forms</h3>
               <p className="mt-2 text-sm leading-7 text-ap-brown md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -89,9 +89,9 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-10 max-w-[90%] text-center md:mt-12 md:max-w-[40%] lg:mt-14 lg:max-w-[50%]">
+          <div className="mx-auto mt-10 max-w-[80%] text-center md:mt-12 md:max-w-[30%] lg:mt-14 lg:max-w-[40%]">
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
-              <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
+              <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[170px] w-full object-cover object-center md:h-[220px] lg:h-[270px]" />
             </div>
             <Link to="/products/new-arrival" className="mt-8 inline-block cursor-pointer border border-ap-brown px-7 py-3 text-xs uppercase tracking-[0.2em] transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-8 md:text-sm lg:px-9 lg:py-4">
               Discover More

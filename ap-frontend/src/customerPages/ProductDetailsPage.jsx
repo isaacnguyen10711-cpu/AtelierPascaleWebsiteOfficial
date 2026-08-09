@@ -67,7 +67,7 @@ function ProductDetailsPage() {
     return (
       <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">
         <p>Product not found.</p>
-        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 transition duration-200 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0">
+        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0">
           Back To Products
         </Link>
       </main>
@@ -93,12 +93,12 @@ function ProductDetailsPage() {
                   <img
                     src={image.imageUrl}
                     alt={product.name}
-                    className="h-[400px] w-full object-cover object-center transition duration-500 hover:scale-105 md:h-[540px] lg:h-[600px]"
+                    className="aspect-square w-full object-cover object-center transition duration-500 hover:scale-105"
                   />
                 </div>
               ))
             ) : (
-              <div className="flex h-[520px] items-center justify-center border border-ap-brown bg-ap-tan">
+              <div className="flex aspect-square w-full items-center justify-center border border-ap-brown bg-ap-tan">
                 No image available
               </div>
             )}

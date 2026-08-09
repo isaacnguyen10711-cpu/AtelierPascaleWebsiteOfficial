@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 
 function AdminAddProductPage() {
@@ -7,6 +7,7 @@ function AdminAddProductPage() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const navigate = useNavigate()
 
   const handleAddProduct = async (event) => {
     event.preventDefault();
@@ -34,6 +35,7 @@ function AdminAddProductPage() {
     }
 
     alert(`${name} added successfully!`);
+    navigate('/')
   }
 
   return (

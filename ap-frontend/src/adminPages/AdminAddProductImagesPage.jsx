@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import {useNavigate } from 'react-router-dom'
 
 function AdminAddProductImagesPage() {
   const [productId, setProductId] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+  const navigate = useNavigate()
 
   const handleAddProductImage = async (event) => {
     event.preventDefault()
@@ -30,6 +32,7 @@ function AdminAddProductImagesPage() {
     alert('Product image added successfully!')
     setProductId('')
     setImageUrl('')
+    navigate('/')
   }
 
   return (
