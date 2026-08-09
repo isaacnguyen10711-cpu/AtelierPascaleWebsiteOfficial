@@ -20,9 +20,20 @@ public class OrdersController : ControllerBase
     // GET: api/Order
     [Authorize(Roles = "Admin")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Order>>> GetOrder()
+    public async Task<ActionResult<IEnumerable<OrderResponseDTO>>> GetOrder()
     {
-        return await _context.Orders.ToListAsync();
+        return await _context.Orders
+            .Select(o => new OrderResponseDTO
+            {
+                OrderId = o.Id,
+                Email = o.Email,
+                FirstName = o.FirstName,
+                LastName = o.LastName,
+                Status = o.Status,
+                TotalPrice = o.TotalPrice,
+                OrderDate = o.OrderDate
+            })
+            .ToListAsync();
     }
 
     // GET: api/Order/5

@@ -55,6 +55,11 @@ public class ItemsInCartController : ControllerBase
             return NotFound();
         }
 
+        if (itemsincart.Quantity <= 0)
+        {
+            return BadRequest("Quantity must be at least 1.");
+        }
+
         existingItem.Quantity = itemsincart.Quantity;
         await _context.SaveChangesAsync();
         return NoContent();

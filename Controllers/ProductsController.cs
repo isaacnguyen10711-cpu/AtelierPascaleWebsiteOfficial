@@ -130,11 +130,16 @@ public class ProductsController : ControllerBase
 
         var existingProduct = _context.Products.FirstOrDefault(p => p.Id == id);
 
+        if (existingProduct == null)
+        {
+            return NotFound();
+        }
+
         // Update the properties of the existing product with the values from the DTO
-        existingProduct?.Name = product.Name;
-        existingProduct?.Description = product.Description;
-        existingProduct?.Price = product.Price;
-        existingProduct?.CategoryId = product.categoryId;
+        existingProduct.Name = product.Name;
+        existingProduct.Description = product.Description;
+        existingProduct.Price = product.Price;
+        existingProduct.CategoryId = product.CategoryId;
 
         try
         {
