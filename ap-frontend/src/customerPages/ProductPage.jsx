@@ -42,7 +42,7 @@ function ProductPage() {
       <section className="relative min-h-screen">
         <div className={categoryBackground} />
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
-          <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
+          <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
             {categoryTitle}
           </h1>
         </div>
