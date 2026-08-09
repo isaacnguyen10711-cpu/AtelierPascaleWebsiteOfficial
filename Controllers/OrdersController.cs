@@ -38,7 +38,7 @@ public class OrdersController : ControllerBase
 
         if (order.UserId != GetCurrentUserId() && !User.IsInRole("Admin"))
         {
-            return Forbid("You are not authorized to access this order.");
+            return Forbid();
         }
 
         return new OrderResponseDTO
