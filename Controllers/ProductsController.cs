@@ -70,7 +70,7 @@ public class ProductsController : ControllerBase
 
     // Filter products by category name
     [HttpGet("category/{categoryName}")] 
-    public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetProductsByCategory(string categoryName)
+    public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetProductsByCategory(string categoryName, string? sortBy)
     {
         if (string.IsNullOrWhiteSpace(categoryName))
         {
@@ -95,6 +95,16 @@ public class ProductsController : ControllerBase
                 .Where(p => p.Category.Name.ToLower() == formattedCategoryName);
         }
 
+        productsQuery = sortBy switch
+        {
+            "price-low-to-high" => productsQuery.OrderBy(p => p.Price),
+            "price-high-to-low" => productsQuery.OrderByDescending(p => p.Price),
+            "name-a-to-z" => productsQuery.OrderBy(p => p.Name),
+            "name-z-to-a" => productsQuery.OrderByDescending(p => p.Name),
+            "newest" => productsQuery.OrderByDescending(p => p.CreatedAt),
+            _ => productsQuery
+        };
+
         var products = await productsQuery
             .Select(p => new ProductResponseDTO
             {
@@ -110,6 +120,7 @@ public class ProductsController : ControllerBase
                 }).ToList()
             })
             .ToListAsync();
+
         if (!products.Any())
         {
             return NotFound();
