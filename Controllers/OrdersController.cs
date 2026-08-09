@@ -27,7 +27,7 @@ public class OrdersController : ControllerBase
 
     // GET: api/Order/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Order>> GetOrder(int id)
+    public async Task<ActionResult<OrderResponseDTO>> GetOrder(int id)
     {
         var order = await _context.Orders.FindAsync(id);
 
@@ -36,7 +36,21 @@ public class OrdersController : ControllerBase
             return NotFound();
         }
 
-        return order;
+        if (order.UserId != GetCurrentUserId() && !User.IsInRole("Admin"))
+        {
+            return Forbid("You are not authorized to access this order.");
+        }
+
+        return new OrderResponseDTO
+        {
+            OrderId = order.Id,
+            Email = order.Email,
+            FirstName = order.FirstName,
+            LastName = order.LastName,
+            Status = order.Status,
+            TotalPrice = order.TotalPrice,
+            OrderDate = order.OrderDate
+        };
     }
 
     // POST: api/Order
