@@ -61,8 +61,8 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-10 max-w-[90%] text-center transition duration-300 hover:-translate-y-1 md:max-w-[40%] lg:max-w-[50%]">
-            <div className="overflow-hidden rounded">
+          <div className="mx-auto mt-10 max-w-[90%] text-center md:max-w-[40%] lg:max-w-[50%]">
+            <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
               <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[200px] w-full object-cover object-center md:h-[250px] lg:h-[300px]" />
             </div>
             <Link to="/products/new-arrival" className="mt-8 inline-block cursor-pointer border border-ap-brown px-7 py-3 text-sm uppercase tracking-[0.2em] transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0">
@@ -86,10 +86,10 @@ function HomePage() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-[5fr_4fr]">
-            <div className="overflow-hidden rounded">
+            <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
               <img src={images.homeDecor} alt="Home decor collection" className="mx-auto h-[240px] w-full object-cover object-center md:h-[320px] lg:h-[420px]" />
             </div>
-            <div className="overflow-hidden rounded md:mt-10">
+            <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1 md:mt-10">
               <img src={images.gifts} alt="Home decor detail" className="mx-auto h-[220px] w-full object-cover object-center md:h-[270px] lg:h-[350px]" />
             </div>
           </div>
@@ -142,10 +142,8 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="md:order-1">
-            <div className="overflow-hidden rounded">
-              <img src={images.jewelry} alt="Jewelry collection" className="mx-auto h-[260px] w-full object-cover object-center md:h-[340px] lg:h-[460px]" />
-            </div>
+          <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1 md:order-1">
+            <img src={images.jewelry} alt="Jewelry collection" className="mx-auto h-[260px] w-full object-cover object-center md:h-[340px] lg:h-[460px]" />
           </div>
         </section>
 
