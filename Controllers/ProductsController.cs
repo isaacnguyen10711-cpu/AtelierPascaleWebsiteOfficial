@@ -128,7 +128,7 @@ public class ProductsController : ControllerBase
             return BadRequest();
         }
 
-        var existingProduct = _context.Products.FirstOrDefault(p => p.Id == id);
+        var existingProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
         if (existingProduct == null)
         {
