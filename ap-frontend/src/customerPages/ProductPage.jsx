@@ -49,7 +49,7 @@ function ProductPage() {
         </div>
       </section>
 
-      <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
+      <main className="bg-ap-tan px-6 py-10 text-ap-brown md:px-12 lg:px-20">
         <div className="mx-auto mb-10 flex max-w-6xl justify-end">
           <select
             value={sortBy}
@@ -69,35 +69,43 @@ function ProductPage() {
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-7 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-10">
             {products.map((product) => (
               <div key={product.id} className="group transition duration-300 hover:-translate-y-1">
-                {product.images?.[0]?.imageUrl && (
-                  // Add overflow-hidden to prevent larger images get overflowed
-                  <Link to={`/products/${categoryName}/${product.id}`} className="block overflow-hidden rounded">
-                    <img
-                      src={product.images[0].imageUrl}
-                      alt={product.name}
-                      className="h-[160px] w-full object-cover object-center transition duration-500 group-hover:scale-105 md:h-[230px] lg:h-[300px]"
-                    />
-                  </Link>
-                )}
-                {role == "Admin" ? (
-                  <h2 className="mt-4 text-sm font-bold uppercase tracking-widest md:text-base lg:text-lg">Product Id: {product.id}</h2>
-                ) : null}
-                <h2 className="mt-4 font-['Tangerine'] text-3xl font-bold leading-none transition duration-200 group-hover:text-ap-beige md:text-4xl lg:text-5xl">
-                  {product.name}
-                </h2>
-                <p className="mt-2 line-clamp-3 text-sm leading-6 md:text-base md:leading-7 lg:text-base">
-                  {product.description}
-                </p>
-                <p className="mt-3 text-sm font-medium md:text-base lg:text-lg">
-                  ${Number(product.price).toFixed(2)}
-                </p>
+                <Link to={`/products/${categoryName}/${product.id}`} className="block">
+
+                  <div className="overflow-hidden rounded">
+                    {product.images?.[0]?.imageUrl ? (
+                      <img
+                        src={product.images[0].imageUrl}
+                        alt={product.name}
+                        className="h-[160px] w-full object-cover object-center transition duration-500 group-hover:scale-105 md:h-[230px] lg:h-[300px]"
+                      />
+                    ) : (
+                      <div className="flex h-[160px] w-full items-center justify-center border border-ap-brown bg-ap-pale px-4 text-center text-xs uppercase tracking-widest md:h-[230px] md:text-sm lg:h-[300px]">
+                        No image available
+                      </div>
+                    )}
+                  </div>
+
+                  {role == "Admin" ? (
+                    <h2 className="mt-4 text-sm font-bold uppercase tracking-widest md:text-base lg:text-lg">Product Id: {product.id}</h2>
+                  ) : null}
+
+                  <h2 className="mt-4 font-['Tangerine'] text-3xl font-bold leading-none transition duration-200 group-hover:text-ap-beige md:text-4xl lg:text-5xl">
+                    {product.name}
+                  </h2>
+                  <p className="mt-2 line-clamp-3 text-sm leading-6 md:text-base md:leading-7 lg:text-base">
+                    {product.description}
+                  </p>
+                  <p className="mt-3 text-sm font-medium md:text-base lg:text-lg">
+                    ${Number(product.price).toFixed(2)}
+                  </p>
+                </Link>
               </div>
             ))}
           </div>
         ) : (
           <p className="text-center">No products found.</p>
         )}
-      </main>
+      </main >
     </>
   );
 }

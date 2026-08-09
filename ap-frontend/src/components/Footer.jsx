@@ -18,20 +18,20 @@ function Footer() {
         <div>
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em]">Explore</h3>
           <div className="flex flex-col gap-3">
-            <Link to="/" className="hover:text-ap-beige">Home</Link>
-            <Link to="/products/new-arrival" className="hover:text-ap-beige">New Arrival</Link>
-            <Link to="/products/home-decor" className="hover:text-ap-beige">Home Decor</Link>
-            <Link to="/products/art" className="hover:text-ap-beige">Art</Link>
+            <Link to="/" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">Home</Link>
+            <Link to="/products/new-arrival" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">New Arrival</Link>
+            <Link to="/products/home-decor" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">Home Decor</Link>
+            <Link to="/products/art" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">Art</Link>
           </div>
         </div>
 
         <div>
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em]">Service</h3>
           <div className="flex flex-col gap-3">
-            <Link to="/products/gifts" className="hover:text-ap-beige">Gifts</Link>
-            <Link to="/products/jewelry" className="hover:text-ap-beige">Jewelry</Link>
-            <Link to="/login" className="hover:text-ap-beige">Account</Link>
-            <Link to="/cart" className="hover:text-ap-beige">Shopping Bag</Link>
+            <Link to="/products/gifts" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">Gifts</Link>
+            <Link to="/products/jewelry" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">Jewelry</Link>
+            <Link to="/login" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">Account</Link>
+            <Link to="/cart" className="transition duration-300 hover:translate-x-1 hover:text-ap-beige">Shopping Bag</Link>
           </div>
         </div>
 
@@ -39,11 +39,11 @@ function Footer() {
         <div>
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em]">Atelier</h3>
           <div className="flex flex-col gap-3">
-            <a href="mailto:isaac.nguyen10711@gmail.com" className="flex items-center gap-2 hover:text-ap-beige">
+            <a href="mailto:isaac.nguyen10711@gmail.com" className="flex items-center gap-2 transition duration-300 hover:translate-x-1 hover:text-ap-beige">
               <Mail className="h-4 w-4" />
               isaac.nguyen10711@gmail.com
             </a>
-            <a href="tel:+61000000000" className="flex items-center gap-2 hover:text-ap-beige">
+            <a href="tel:+61000000000" className="flex items-center gap-2 transition duration-300 hover:translate-x-1 hover:text-ap-beige">
               <Phone className="h-4 w-4" />
               +61 000 000 000
             </a>
@@ -51,7 +51,7 @@ function Footer() {
               <MapPin className="h-4 w-4" />
               Adelaide, Australia
             </p>
-            <a href="https://www.instagram.com/" className="flex items-center gap-2 hover:text-ap-beige">
+            <a href="https://www.instagram.com/" className="flex items-center gap-2 transition duration-300 hover:translate-x-1 hover:text-ap-beige">
               <Camera className="h-4 w-4" />
               Instagram
             </a>
