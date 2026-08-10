@@ -3,6 +3,8 @@ import PopUpDialog from '../components/PopUpDialog'
 
 function AdminEditProductImagesPage() {
   const [productImages, setProductImages] = useState([])
+  const [productId, setProductId] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
   const [imageId, setImageId] = useState('')
   const [newProductId, setNewProductId] = useState('')
   const [newImageUrl, setNewImageUrl] = useState('')
@@ -33,6 +35,40 @@ function AdminEditProductImagesPage() {
     setImageId(image.id)
     setNewProductId(image.productId)
     setNewImageUrl(image.imageUrl)
+  }
+
+  async function handleAddProductImage(event) {
+    event.preventDefault()
+
+    const token = localStorage.getItem('token')
+
+    const newProductImage = {
+      productId: Number(productId),
+      imageUrl,
+    }
+
+    const response = await fetch('https://localhost:7215/api/ProductImages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newProductImage),
+    })
+
+    if (!response.ok) {
+      setPopUpTitle('Error')
+      setPopUpMessage('Failed to add product image. Please try again.')
+      setIsPopUpOpen(true)
+      return
+    }
+
+    await loadProductImages()
+    setProductId('')
+    setImageUrl('')
+    setPopUpTitle('Success')
+    setPopUpMessage('Product image added successfully!')
+    setIsPopUpOpen(true)
   }
 
   async function handleSaveImage(event) {
@@ -126,7 +162,56 @@ function AdminEditProductImagesPage() {
           Admin Edit Product Images
         </h1>
 
+        <form onSubmit={handleAddProductImage} className="mt-6 grid gap-4 rounded-md border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:mt-8 md:grid-cols-2 md:gap-5 md:p-6 lg:mt-10 lg:gap-6 lg:p-8">
+          <div className="md:col-span-2">
+            <h2 className="text-sm font-medium uppercase tracking-widest md:text-base lg:text-lg">
+              Add Product Image
+            </h2>
+          </div>
+
+          <div>
+            <label htmlFor="productId" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">
+              Product ID
+            </label>
+            <input
+              id="productId"
+              type="number"
+              value={productId}
+              onChange={(event) => setProductId(event.target.value)}
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="imageUrl" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">
+              Image URL
+            </label>
+            <input
+              id="imageUrl"
+              type="text"
+              value={imageUrl}
+              onChange={(event) => setImageUrl(event.target.value)}
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <button
+              type="submit"
+              className="cursor-pointer rounded-md bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
+            >
+              Add Image
+            </button>
+          </div>
+        </form>
+
         <form onSubmit={handleSaveImage} className="mt-6 grid gap-4 rounded-md border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:mt-8 md:grid-cols-2 md:gap-5 md:p-6 lg:mt-10 lg:gap-6 lg:p-8">
+          <div className="md:col-span-2">
+            <h2 className="text-sm font-medium uppercase tracking-widest md:text-base lg:text-lg">
+              Edit Product Image
+            </h2>
+          </div>
+
           <div>
             <label htmlFor="imageId" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">
               Image ID

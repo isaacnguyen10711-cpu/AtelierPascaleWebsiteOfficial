@@ -9,8 +9,7 @@ import ShoppingCartPage from './customerPages/ShoppingCartPage.jsx'
 import CheckoutPage from './customerPages/CheckoutPage.jsx'
 import AdminProductEditPage from './adminPages/AdminProductEditPage.jsx'
 import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
-import AdminAddProductImagesPage from './adminPages/AdminAddProductImagesPage.jsx'
-import AdminEditProductImagesPage from './adminPages/AdminEditProductImagesPage.jsx'
+import AdminProductImagesPage from './adminPages/AdminProductImagesPage.jsx'
 import Footer from './components/Footer.jsx'
 import GetUserRole from './components/GetUserRole.jsx'
 
@@ -30,8 +29,7 @@ function App() {
         <Route path="/products/:categoryName" element={<ProductPage />} />
         <Route path="/products/:categoryName/:productId" element={role == "Admin" ? < AdminProductEditPage /> : <ProductDetailsPage />} />
         <Route path="/admin/add-product" element={<AdminAddProductPage />} />
-        <Route path="/admin/add-product-image" element={<AdminAddProductImagesPage />} />
-        <Route path="/admin/edit-product-images" element={<AdminEditProductImagesPage />} />
+        <Route path="/admin/product-image" element={<AdminProductImagesPage />} />
       </Routes>
 
       <Footer />
