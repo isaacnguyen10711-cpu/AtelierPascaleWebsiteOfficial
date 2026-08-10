@@ -86,7 +86,7 @@ function ProductDetailsPage() {
   return (
     <main className="min-h-screen bg-ap-tan text-ap-brown">
       <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
-      <section className="grid min-h-screen md:grid-cols-[5fr_4fr]">
+      <section className="grid min-h-screen md:grid-cols-[5fr_4fr] md:gap-10">
         <div className="px-6 pb-12 pt-23 md:px-5 lg:px-15">
           <Link to={`/products/${categoryName}`} className="mb-6 inline-block text-sm uppercase tracking-widest transition duration-200 hover:text-ap-beige">
             Back To Products
