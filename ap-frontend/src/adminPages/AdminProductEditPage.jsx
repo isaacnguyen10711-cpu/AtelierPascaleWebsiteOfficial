@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import PopUpDialog from '../components/PopUpDialog'
 
 function AdminProductDetailsPage() {
   const [product, setProduct] = useState(null)
@@ -9,6 +10,9 @@ function AdminProductDetailsPage() {
   const [newCategoryId, setNewCategoryId] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+  const [popUpTitle, setPopUpTitle] = useState('')
+  const [popUpMessage, setPopUpMessage] = useState('')
   const { categoryName, productId } = useParams()
   const navigate = useNavigate()
 
@@ -61,14 +65,18 @@ function AdminProductDetailsPage() {
     })
 
     if (!response.ok) {
-      alert('Failed to save product')
+      setPopUpTitle('Error')
+      setPopUpMessage('Failed to save product')
+      setIsPopUpOpen(true)
       return
     }
 
     // Update the product state with the new details from the updated product object
     setProduct({ ...product, ...updatedProduct })
     setIsEditing(false)
-    alert('Product saved')
+    setPopUpTitle('Success')
+    setPopUpMessage('Product saved')
+    setIsPopUpOpen(true)
   }
 
   async function handleDelete() {
@@ -88,7 +96,9 @@ function AdminProductDetailsPage() {
     })
 
     if (!response.ok) {
-      alert('Failed to delete product')
+      setPopUpTitle('Error')
+      setPopUpMessage('Failed to delete product')
+      setIsPopUpOpen(true)
       return
     }
 
@@ -116,6 +126,7 @@ function AdminProductDetailsPage() {
 
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
       <section className="mx-auto max-w-3xl">
         <Link to={`/products/${categoryName}`} className="mb-8 inline-block text-sm uppercase tracking-widest transition duration-300 hover:text-ap-beige">
           Back To Products

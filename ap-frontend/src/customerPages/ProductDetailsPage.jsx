@@ -53,11 +53,15 @@ function ProductDetailsPage() {
       setIsPopUpOpen(true)
     }
     else if (!GetUserToken()) {
-      alert("Please log in first to add this item to your cart")
+      setPopUpTitle("Login Required")
+      setPopUpMessage("Please log in first to add this item to your cart")
+      setIsPopUpOpen(true)
     }
     else {
       // Handle error
-      alert('Failed to add product to cart. Please try again.')
+      setPopUpTitle("Error")
+      setPopUpMessage("Failed to add product to cart. Please try again.")
+      setIsPopUpOpen(true)
     }
   }
 

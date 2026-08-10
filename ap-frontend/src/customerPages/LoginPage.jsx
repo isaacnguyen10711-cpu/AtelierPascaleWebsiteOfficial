@@ -1,11 +1,15 @@
 ﻿import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import PopUpDialog from '../components/PopUpDialog';
 
 function LoginPage() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [popUpTitle, setPopUpTitle] = useState('');
+  const [popUpMessage, setPopUpMessage] = useState('');
   const navigate = useNavigate();
 
   async function handleLogin(event) {
@@ -20,11 +24,10 @@ function LoginPage() {
 
     if (!response.ok) {
       // Handle error
-      alert('Invalid email or password');
+      setPopUpTitle('Error');
+      setPopUpMessage('Invalid email or password');
+      setIsPopUpOpen(true);
       return;
-    }
-    else {
-      alert('Login successful');
     }
 
     const data = await response.json();
@@ -35,6 +38,7 @@ function LoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
       <section className="w-full max-w-sm rounded border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:max-w-md md:p-7 lg:max-w-lg lg:p-8">
         <h1 className="text-center text-4xl font-medium md:text-5xl lg:text-6xl">
           Login

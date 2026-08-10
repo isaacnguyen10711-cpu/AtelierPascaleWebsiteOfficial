@@ -1,13 +1,26 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"; 
+import PopUpDialog from "../components/PopUpDialog";
 
 function AdminAddProductPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [popUpTitle, setPopUpTitle] = useState("");
+  const [popUpMessage, setPopUpMessage] = useState("");
+  const [popUpRedirectPath, setPopUpRedirectPath] = useState("");
   const navigate = useNavigate()
+
+  function handleClosePopUp() {
+    setIsPopUpOpen(false);
+
+    if (popUpRedirectPath) {
+      navigate(popUpRedirectPath);
+    }
+  }
 
   const handleAddProduct = async (event) => {
     event.preventDefault();
@@ -30,16 +43,22 @@ function AdminAddProductPage() {
     });
 
     if (!response.ok) {
-      alert("Failed to add product. Please try again.");
+      setPopUpTitle("Error");
+      setPopUpMessage("Failed to add product. Please try again.");
+      setPopUpRedirectPath("");
+      setIsPopUpOpen(true);
       return;
     }
 
-    alert(`${name} added successfully!`);
-    navigate('/')
+    setPopUpTitle("Success");
+    setPopUpMessage(`${name} added successfully!`);
+    setPopUpRedirectPath("/");
+    setIsPopUpOpen(true);
   }
 
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={handleClosePopUp} title={popUpTitle} message={popUpMessage} />
       <section className="mx-auto max-w-3xl">
         
 

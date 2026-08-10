@@ -1,10 +1,23 @@
 import { useState } from 'react'
 import {useNavigate } from 'react-router-dom'
+import PopUpDialog from '../components/PopUpDialog'
 
 function AdminAddProductImagesPage() {
   const [productId, setProductId] = useState('')
   const [imageUrl, setImageUrl] = useState('')
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+  const [popUpTitle, setPopUpTitle] = useState('')
+  const [popUpMessage, setPopUpMessage] = useState('')
+  const [popUpRedirectPath, setPopUpRedirectPath] = useState('')
   const navigate = useNavigate()
+
+  function handleClosePopUp() {
+    setIsPopUpOpen(false)
+
+    if (popUpRedirectPath) {
+      navigate(popUpRedirectPath)
+    }
+  }
 
   const handleAddProductImage = async (event) => {
     event.preventDefault()
@@ -25,18 +38,24 @@ function AdminAddProductImagesPage() {
     })
 
     if (!response.ok) {
-      alert('Failed to add product image. Please try again.')
+      setPopUpTitle('Error')
+      setPopUpMessage('Failed to add product image. Please try again.')
+      setPopUpRedirectPath('')
+      setIsPopUpOpen(true)
       return
     }
 
-    alert('Product image added successfully!')
+    setPopUpTitle('Success')
+    setPopUpMessage('Product image added successfully!')
+    setPopUpRedirectPath('/')
+    setIsPopUpOpen(true)
     setProductId('')
     setImageUrl('')
-    navigate('/')
   }
 
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={handleClosePopUp} title={popUpTitle} message={popUpMessage} />
       <section className="mx-auto max-w-3xl">
         <h1 className="font-['Tangerine'] text-6xl font-bold md:text-7xl">
           Admin Add Product Image

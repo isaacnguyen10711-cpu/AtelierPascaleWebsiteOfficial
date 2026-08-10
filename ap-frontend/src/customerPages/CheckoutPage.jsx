@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import PopUpDialog from '../components/PopUpDialog'
 
 function CheckoutPage() {
   const [cartItems, setCartItems] = useState([]);
@@ -10,6 +11,9 @@ function CheckoutPage() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [postcode, setPostcode] = useState('');
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [popUpTitle, setPopUpTitle] = useState('');
+  const [popUpMessage, setPopUpMessage] = useState('');
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
@@ -47,16 +51,21 @@ function CheckoutPage() {
     });
 
     if (!response.ok) {
-      alert("Failed to place order")
+      setPopUpTitle('Error')
+      setPopUpMessage('Failed to place order')
+      setIsPopUpOpen(true)
       return;
     }
     const data = await response.json()
-    alert("Order was placed successfully")
+    setPopUpTitle('Success')
+    setPopUpMessage('Order was placed successfully')
+    setIsPopUpOpen(true)
     console.log(data)
   };
 
   return (
     <main className="min-h-screen bg-ap-tan px-5 py-22 text-ap-brown md:px-10 md:py-28 lg:px-16 lg:py-32">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
       <section className="mx-auto max-w-5xl lg:max-w-6xl">
         <div className="border-b border-ap-brown pb-5 md:pb-7 lg:pb-8">
           <h1 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">

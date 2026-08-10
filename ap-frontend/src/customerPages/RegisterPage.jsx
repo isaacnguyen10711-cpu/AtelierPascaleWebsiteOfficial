@@ -1,17 +1,23 @@
 import { React, useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
+import PopUpDialog from '../components/PopUpDialog';
 
 function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [popUpTitle, setPopUpTitle] = useState('');
+  const [popUpMessage, setPopUpMessage] = useState('');
   const navigate = useNavigate();
 
   async function handleRegister(event) {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match, please try again.');
+      setPopUpTitle('Error');
+      setPopUpMessage('Passwords do not match, please try again.');
+      setIsPopUpOpen(true);
       return;
     }
 
@@ -25,10 +31,11 @@ function RegisterPage() {
 
     if (!response.ok) {
       // Handle error
-      alert('Registration failed');
+      setPopUpTitle('Error');
+      setPopUpMessage('Registration failed');
+      setIsPopUpOpen(true);
       return;
     } else {
-      alert('Registration successful, please log in to continue.');
       navigate('/login');
       window.location.reload();
     }
@@ -36,6 +43,7 @@ function RegisterPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
       <section className="w-full max-w-sm rounded border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:max-w-md md:p-7 lg:max-w-lg lg:p-8">
         <h1 className="text-center font-medium text-4xl font-bold md:text-5xl lg:text-6xl">
           Register
