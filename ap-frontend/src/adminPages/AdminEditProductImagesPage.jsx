@@ -70,6 +70,9 @@ function AdminEditProductImagesPage() {
     }
 
     await loadProductImages()
+    setImageId('')
+    setNewProductId('')
+    setNewImageUrl('')
     setPopUpTitle('Success')
     setPopUpMessage('Product image updated successfully')
     setIsPopUpOpen(true)
@@ -118,14 +121,14 @@ function AdminEditProductImagesPage() {
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
       <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
 
-      <section className="mx-auto max-w-5xl">
-        <h1 className="font-['Tangerine'] text-6xl font-bold md:text-7xl">
+      <section className="mx-auto max-w-4xl md:max-w-5xl lg:max-w-6xl">
+        <h1 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
           Admin Edit Product Images
         </h1>
 
-        <form onSubmit={handleSaveImage} className="mt-6 space-y-4 rounded-md border border-ap-brown bg-ap-pale p-6 transition duration-300 hover:shadow-lg md:mt-8 md:p-8">
+        <form onSubmit={handleSaveImage} className="mt-6 grid gap-4 rounded-md border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:mt-8 md:grid-cols-2 md:gap-5 md:p-6 lg:mt-10 lg:gap-6 lg:p-8">
           <div>
-            <label htmlFor="imageId" className="block text-sm font-medium uppercase tracking-widest md:text-base">
+            <label htmlFor="imageId" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">
               Image ID
             </label>
             <input
@@ -133,12 +136,12 @@ function AdminEditProductImagesPage() {
               type="number"
               value={imageId}
               onChange={(event) => setImageId(event.target.value)}
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:text-base"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
 
           <div>
-            <label htmlFor="newProductId" className="block text-sm font-medium uppercase tracking-widest md:text-base">
+            <label htmlFor="newProductId" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">
               Product ID
             </label>
             <input
@@ -146,12 +149,12 @@ function AdminEditProductImagesPage() {
               type="number"
               value={newProductId}
               onChange={(event) => setNewProductId(event.target.value)}
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:text-base"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
 
-          <div>
-            <label htmlFor="newImageUrl" className="block text-sm font-medium uppercase tracking-widest md:text-base">
+          <div className="md:col-span-2">
+            <label htmlFor="newImageUrl" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">
               Image URL
             </label>
             <input
@@ -159,14 +162,14 @@ function AdminEditProductImagesPage() {
               type="text"
               value={newImageUrl}
               onChange={(event) => setNewImageUrl(event.target.value)}
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:text-base"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
 
-          <div className="flex flex-col gap-3 pt-2 md:flex-row">
+          <div className="flex flex-col gap-3 pt-2 md:col-span-2 md:flex-row lg:gap-4">
             <button
               type="submit"
-              className="cursor-pointer rounded-md bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:text-sm"
+              className="cursor-pointer rounded-md bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
             >
               Save
             </button>
@@ -174,17 +177,17 @@ function AdminEditProductImagesPage() {
             <button
               type="button"
               onClick={handleDeleteImage}
-              className="cursor-pointer rounded-md border border-ap-brown px-5 py-3 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:text-sm"
+              className="cursor-pointer rounded-md border border-ap-brown px-5 py-3 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
             >
               Delete
             </button>
           </div>
         </form>
 
-        <div className="mt-6 space-y-5 md:mt-8 lg:mt-10">
+        <div className="mt-6 grid gap-5 md:mt-8 md:grid-cols-2 md:gap-4 lg:mt-10 lg:gap-8">
           {productImages.length > 0 ? (
             productImages.map((image) => (
-              <div key={image.id} className="grid gap-4 rounded-md border border-ap-brown bg-ap-pale p-4 transition duration-300 hover:shadow-lg md:grid-cols-[1fr_2fr] md:p-5 lg:grid-cols-[1fr_3fr] lg:p-6">
+              <div key={image.id} className="grid gap-4 rounded-md border border-ap-brown bg-ap-pale p-4 transition duration-300 hover:shadow-lg md:grid-cols-2 md:gap-6 md:p-5 lg:gap-8 lg:p-6">
                 <div className="overflow-hidden rounded">
                   <img
                     src={image.imageUrl}
@@ -193,25 +196,25 @@ function AdminEditProductImagesPage() {
                   />
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 md:space-y-5 lg:space-y-6">
                   <div>
-                    <p className="text-xs uppercase tracking-widest md:text-sm">
+                    <p className="text-xs uppercase tracking-widest md:text-sm lg:text-base">
                       Image ID: {image.id}
                     </p>
-                    <p className="mt-2 text-xs uppercase tracking-widest md:text-sm">
+                    <p className="mt-2 text-xs uppercase tracking-widest md:text-sm lg:text-base">
                       Product ID: {image.productId}
                     </p>
                   </div>
 
-                  <p className="break-all text-sm leading-7 md:text-base">
+                  <p className="line-clamp-3 break-all text-sm leading-7 md:text-base md:leading-8 lg:text-lg lg:leading-9">
                     {image.imageUrl}
                   </p>
 
-                  <div className="flex flex-col gap-3 pt-2 md:flex-row">
+                  <div className="flex flex-col gap-3 pt-2 md:flex-row lg:gap-4">
                     <button
                       type="button"
                       onClick={() => handleSelectImage(image)}
-                      className="cursor-pointer rounded-md bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:text-sm"
+                      className="cursor-pointer rounded-md bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
                     >
                       Select
                     </button>
@@ -220,7 +223,7 @@ function AdminEditProductImagesPage() {
               </div>
             ))
           ) : (
-            <p className="text-sm uppercase tracking-widest md:text-base">
+            <p className="text-sm uppercase tracking-widest md:text-base lg:text-lg">
               No product images found.
             </p>
           )}

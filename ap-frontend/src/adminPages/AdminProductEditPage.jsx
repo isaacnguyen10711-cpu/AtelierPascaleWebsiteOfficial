@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 
 function AdminProductDetailsPage() {
@@ -14,7 +14,10 @@ function AdminProductDetailsPage() {
   const [popUpTitle, setPopUpTitle] = useState('')
   const [popUpMessage, setPopUpMessage] = useState('')
   const { categoryName, productId } = useParams()
-  const navigate = useNavigate()
+
+  function handleClosePopUp() {
+    setIsPopUpOpen(false)
+  }
 
   useEffect(() => {
     async function loadProductDetails() {
@@ -102,12 +105,14 @@ function AdminProductDetailsPage() {
       return
     }
 
-    navigate(`/products/${categoryName}`)
+    setPopUpTitle('Success')
+    setPopUpMessage('Product deleted successfully')
+    setIsPopUpOpen(true)
   }
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">
+      <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown md:px-12 md:pt-36 lg:px-20 lg:pt-40">
         Loading...
       </main>
     )
@@ -115,9 +120,9 @@ function AdminProductDetailsPage() {
 
   if (!product) {
     return (
-      <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">
-        <p>Product not found.</p>
-        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0">
+      <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown md:px-12 md:pt-36 lg:px-20 lg:pt-40">
+        <p className="text-sm uppercase tracking-widest md:text-base lg:text-lg">Product not found.</p>
+        <Link to={`/products/${categoryName}`} className="mt-6 inline-block border border-ap-brown px-6 py-2 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-7 md:py-3 md:text-sm lg:px-8">
           Back To Products
         </Link>
       </main>
@@ -126,86 +131,84 @@ function AdminProductDetailsPage() {
 
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
-      <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
-      <section className="mx-auto max-w-3xl">
-        <Link to={`/products/${categoryName}`} className="mb-8 inline-block text-sm uppercase tracking-widest transition duration-300 hover:text-ap-beige">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={handleClosePopUp} title={popUpTitle} message={popUpMessage} />
+      <section className="mx-auto max-w-4xl md:max-w-5xl lg:max-w-6xl">
+        <Link to={`/products/${categoryName}`} className="mb-6 inline-block text-xs uppercase tracking-widest transition duration-300 hover:text-ap-beige md:mb-8 md:text-sm lg:mb-10">
           Back To Products
         </Link>
 
-        <h1 className="font-['Tangerine'] text-6xl font-bold md:text-7xl">
+        <h1 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
           Admin Product Details
         </h1>
 
-        <form onSubmit={handleSaveNewData} className="mt-10 space-y-6 rounded-md border border-ap-brown bg-ap-pale p-6 transition duration-300 hover:shadow-lg md:p-8">
+        <form onSubmit={handleSaveNewData} className="mt-6 grid gap-4 rounded-md border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:mt-8 md:grid-cols-2 md:gap-5 md:p-6 lg:mt-10 lg:gap-6 lg:p-8">
           <div>
-            <label htmlFor="name" className="block text-sm uppercase tracking-widest">Name</label>
+            <label htmlFor="name" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">Name</label>
             <input
               id="name"
               value={newName}
               onChange={(event) => setNewName(event.target.value)}
               disabled={!isEditing}
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm uppercase tracking-widest">Description</label>
+            <label htmlFor="price" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">Price</label>
+            <input
+              id="price"
+              type="number"
+              step="0.01"
+              value={newPrice}
+              onChange={(event) => setNewPrice(event.target.value)}
+              disabled={!isEditing}
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="categoryId" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">Category ID</label>
+            <input
+              id="categoryId"
+              type="number"
+              value={newCategoryId}
+              onChange={(event) => setNewCategoryId(event.target.value)}
+              disabled={!isEditing}
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label htmlFor="description" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">Description</label>
             <textarea
               id="description"
               value={newDescription}
               onChange={(event) => setNewDescription(event.target.value)}
               disabled={!isEditing}
               rows="6"
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm leading-7 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base md:leading-8 lg:px-5 lg:py-4 lg:text-lg lg:leading-9"
             />
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <label htmlFor="price" className="block text-sm uppercase tracking-widest">Price</label>
-              <input
-                id="price"
-                type="number"
-                step="0.01"
-                value={newPrice}
-                onChange={(event) => setNewPrice(event.target.value)}
-                disabled={!isEditing}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="categoryId" className="block text-sm uppercase tracking-widest">Category ID</label>
-              <input
-                id="categoryId"
-                type="number"
-                value={newCategoryId}
-                onChange={(event) => setNewCategoryId(event.target.value)}
-                disabled={!isEditing}
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:bg-ap-pale disabled:cursor-not-allowed"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3 pt-4 md:flex-row">
+          <div className="flex flex-col gap-3 pt-2 md:col-span-2 md:flex-row lg:gap-4">
             <button
               type="button"
               onClick={() => setIsEditing(true)}
-              className="cursor-pointer border border-ap-brown px-8 py-3 text-sm uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0"
+              className="cursor-pointer rounded-md border border-ap-brown px-5 py-3 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
             >
               Edit
             </button>
             <button
               type="submit"
               disabled={!isEditing}
-              className="cursor-pointer bg-ap-brown px-8 py-3 text-sm uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 disabled:cursor-not-allowed disabled:bg-ap-beige disabled:hover:translate-y-0"
+              className="cursor-pointer rounded-md bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 disabled:cursor-not-allowed disabled:bg-ap-beige disabled:hover:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
             >
               Save
             </button>
             <button
               type="button"
               onClick={handleDelete}
-              className="cursor-pointer border border-ap-brown px-8 py-3 text-sm uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0"
+              className="cursor-pointer rounded-md border border-ap-brown px-5 py-3 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
             >
               Delete
             </button>

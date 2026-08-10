@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import {useNavigate } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 
 function AdminAddProductImagesPage() {
@@ -8,15 +7,9 @@ function AdminAddProductImagesPage() {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false)
   const [popUpTitle, setPopUpTitle] = useState('')
   const [popUpMessage, setPopUpMessage] = useState('')
-  const [popUpRedirectPath, setPopUpRedirectPath] = useState('')
-  const navigate = useNavigate()
 
   function handleClosePopUp() {
     setIsPopUpOpen(false)
-
-    if (popUpRedirectPath) {
-      navigate(popUpRedirectPath)
-    }
   }
 
   const handleAddProductImage = async (event) => {
@@ -40,14 +33,12 @@ function AdminAddProductImagesPage() {
     if (!response.ok) {
       setPopUpTitle('Error')
       setPopUpMessage('Failed to add product image. Please try again.')
-      setPopUpRedirectPath('')
       setIsPopUpOpen(true)
       return
     }
 
     setPopUpTitle('Success')
     setPopUpMessage('Product image added successfully!')
-    setPopUpRedirectPath('/')
     setIsPopUpOpen(true)
     setProductId('')
     setImageUrl('')

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import PopUpDialog from "../components/PopUpDialog";
 
@@ -11,15 +11,9 @@ function AdminAddProductPage() {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popUpTitle, setPopUpTitle] = useState("");
   const [popUpMessage, setPopUpMessage] = useState("");
-  const [popUpRedirectPath, setPopUpRedirectPath] = useState("");
-  const navigate = useNavigate()
 
   function handleClosePopUp() {
     setIsPopUpOpen(false);
-
-    if (popUpRedirectPath) {
-      navigate(popUpRedirectPath);
-    }
   }
 
   const handleAddProduct = async (event) => {
@@ -45,15 +39,17 @@ function AdminAddProductPage() {
     if (!response.ok) {
       setPopUpTitle("Error");
       setPopUpMessage("Failed to add product. Please try again.");
-      setPopUpRedirectPath("");
       setIsPopUpOpen(true);
       return;
     }
 
     setPopUpTitle("Success");
     setPopUpMessage(`${name} added successfully!`);
-    setPopUpRedirectPath("/");
     setIsPopUpOpen(true);
+    setName("");
+    setDescription("");
+    setPrice("");
+    setCategoryId("");
   }
 
   return (
@@ -75,6 +71,7 @@ function AdminAddProductPage() {
                 type="text"
                 name="name"
                 id="name"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
@@ -87,6 +84,7 @@ function AdminAddProductPage() {
               <textarea
                 name="description"
                 id="description"
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-4 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-4 md:text-base lg:px-5 lg:py-5 lg:text-base"
               />
@@ -99,6 +97,7 @@ function AdminAddProductPage() {
                 type="number"
                 name="price"
                 id="price"
+                value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
@@ -111,6 +110,7 @@ function AdminAddProductPage() {
                 type="number"
                 name="categoryId"
                 id="categoryId"
+                value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)} 
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
