@@ -1,11 +1,15 @@
 ﻿import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import GetUserToken from '../components/GetUserToken'
+import PopUpDialog from '../components/PopUpDialog'
 
 function ProductDetailsPage() {
   const [product, setProduct] = useState(null)  
   const [isLoading, setIsLoading] = useState(true)
   const { categoryName, productId } = useParams()
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+  const [popUpMessage, setPopUpMessage] = useState('')
+  const [popUpTitle, setPopUpTitle] = useState('')
 
   useEffect(() => {
     // Fetch details using its ID
@@ -44,7 +48,9 @@ function ProductDetailsPage() {
     })
 
     if (response.ok) {
-      alert('Product added to cart successfully!')
+      setPopUpTitle("Success")
+      setPopUpMessage("Product added to cart successfully!")
+      setIsPopUpOpen(true)
     }
     else if (!GetUserToken()) {
       alert("Please log in first to add this item to your cart")
@@ -79,6 +85,7 @@ function ProductDetailsPage() {
 
   return (
     <main className="min-h-screen bg-ap-tan text-ap-brown">
+      <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
       <section className="grid min-h-screen md:grid-cols-[5fr_4fr]">
         <div className="px-6 pb-12 pt-23 md:px-5 lg:px-15">
           <Link to={`/products/${categoryName}`} className="mb-6 inline-block text-sm uppercase tracking-widest transition duration-200 hover:text-ap-beige">
