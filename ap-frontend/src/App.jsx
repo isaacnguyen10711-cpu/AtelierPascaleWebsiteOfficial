@@ -7,6 +7,7 @@ import ProductPage from './customerPages/ProductPage.jsx'
 import ProductDetailsPage from './customerPages/ProductDetailsPage.jsx'
 import ShoppingCartPage from './customerPages/ShoppingCartPage.jsx'
 import CheckoutPage from './customerPages/CheckoutPage.jsx'
+import UnauthorizedPage from './customerPages/UnauthorizedPage.jsx'
 import AdminProductEditPage from './adminPages/AdminProductEditPage.jsx'
 import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
 import AdminProductImagesPage from './adminPages/AdminProductImagesPage.jsx'
@@ -25,11 +26,12 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} /> 
         <Route path="/cart" element={<ShoppingCartPage />} />
-        <Route path="/checkout" element={role == "Customer" ? <CheckoutPage /> : <Navigate to="/" replace />} />
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
+        <Route path="/checkout" element={role == "Customer" ? <CheckoutPage /> : <Navigate to="/unauthorized" replace />} />
         <Route path="/products/:categoryName" element={<ProductPage />} />
         <Route path="/products/:categoryName/:productId" element={role == "Admin" ? < AdminProductEditPage /> : <ProductDetailsPage />} />
-        <Route path="/admin/add-product" element={<AdminAddProductPage />} />
-        <Route path="/admin/product-image" element={<AdminProductImagesPage />} />
+        <Route path="/admin/add-product" element={role == "Admin" ? <AdminAddProductPage /> : <Navigate to="/unauthorized" replace />} />
+        <Route path="/admin/product-image" element={role == "Admin" ? <AdminProductImagesPage /> : <Navigate to="/unauthorized" replace />} />
       </Routes>
 
       <Footer />

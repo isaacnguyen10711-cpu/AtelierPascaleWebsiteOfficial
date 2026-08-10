@@ -60,18 +60,24 @@ function ProductPage() {
       </section>
 
       <main className="bg-ap-tan px-6 py-10 text-ap-brown md:px-12 lg:px-20">
-        <div className="mx-auto mb-10 flex max-w-6xl justify-end">
+        <div className="mx-auto mb-10 flex max-w-6xl items-center justify-between">
+          {role == "Admin" ? (
+            <Link to="/admin/add-product" className="cursor-pointer border border-ap-brown bg-ap-tan px-2 py-1 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale md:px-5 md:py-2 md:text-base">
+              Add product
+            </Link>
+          ) : (
+            <div></div>
+          )}
+
           <select
             value={sortBy}
             onChange={(event) => setSortBy(event.target.value)}
-            className="cursor-pointer border border-ap-brown bg-ap-tan px-3 py-2 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale focus:bg-ap-pale md:text-base"
+            className="cursor-pointer border border-ap-brown bg-ap-tan px-2 py-1 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale focus:bg-ap-pale md:px-3 md:py-2 md:text-base"
           >
             <option value="">Sort by</option>
             <option value="price-low-to-high">Price: Low to High</option>
             <option value="price-high-to-low">Price: High to Low</option>
             <option value="name-a-to-z">Name: A to Z</option>
-            <option value="name-z-to-a">Name: Z to A</option>
-            <option value="newest">Newest</option>
           </select>
         </div>
 

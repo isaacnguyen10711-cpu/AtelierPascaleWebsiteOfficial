@@ -7,8 +7,9 @@ function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const location = useLocation()
-  const isProductDetailsPage = location.pathname.startsWith('/products/') && location.pathname.split('/').length === 4
-  const isBlackTextPage = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/cart' || location.pathname === '/checkout' || isProductDetailsPage
+  const isHomePage = location.pathname === '/'
+  const isProductCategoryPage = location.pathname.startsWith('/products/') && location.pathname.split('/').length === 3
+  const isBlackTextPage = !isHomePage && !isProductCategoryPage
   // Used for changing the login button to logout button if the user is logged in
   const isLoggedIn = Boolean(GetUserToken())
   const linkHover = isBlackTextPage ? 'hover:text-gray-500' : 'hover:text-gray-300'
@@ -69,7 +70,7 @@ function NavBar() {
             <ShoppingCart className={`mr-4 h-5 w-5 ${isBlackTextPage ? 'text-black' : 'text-white'} md:mr-4 md:h-6 md:w-6 lg:mr-6 lg:h-7 lg:w-7`} />
           </Link>
           {isLoggedIn ? (
-            <button onClick={handleLogout} className={linkHover}>
+            <button onClick={handleLogout} className={`${linkHover} cursor-pointer`}>
               Log out
             </button>
           ) : (
