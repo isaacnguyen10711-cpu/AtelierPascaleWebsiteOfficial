@@ -63,7 +63,7 @@ function HomePage() {
 
       <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
         <section id="new-arrival" className="mx-auto max-w-5xl lg:max-w-6xl">
-          <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
+          <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
             New Arrival
           </h2>
 
@@ -102,7 +102,7 @@ function HomePage() {
         <section id="home-decor" className="mx-auto mt-24 grid max-w-6xl gap-8 md:mt-28 md:grid-cols-2 md:items-center md:gap-10 lg:mt-32 lg:gap-12">
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Timeless Elegance</p>
-            <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
+            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Home Decor
             </h2>
             <p className="mt-5 text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -126,7 +126,7 @@ function HomePage() {
         <section id="gifts" className="mx-auto mt-24 max-w-6xl md:mt-28 lg:mt-32">
           <div className="mb-8 text-center md:mb-10 lg:mb-12">
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Thoughtful Gestures</p>
-            <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
+            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Gifts
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -163,7 +163,7 @@ function HomePage() {
 
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Personal Details</p>
-            <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
+            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Jewelry
             </h2>
             <p className="mt-5 text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -179,7 +179,7 @@ function HomePage() {
           <div className="grid gap-6 md:grid-cols-3 md:gap-7 lg:gap-8">
             <div className="m-1 md:m-2 lg:m-3">
               <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Moments Become Art</p>
-              <h2 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
+              <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
                 Art
               </h2>
               <p className="mt-5 text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
