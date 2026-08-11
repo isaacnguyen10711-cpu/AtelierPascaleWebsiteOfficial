@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import PopUpDialog from '../components/PopUpDialog'
 
@@ -14,6 +14,7 @@ function CheckoutPage() {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popUpTitle, setPopUpTitle] = useState('');
   const [popUpMessage, setPopUpMessage] = useState('');
+  const navigate = useNavigate();
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
@@ -57,10 +58,7 @@ function CheckoutPage() {
       return;
     }
     const data = await response.json()
-    setPopUpTitle('Success')
-    setPopUpMessage('Order was placed successfully')
-    setIsPopUpOpen(true)
-    console.log(data)
+    navigate(`/order-confirmation/${data.orderId}`)
   };
 
   return (
