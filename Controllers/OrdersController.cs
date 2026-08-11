@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using AtelierPascaleWebsite.Services;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -12,9 +13,11 @@ using Microsoft.AspNetCore.Authorization;
 public class OrdersController : ControllerBase
 {
     private readonly DatabaseContext _context;
-    public OrdersController(DatabaseContext context)
+    private readonly EmailSender _emailSender;
+    public OrdersController(DatabaseContext context, EmailSender emailSender)
     {
         _context = context;
+        _emailSender = emailSender;
     }
 
     // GET: api/Order
@@ -116,6 +119,21 @@ public class OrdersController : ControllerBase
         // Remove items from the shopping cart after creating the order
         _context.ItemsInCarts.RemoveRange(shoppingCart.ItemsInCarts);
         await _context.SaveChangesAsync();
+
+        // Send a confirmation email to the user
+        var receiverName = confirmedOrder.FirstName;
+        var receiverEmail = confirmedOrder.Email;
+        var subject = "Order Confirmation";
+        var body = $@"
+            <h2>Dear {confirmedOrder.FirstName},</h2>
+            <p>Thank you for your order!</p>
+            <p>Your order ID is <strong>{confirmedOrder.Id}</strong>.</p>
+            <p>Total price: <strong>{confirmedOrder.TotalPrice:C}</strong></p>
+            <p>We will notify you once your order is shipped.</p>
+            <br />
+            <p>Best regards,<br />Atelier Pascale</p>";
+
+        await _emailSender.SendEmailAsync(receiverName, receiverEmail, subject, body);
 
         return CreatedAtAction("GetOrder", new { id = confirmedOrder.Id }, new OrderResponseDTO
         {

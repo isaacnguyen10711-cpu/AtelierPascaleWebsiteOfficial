@@ -12,7 +12,7 @@ namespace AtelierPascaleWebsite.Services
             _configuration = configuration;
         }
         // Method to send an email
-        public async Task SendEmailAsync(string receiverName, string receiverAddress, string subject, string body)
+        public async Task SendEmailAsync(string receiverName, string receiverEmail, string subject, string body)
         {
             var smtpHost = _configuration["EmailSettings:SmtpServer"]!;
             var smtpPort = int.Parse(_configuration["EmailSettings:Port"]!);
@@ -23,7 +23,7 @@ namespace AtelierPascaleWebsite.Services
             // Create the email message
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress(senderName, senderEmail));
-            email.To.Add(new MailboxAddress(receiverName, receiverAddress));
+            email.To.Add(new MailboxAddress(receiverName, receiverEmail));
             email.Subject = subject;
             email.Body = new TextPart("html") { Text = body };
 

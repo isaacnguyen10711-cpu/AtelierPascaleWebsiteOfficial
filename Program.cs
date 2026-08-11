@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using AtelierPascaleWebsite.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +45,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<EmailSender>();
 
 var app = builder.Build();
 
