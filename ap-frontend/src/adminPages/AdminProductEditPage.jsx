@@ -8,6 +8,9 @@ function AdminProductDetailsPage() {
   const [newDescription, setNewDescription] = useState('')
   const [newPrice, setNewPrice] = useState('')
   const [newCategoryId, setNewCategoryId] = useState('')
+
+  const [images, setImages] = useState([])
+
   const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
   const [isPopUpOpen, setIsPopUpOpen] = useState(false)
@@ -37,6 +40,7 @@ function AdminProductDetailsPage() {
       setNewDescription(selectedProduct.description)
       setNewPrice(selectedProduct.price)
       setNewCategoryId(selectedProduct.categoryId)
+      setImages(selectedProduct.images)
       setIsLoading(false)
     }
 

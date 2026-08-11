@@ -67,10 +67,10 @@ function HomePage() {
             New Arrival
           </h2>
 
-          <div className="mx-auto mt-5 grid w-[80%] gap-10 md:mt-7 md:grid-cols-2 md:gap-12 lg:mt-9 lg:gap-15">
+          <div className="mx-auto mt-5 grid w-full gap-10 md:mt-7 md:grid-cols-2 md:gap-12 md:w-[90%] lg:mt-9 lg:gap-15 lg:w-[80%]">
             <div className="transition duration-300 hover:-translate-y-1">
               <div className="overflow-hidden rounded">
-                <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[170px] w-full object-cover object-center md:h-[220px] lg:h-[270px]" />
+                <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
               </div>
               <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold transition duration-300 hover:text-ap-beige md:text-5xl lg:text-6xl">Latest Pieces</h3>
               <p className="mt-2 text-sm leading-7 text-ap-brown md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -80,7 +80,7 @@ function HomePage() {
 
             <div className="transition duration-300 hover:-translate-y-1">
               <div className="overflow-hidden rounded">
-                <img src={images.art} alt="Featured art arrival" className="mx-auto h-[170px] w-full object-cover object-center md:h-[230px] lg:h-[270px]" />
+                <img src={images.art} alt="Featured art arrival" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
               </div>
               <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold transition duration-300 hover:text-ap-beige md:text-5xl lg:text-6xl">Collected Forms</h3>
               <p className="mt-2 text-sm leading-7 text-ap-brown md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -89,9 +89,9 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-10 max-w-[80%] text-center md:mt-12 md:max-w-[30%] lg:mt-14 lg:max-w-[40%]">
+          <div className="mx-auto mt-10 w-full text-center md:mt-12 md:w-[45%] lg:mt-14 lg:w-[40%]">
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
-              <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[170px] w-full object-cover object-center md:h-[220px] lg:h-[270px]" />
+              <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
             </div>
             <Link to="/products/new-arrival" className="mt-8 inline-block cursor-pointer border border-ap-brown px-7 py-3 text-xs uppercase tracking-[0.2em] transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-8 md:text-sm lg:px-9 lg:py-4">
               Discover More
@@ -115,10 +115,10 @@ function HomePage() {
 
           <div className="grid gap-4 md:grid-cols-[5fr_4fr] md:gap-5 lg:gap-6">
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
-              <img src={homeDecorImages[0]} alt="Home decor collection" className="mx-auto h-[240px] w-full object-cover object-center md:h-[320px] lg:h-[420px]" />
+              <img src={homeDecorImages[0]} alt="Home decor collection" className="mx-auto h-[450px] w-full object-cover object-center md:h-[320px] lg:h-[420px]" />
             </div>
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1 md:mt-10">
-              <img src={homeDecorImages[1]} alt="Home decor detail" className="mx-auto h-[220px] w-full object-cover object-center md:h-[270px] lg:h-[350px]" />
+              <img src={homeDecorImages[1]} alt="Home decor detail" className="mx-auto h-[450px] w-full object-cover object-center md:h-[270px] lg:h-[350px]" />
             </div>
           </div>
         </section>
@@ -129,7 +129,7 @@ function HomePage() {
             <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Gifts
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
+            <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
               Small pieces with presence, made for celebrations, quiet gratitude, and personal keepsakes.
             </p>
           </div>
@@ -157,11 +157,11 @@ function HomePage() {
         </section>
 
         <section id="jewelry" className="mx-auto mt-24 grid max-w-6xl gap-8 md:mt-28 md:grid-cols-2 md:items-center md:gap-12 lg:mt-32 lg:gap-16">
-          <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
-            <img src={jewelryImages[2]} alt="Jewelry collection" className="mx-auto h-[260px] w-full object-cover object-center md:h-[340px] lg:h-[550px]" />
+          <div className="overflow-hidden rounded order-2 transition duration-300 hover:-translate-y-1 md:order-1">
+            <img src={jewelryImages[2]} alt="Jewelry collection" className="mx-auto h-[400px] w-full object-cover object-center md:h-[340px] lg:h-[550px]" />
           </div>
 
-          <div>
+          <div className="order-1 md:order-2">
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Personal Details</p>
             <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Jewelry
@@ -176,8 +176,8 @@ function HomePage() {
         </section>
 
         <section id="art" className="mx-auto mt-24 max-w-6xl pb-10 md:mt-28 md:pb-12 lg:mt-32 lg:pb-14">
-          <div className="grid gap-6 md:grid-cols-3 md:gap-7 lg:gap-8">
-            <div className="m-1 md:m-2 lg:m-3">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-7 lg:gap-8">
+            <div className="col-span-2 m-1 md:col-span-1 md:m-2 lg:m-3">
               <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Moments Become Art</p>
               <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
                 Art
@@ -197,9 +197,7 @@ function HomePage() {
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
               <img src={artImages[1]} alt="Art collection arrangement" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
             </div>
-          </div>
 
-          <div className="mt-4 grid gap-6 md:mt-6 md:grid-cols-3 md:gap-7 lg:mt-8 lg:gap-8">
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
               <img src={artImages[2]} alt="Art styling piece" className="h-[200px] w-full object-cover object-center md:h-[240px] lg:h-[280px]" />
             </div>
