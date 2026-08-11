@@ -15,28 +15,6 @@ public class ProductsController : ControllerBase
         _context = context;
     }
 
-    // GET: api/Product
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetProduct()
-    {
-        return await _context.Products
-            .Include(p => p.Images)
-            .Select(p => new ProductResponseDTO
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                CategoryId = p.CategoryId,
-                Images = p.Images.Select(i => new ProductImageDTO
-                {
-                    Id = i.Id,
-                    ImageUrl = i.ImageUrl
-                }).ToList()
-            })
-            .ToListAsync();
-    }
-
     // GET: api/Product/5
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductResponseDTO>> GetProduct(int id)
