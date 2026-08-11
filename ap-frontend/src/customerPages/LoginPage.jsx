@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PopUpDialog from '../components/PopUpDialog';
 
 function LoginPage() {
@@ -70,8 +70,7 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-2 md:flex-row md:justify-between">
-            <Link to="/forgot-password" className="text-xs uppercase tracking-widest transition duration-200 hover:text-ap-beige md:text-xs lg:text-sm">Forgot Password?</Link>
+          <div className="flex justify-end">
             <Link to="/register" className="text-xs uppercase tracking-widest transition duration-200 hover:text-ap-beige md:text-xs lg:text-sm">Create Account</Link>
           </div>
           <div>
