@@ -14,7 +14,6 @@ using AtelierPascaleWebsite.Models.DTOs;
 namespace AtelierPascaleWebsite.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
     [Route("api/[controller]")]
     public class AuthenticationController : ControllerBase
     {
@@ -27,6 +26,7 @@ namespace AtelierPascaleWebsite.Controllers
             _configuration = configuration;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
         {
@@ -93,6 +93,7 @@ namespace AtelierPascaleWebsite.Controllers
             });
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -132,8 +133,23 @@ namespace AtelierPascaleWebsite.Controllers
             return Ok("User registered successfully.");
         }
 
+        [Authorize]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("accessToken", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None
+            });
+
+            return Ok("User logged out successfully.");
+        }
+
+        [Authorize]
         [HttpGet("getUserRole")]
-        public async Task<ActionResult> GetUserRole()
+        public ActionResult GetUserRole()
         {
             return Ok(new
             {
@@ -143,7 +159,7 @@ namespace AtelierPascaleWebsite.Controllers
             });
         }
 
-    }
+    } 
 }
 
 
