@@ -1,6 +1,5 @@
 ﻿import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import GetUserToken from '../components/GetUserToken'
 import PopUpDialog from '../components/PopUpDialog'
 
 function ProductDetailsPage() {
@@ -40,9 +39,9 @@ function ProductDetailsPage() {
     // Implement the logic to add the product to the cart
     const response = await fetch('https://localhost:7215/api/ItemsInCart', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({ productId: product.id }),
     })
@@ -52,7 +51,7 @@ function ProductDetailsPage() {
       setPopUpMessage("Product added to cart successfully!")
       setIsPopUpOpen(true)
     }
-    else if (!GetUserToken()) {
+    else if (response.status === 401) {
       setPopUpTitle("Login Required")
       setPopUpMessage("Please log in first to add this item to your cart")
       setIsPopUpOpen(true)

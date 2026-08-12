@@ -21,8 +21,8 @@ function CheckoutPage() {
   useEffect(() => {
     const loadCartItems = async () => {
       const response = await fetch('https://localhost:7215/api/ItemsInCart', {
+        credentials: 'include',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
         }
       })
@@ -36,8 +36,8 @@ function CheckoutPage() {
   const handlePlaceOrder = async () => {
     const response = await fetch(`https://localhost:7215/api/Orders`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({

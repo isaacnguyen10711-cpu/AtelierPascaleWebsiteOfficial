@@ -8,8 +8,8 @@ function ShoppingCartPage() {
   useEffect(() => {
     const loadCartItems = async () => {
       const response = await fetch('https://localhost:7215/api/ItemsInCart', {
+        credentials: 'include',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
         }
       })
@@ -23,8 +23,8 @@ function ShoppingCartPage() {
   async function handleUpdateQuantity(itemId, newQuantity) {
     const response = await fetch(`https://localhost:7215/api/ItemsInCart/${itemId}`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ quantity: newQuantity })
@@ -44,8 +44,8 @@ function ShoppingCartPage() {
   async function handleRemoveItem(itemId) {
     const response = await fetch(`https://localhost:7215/api/ItemsInCart/${itemId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json'
       }
     })

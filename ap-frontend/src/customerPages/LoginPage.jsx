@@ -16,6 +16,7 @@ function LoginPage() {
     event.preventDefault();
     const response = await fetch(`https://localhost:7215/api/Authentication/login`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -30,8 +31,6 @@ function LoginPage() {
       return;
     }
 
-    const data = await response.json();
-    localStorage.setItem('token', data.accessToken);
     navigate('/');
     window.location.reload();
   }

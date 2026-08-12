@@ -19,7 +19,6 @@ function AdminAddProductPage() {
   const handleAddProduct = async (event) => {
     event.preventDefault();
 
-    const token = localStorage.getItem("token");
     const newProduct = {
       name,
       description,
@@ -29,9 +28,9 @@ function AdminAddProductPage() {
 
     const response = await fetch("https://localhost:7215/api/products", {
       method: "POST",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(newProduct),
     });

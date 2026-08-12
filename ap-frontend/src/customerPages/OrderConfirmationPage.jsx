@@ -9,8 +9,8 @@ function OrderConfirmationPage() {
   useEffect(() => {
     async function loadOrder() {
       const response = await fetch(`https://localhost:7215/api/Orders/${orderId}`, {
+        credentials: 'include',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
         },
       })

@@ -50,8 +50,6 @@ function AdminProductDetailsPage() {
   async function handleSaveNewData(event) {
     event.preventDefault()
 
-    const token = localStorage.getItem('token')
-
     // Create an updated product object with the new values
     const updatedProduct = {
       id: productId,
@@ -64,9 +62,9 @@ function AdminProductDetailsPage() {
     // Send a PUT request to update the product details
     const response = await fetch(`https://localhost:7215/api/products/${productId}`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updatedProduct),
     })
@@ -94,12 +92,9 @@ function AdminProductDetailsPage() {
     }
 
     // Send a DELETE request to delete the product
-    const token = localStorage.getItem('token')
     const response = await fetch(`https://localhost:7215/api/products/${productId}`, {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: 'include',
     })
 
     if (!response.ok) {

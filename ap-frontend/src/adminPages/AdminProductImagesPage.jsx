@@ -40,8 +40,6 @@ function AdminEditProductImagesPage() {
   async function handleAddProductImage(event) {
     event.preventDefault()
 
-    const token = localStorage.getItem('token')
-
     const newProductImage = {
       productId: Number(productId),
       imageUrl,
@@ -49,9 +47,9 @@ function AdminEditProductImagesPage() {
 
     const response = await fetch('https://localhost:7215/api/ProductImages', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(newProductImage),
     })
@@ -81,8 +79,6 @@ function AdminEditProductImagesPage() {
       return
     }
 
-    const token = localStorage.getItem('token')
-
     const updatedImage = {
       id: Number(imageId),
       productId: Number(newProductId),
@@ -91,9 +87,9 @@ function AdminEditProductImagesPage() {
 
     const response = await fetch(`https://localhost:7215/api/ProductImages/${imageId}`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updatedImage),
     })
@@ -128,13 +124,9 @@ function AdminEditProductImagesPage() {
       return
     }
 
-    const token = localStorage.getItem('token')
-
     const response = await fetch(`https://localhost:7215/api/ProductImages/${imageId}`, {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: 'include',
     })
 
     if (!response.ok) {
