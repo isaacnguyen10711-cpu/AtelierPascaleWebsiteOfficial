@@ -33,7 +33,9 @@ function CheckoutPage() {
     loadCartItems()
   }, [])
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrder = async (event) => {
+    event.preventDefault()
+
     const response = await fetch(`https://localhost:7215/api/Orders`, {
       method: 'POST',
       credentials: 'include',
@@ -74,7 +76,7 @@ function CheckoutPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 pt-6 md:grid-cols-[3fr_2fr] md:gap-8 md:pt-8 lg:gap-10 lg:pt-10">
+        <form onSubmit={handlePlaceOrder} className="grid gap-6 pt-6 md:grid-cols-[3fr_2fr] md:gap-8 md:pt-8 lg:gap-10 lg:pt-10">
           <section className="space-y-5 lg:space-y-7">
             <div className="border border-ap-brown bg-ap-pale rounded p-4 transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-6 lg:p-7">
               <h2 className="text-xs uppercase tracking-widest md:text-sm">
@@ -87,6 +89,7 @@ function CheckoutPage() {
                   placeholder="First name"
                   value={firstName}
                   onChange={(event) => setFirstName(event.target.value)}
+                  required
                   className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <input
@@ -94,6 +97,7 @@ function CheckoutPage() {
                   placeholder="Last name"
                   value={lastName}
                   onChange={(event) => setLastName(event.target.value)}
+                  required
                   className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <input
@@ -101,6 +105,7 @@ function CheckoutPage() {
                   placeholder="Email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
+                  required
                   className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:col-span-2 md:text-sm lg:text-base"
                 />
               </div>
@@ -117,6 +122,7 @@ function CheckoutPage() {
                   placeholder="Address"
                   value={address}
                   onChange={(event) => setAddress(event.target.value)}
+                  required
                   className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <div className="grid gap-3 md:grid-cols-3">
@@ -125,6 +131,7 @@ function CheckoutPage() {
                     placeholder="City"
                     value={city}
                     onChange={(event) => setCity(event.target.value)}
+                    required
                     className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                   <input
@@ -132,6 +139,7 @@ function CheckoutPage() {
                     placeholder="State"
                     value={state}
                     onChange={(event) => setState(event.target.value)}
+                    required
                     className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                   <input
@@ -139,6 +147,7 @@ function CheckoutPage() {
                     placeholder="Postcode"
                     value={postcode}
                     onChange={(event) => setPostcode(event.target.value)}
+                    required
                     className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                 </div>
@@ -154,17 +163,20 @@ function CheckoutPage() {
                 <input
                   type="text"
                   placeholder="Card number"
+                  required
                   className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                 />
                 <div className="grid gap-3 md:grid-cols-2">
                   <input
                     type="text"
                     placeholder="MM / YY"
+                    required
                     className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                   <input
                     type="text"
                     placeholder="CVC"
+                    required
                     className="w-full rounded border border-ap-brown bg-white px-3 py-2 text-xs outline-none transition duration-200 focus:border-ap-beige focus:shadow-md md:text-sm lg:text-base"
                   />
                 </div>
@@ -229,7 +241,7 @@ function CheckoutPage() {
             </div>
 
             <button
-              onClick={handlePlaceOrder}
+              type="submit"
               className="mt-5 w-full rounded bg-ap-brown px-4 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-200 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 hover:cursor-pointer md:text-sm lg:px-6 lg:py-4"
             >
               Place Order
@@ -239,7 +251,7 @@ function CheckoutPage() {
               Back To Cart
             </Link>
           </section>
-        </div>
+        </form>
       </section>
     </main>
   )
