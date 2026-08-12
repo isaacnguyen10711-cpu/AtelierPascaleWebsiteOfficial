@@ -37,12 +37,14 @@ namespace AtelierPascaleWebsite.Controllers
 
             var passwordHasher = new PasswordHasher<User>();
 
+            // Check if the user exists and verify the password
             var userAccount = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
             if (userAccount == null || passwordHasher.VerifyHashedPassword(userAccount, userAccount.PasswordHash, request.Password) != PasswordVerificationResult.Success)
             {
                 return Unauthorized("Invalid email or password.");
             }
 
+            // Create variables for JWT token generation
             var issuer = _configuration["JwtConfig:Issuer"];
             var audience = _configuration["JwtConfig:Audience"];
             var key = _configuration["JwtConfig:Key"];
@@ -58,6 +60,7 @@ namespace AtelierPascaleWebsite.Controllers
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            // Create the token descriptor
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Issuer = issuer,
@@ -68,13 +71,23 @@ namespace AtelierPascaleWebsite.Controllers
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
+            // Create the token
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var accessToken = tokenHandler.WriteToken(securityToken);
+
+            // Set the access token in an HttpOnly cookie
+            Response.Cookies.Append("accessToken", accessToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = tokenExpiryTimeStamp
+            });
 
             return Ok(new LoginResponse
             {
                 Email = userAccount.Email,
-                AccessToken = accessToken,
+                Role = userAccount.Role,
                 ExpiresIn = _configuration.GetValue<int>("JwtConfig:TokenValidityInMinutes")
 
             });

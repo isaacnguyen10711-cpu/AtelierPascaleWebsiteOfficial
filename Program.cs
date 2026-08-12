@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("https://localhost:7215") 
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
@@ -29,20 +29,36 @@ builder.Services.AddAuthentication(options =>
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options => {
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
+})
+    .AddJwtBearer(options =>
     {
-        ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
-        ValidAudience = builder.Configuration["JwtConfig:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JwtConfig:Key"]!)),
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
+            ValidAudience = builder.Configuration["JwtConfig:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JwtConfig:Key"]!)),
 
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-    };
-});
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                context.Request.Cookies.TryGetValue("accessToken", out var accessToken);
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    context.Token = accessToken;
+                }
+
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 builder.Services.AddAuthorization();
 
