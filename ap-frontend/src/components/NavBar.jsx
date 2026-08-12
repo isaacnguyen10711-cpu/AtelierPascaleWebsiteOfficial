@@ -11,6 +11,7 @@ function NavBar() {
   const isHomePage = location.pathname === '/'
   const isProductCategoryPage = location.pathname.startsWith('/products/') && location.pathname.split('/').length === 3
   const isBlackTextPage = !isHomePage && !isProductCategoryPage
+
   // Used for changing the login button to logout button if the user is logged in
   const isLoggedIn = Boolean(role)
   const linkHover = isBlackTextPage ? 'hover:text-gray-500' : 'hover:text-gray-300'
@@ -24,7 +25,7 @@ function NavBar() {
   }, [])
 
   async function handleLogout() {
-    const response = await fetch('http://localhost:7215/api/authentication/logout', {
+    const response = await fetch('https://localhost:7215/api/authentication/logout', {
       method: 'POST',
       credentials: 'include'
     })
