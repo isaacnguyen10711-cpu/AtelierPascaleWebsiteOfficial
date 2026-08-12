@@ -1,7 +1,4 @@
-﻿import GetUserToken from './GetUserToken'
-import PopUpDialog from './PopUpDialog'
-
-async function GetUserRole() {
+﻿async function GetUserRole() {
   const response = await fetch(`https://localhost:7215/api/authentication/getUserRole`,
     {
       credentials: 'include',

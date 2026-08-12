@@ -14,9 +14,18 @@ import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
 import AdminProductImagesPage from './adminPages/AdminProductImagesPage.jsx'
 import Footer from './components/Footer.jsx'
 import GetUserRole from './components/GetUserRole.jsx'
+import { useState, useEffect } from 'react'
 
 function App() {
-  const role = GetUserRole()
+  const [role, setRole] = useState(null)
+
+  useEffect(() => {
+    async function fetchUserRole() {
+      const userRole = await GetUserRole()
+      setRole(userRole)
+    }
+    fetchUserRole()
+  }, [])
 
   return (
     <>
