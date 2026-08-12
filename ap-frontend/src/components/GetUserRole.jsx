@@ -1,13 +1,19 @@
 ﻿import GetUserToken from './GetUserToken'
-function GetUserRole() {
-  const decodedToken = GetUserToken()
+import PopUpDialog from './PopUpDialog'
 
-  if (!decodedToken) {
-    return null
+async function GetUserRole() {
+  const response = await fetch(`https://localhost:7215/api/authentication/getUserRole`,
+    {
+      credentials: 'include',
+    });
+
+  if (!response.ok) {
+    return null;
   }
 
-  return decodedToken.role || decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-
+  // Return the role from the response
+  const data = await response.json();
+  return data.role;
 }
 
 export default GetUserRole

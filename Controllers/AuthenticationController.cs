@@ -132,6 +132,16 @@ namespace AtelierPascaleWebsite.Controllers
             return Ok("User registered successfully.");
         }
 
+        [HttpGet("getUserRole")]
+        public async Task<ActionResult> GetUserRole()
+        {
+            return Ok(new
+            {
+                Id = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                Email = User.FindFirstValue(ClaimTypes.Email),
+                Role = User.FindFirstValue(ClaimTypes.Role)
+            });
+        }
 
     }
 }
