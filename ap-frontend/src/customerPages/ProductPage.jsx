@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import GetUserRole from '../components/GetUserRole.jsx';
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
@@ -12,7 +14,7 @@ function ProductPage() {
   useEffect(() => {
     async function loadProducts() {
       setProducts([])
-      const response = await fetch(`https://localhost:7215/api/products/category/${categoryName}?sortBy=${sortBy}`);
+      const response = await fetch(`${API_URL}/api/products/category/${categoryName}?sortBy=${sortBy}`);
 
       if (!response.ok) {
         console.error('Failed to fetch products:', response.statusText);

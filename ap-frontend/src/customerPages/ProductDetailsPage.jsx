@@ -2,6 +2,8 @@
 import { Link, useParams } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function ProductDetailsPage() {
   const [product, setProduct] = useState(null)  
   const [isLoading, setIsLoading] = useState(true)
@@ -13,7 +15,7 @@ function ProductDetailsPage() {
   useEffect(() => {
     // Fetch details using its ID
     async function loadProductDetails() {
-      const response = await fetch(`https://localhost:7215/api/products/${productId}`)
+      const response = await fetch(`${API_URL}/api/products/${productId}`)
 
       if (!response.ok) {
         setProduct(null)
@@ -37,7 +39,7 @@ function ProductDetailsPage() {
       return
     }
     // Implement the logic to add the product to the cart
-    const response = await fetch('https://localhost:7215/api/ItemsInCart', {
+    const response = await fetch(`${API_URL}/api/ItemsInCart`, {
       method: 'POST',
       credentials: 'include',
       headers: {

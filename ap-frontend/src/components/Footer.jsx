@@ -43,9 +43,9 @@ function Footer() {
               <Mail className="h-4 w-4" />
               isaac.nguyen10711@gmail.com
             </a>
-            <a href="tel:+61000000000" className="flex items-center gap-2 transition duration-300 hover:translate-x-1 hover:text-ap-beige">
+            <a href="tel:+61425182280" className="flex items-center gap-2 transition duration-300 hover:translate-x-1 hover:text-ap-beige">
               <Phone className="h-4 w-4" />
-              +61 000 000 000
+              +61 425182280
             </a>
             <p className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />

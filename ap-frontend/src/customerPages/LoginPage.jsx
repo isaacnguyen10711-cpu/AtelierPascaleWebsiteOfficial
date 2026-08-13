@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import PopUpDialog from '../components/PopUpDialog';
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function LoginPage() {
 
   const [email, setEmail] = useState('');
@@ -14,7 +16,7 @@ function LoginPage() {
 
   async function handleLogin(event) {
     event.preventDefault();
-    const response = await fetch(`https://localhost:7215/api/Authentication/login`, {
+    const response = await fetch(`${API_URL}/api/Authentication/login`, {
       method: 'POST',
       credentials: 'include',
       headers: {

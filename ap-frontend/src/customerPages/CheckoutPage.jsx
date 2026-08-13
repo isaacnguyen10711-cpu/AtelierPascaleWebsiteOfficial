@@ -2,6 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import PopUpDialog from '../components/PopUpDialog'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function CheckoutPage() {
   const [cartItems, setCartItems] = useState([]);
   const [firstName, setFirstName] = useState('');
@@ -20,7 +22,7 @@ function CheckoutPage() {
 
   useEffect(() => {
     const loadCartItems = async () => {
-      const response = await fetch('https://localhost:7215/api/ItemsInCart', {
+      const response = await fetch(`${API_URL}/api/ItemsInCart`, {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
@@ -36,7 +38,7 @@ function CheckoutPage() {
   const handlePlaceOrder = async (event) => {
     event.preventDefault()
 
-    const response = await fetch(`https://localhost:7215/api/Orders`, {
+    const response = await fetch(`${API_URL}/api/Orders`, {
       method: 'POST',
       credentials: 'include',
       headers: {

@@ -2,6 +2,8 @@ import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PopUpDialog from '../components/PopUpDialog';
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +23,7 @@ function RegisterPage() {
       return;
     }
 
-    const response = await fetch(`https://localhost:7215/api/Authentication/register`, {
+    const response = await fetch(`${API_URL}/api/Authentication/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

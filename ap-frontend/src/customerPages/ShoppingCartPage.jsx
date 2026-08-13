@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Trash2, Plus, Minus } from 'lucide-react'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function ShoppingCartPage() {
   const [cartItems, setCartItems] = useState([])
 
   useEffect(() => {
     const loadCartItems = async () => {
-      const response = await fetch('https://localhost:7215/api/ItemsInCart', {
+      const response = await fetch(`${API_URL}/api/ItemsInCart`, {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
@@ -21,7 +23,7 @@ function ShoppingCartPage() {
   }, [])
 
   async function handleUpdateQuantity(itemId, newQuantity) {
-    const response = await fetch(`https://localhost:7215/api/ItemsInCart/${itemId}`, {
+    const response = await fetch(`${API_URL}/api/ItemsInCart/${itemId}`, {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -42,7 +44,7 @@ function ShoppingCartPage() {
   }
 
   async function handleRemoveItem(itemId) {
-    const response = await fetch(`https://localhost:7215/api/ItemsInCart/${itemId}`, {
+    const response = await fetch(`${API_URL}/api/ItemsInCart/${itemId}`, {
       method: 'DELETE',
       credentials: 'include',
       headers: {

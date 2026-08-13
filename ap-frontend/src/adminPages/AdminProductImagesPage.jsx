@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import PopUpDialog from '../components/PopUpDialog'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function AdminEditProductImagesPage() {
   const [productImages, setProductImages] = useState([])
   const [productId, setProductId] = useState('')
@@ -17,7 +19,7 @@ function AdminEditProductImagesPage() {
   }, [])
 
   async function loadProductImages() {
-    const response = await fetch('https://localhost:7215/api/ProductImages')
+    const response = await fetch(`${API_URL}/api/ProductImages`)
 
     if (!response.ok) {
       setPopUpTitle('Error')
@@ -45,7 +47,7 @@ function AdminEditProductImagesPage() {
       imageUrl,
     }
 
-    const response = await fetch('https://localhost:7215/api/ProductImages', {
+    const response = await fetch(`${API_URL}/api/ProductImages`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -85,7 +87,7 @@ function AdminEditProductImagesPage() {
       imageUrl: newImageUrl
     }
 
-    const response = await fetch(`https://localhost:7215/api/ProductImages/${imageId}`, {
+    const response = await fetch(`${API_URL}/api/ProductImages/${imageId}`, {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -124,7 +126,7 @@ function AdminEditProductImagesPage() {
       return
     }
 
-    const response = await fetch(`https://localhost:7215/api/ProductImages/${imageId}`, {
+    const response = await fetch(`${API_URL}/api/ProductImages/${imageId}`, {
       method: 'DELETE',
       credentials: 'include',
     })

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import PopUpDialog from "../components/PopUpDialog";
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function AdminAddProductPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -26,7 +28,7 @@ function AdminAddProductPage() {
       categoryId: Number(categoryId),
     };
 
-    const response = await fetch("https://localhost:7215/api/products", {
+    const response = await fetch(`${API_URL}/api/products`, {
       method: "POST",
       credentials: 'include',
       headers: {

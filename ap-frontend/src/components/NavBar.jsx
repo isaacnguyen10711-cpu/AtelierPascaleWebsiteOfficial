@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { House, Menu, X, ShoppingCart } from 'lucide-react'
 import GetUserRole from './GetUserRole'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [role, setRole] = useState(null)
@@ -26,7 +28,7 @@ function NavBar() {
   }, [])
 
   async function handleLogout() {
-    const response = await fetch('https://localhost:7215/api/authentication/logout', {
+    const response = await fetch(`${API_URL}/api/authentication/logout`, {
       method: 'POST',
       credentials: 'include'
     })

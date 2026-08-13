@@ -2,8 +2,8 @@
 import { Link } from 'react-router-dom'
 
 const companyImages = [
-  '',
-  '',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/About/Pic 2.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/About/Pic 4.jpg',
 ]
 
 function AboutPage() {
@@ -48,7 +48,7 @@ function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-0 overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:gap-5 overflow-hidden">
             {companyImages.map((image, index) => (
                 <img
                   key={index}

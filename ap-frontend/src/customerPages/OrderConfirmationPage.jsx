@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function OrderConfirmationPage() {
   const { orderId } = useParams()
   const [order, setOrder] = useState(null)
@@ -8,7 +10,7 @@ function OrderConfirmationPage() {
 
   useEffect(() => {
     async function loadOrder() {
-      const response = await fetch(`https://localhost:7215/api/Orders/${orderId}`, {
+      const response = await fetch(`${API_URL}/api/Orders/${orderId}`, {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',

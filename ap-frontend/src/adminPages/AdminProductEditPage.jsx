@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 
+const API_URL = import.meta.env.VITE_API_URL
+
 function AdminProductDetailsPage() {
   const [product, setProduct] = useState(null)
   const [newName, setNewName] = useState('')
@@ -24,7 +26,7 @@ function AdminProductDetailsPage() {
 
   useEffect(() => {
     async function loadProductDetails() {
-      const response = await fetch(`https://localhost:7215/api/products/${productId}`)
+      const response = await fetch(`${API_URL}/api/products/${productId}`)
 
       if (!response.ok) {
         setProduct(null)
@@ -60,7 +62,7 @@ function AdminProductDetailsPage() {
     }
 
     // Send a PUT request to update the product details
-    const response = await fetch(`https://localhost:7215/api/products/${productId}`, {
+    const response = await fetch(`${API_URL}/api/products/${productId}`, {
       method: 'PUT',
       credentials: 'include',
       headers: {
@@ -92,7 +94,7 @@ function AdminProductDetailsPage() {
     }
 
     // Send a DELETE request to delete the product
-    const response = await fetch(`https://localhost:7215/api/products/${productId}`, {
+    const response = await fetch(`${API_URL}/api/products/${productId}`, {
       method: 'DELETE',
       credentials: 'include',
     })
