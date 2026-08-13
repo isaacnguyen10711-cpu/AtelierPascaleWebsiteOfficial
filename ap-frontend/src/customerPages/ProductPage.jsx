@@ -38,6 +38,12 @@ function ProductPage() {
         : categoryName === 'jewelry' ? 'Jewelry'
           : categoryName === 'art' ? 'Art' : '';
 
+  const categoryDescription = categoryName === 'new-arrival' ? 'A quiet collection of new pieces chosen for warmth, detail, and the feeling they bring into a room.'
+    : categoryName === 'home-decor' ? 'Warm objects and finishes chosen to bring stillness, texture, and character into everyday spaces.'
+      : categoryName === 'gifts' ? 'Thoughtful pieces selected for personal moments, quiet celebrations, and meaningful keepsakes.'
+        : categoryName === 'jewelry' ? 'Delicate accents and expressive details chosen for everyday wear and lasting sentiment.'
+          : categoryName === 'art' ? 'Expressive pieces selected to shape the mood of a room and invite slower looking.' : '';
+
   const productLayout = categoryName === 'art'
     ? {
       gridColumns: 'md:grid-cols-2 lg:grid-cols-3',
@@ -56,6 +62,9 @@ function ProductPage() {
           <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
             {categoryTitle}
           </h1>
+          <p className="mt-4 max-w-xs pr-0 text-right text-sm font-light leading-7 transition duration-300 hover:translate-x-2 md:max-w-xl md:pr-30 md:text-base md:leading-8 lg:max-w-2xl lg:pr-50 lg:text-lg lg:leading-9">
+            {categoryDescription}
+          </p>
         </div>
       </section>
 
