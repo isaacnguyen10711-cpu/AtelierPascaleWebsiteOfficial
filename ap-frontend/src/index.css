@@ -73,7 +73,7 @@ body {
     filter: brightness(0.4);
 }
 
-.bg-art {
+.bg-about {
     width: 100%;
     height: 100vh;
     background-image: url("https://atelierpascaleimages.blob.core.windows.net/product-images/Background/AboutBackground.jpg");

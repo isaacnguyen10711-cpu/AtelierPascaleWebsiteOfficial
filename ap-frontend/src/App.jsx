@@ -12,8 +12,10 @@ import UnauthorizedPage from './customerPages/UnauthorizedPage.jsx'
 import AdminProductEditPage from './adminPages/AdminProductEditPage.jsx'
 import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
 import AdminProductImagesPage from './adminPages/AdminProductImagesPage.jsx'
+import AboutPage from './customerPages/AboutPage.jsx'
 import Footer from './components/Footer.jsx'
 import GetUserRole from './components/GetUserRole.jsx'
+import ScrollToTop from './components/ScrollToTop.jsx'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <NavBar />
 
       <Routes>
@@ -40,6 +43,7 @@ function App() {
         <Route path="/checkout" element={role == "Customer" ? <CheckoutPage /> : <Navigate to="/unauthorized" replace />} />
         <Route path="/order-confirmation/:orderId" element={role == "Customer" ? <OrderConfirmationPage /> : <Navigate to="/unauthorized" replace />} />
         <Route path="/products/:categoryName" element={<ProductPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/products/:categoryName/:productId" element={role == "Admin" ? < AdminProductEditPage /> : <ProductDetailsPage />} />
         <Route path="/admin/add-product" element={role == "Admin" ? <AdminAddProductPage /> : <Navigate to="/unauthorized" replace />} />
         <Route path="/admin/product-image" element={role == "Admin" ? <AdminProductImagesPage /> : <Navigate to="/unauthorized" replace />} />

@@ -9,8 +9,9 @@ function NavBar() {
 
   const location = useLocation()
   const isHomePage = location.pathname === '/'
+  const isAboutPage = location.pathname === '/about'
   const isProductCategoryPage = location.pathname.startsWith('/products/') && location.pathname.split('/').length === 3
-  const isBlackTextPage = !isHomePage && !isProductCategoryPage
+  const isBlackTextPage = !isHomePage && !isProductCategoryPage && !isAboutPage
 
   // Used for changing the login button to logout button if the user is logged in
   const isLoggedIn = Boolean(role)
