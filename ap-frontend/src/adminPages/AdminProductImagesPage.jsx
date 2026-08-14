@@ -11,6 +11,7 @@ function AdminEditProductImagesPage() {
   const [newProductId, setNewProductId] = useState('')
   const [newImageUrl, setNewImageUrl] = useState('')
   const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+  const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false)
   const [popUpTitle, setPopUpTitle] = useState('')
   const [popUpMessage, setPopUpMessage] = useState('')
 
@@ -112,7 +113,7 @@ function AdminEditProductImagesPage() {
     setIsPopUpOpen(true)
   }
 
-  async function handleDeleteImage() {
+  function handleDeleteImageClick() {
     if (!imageId) {
       setPopUpTitle('Error')
       setPopUpMessage('Please select or enter an image ID')
@@ -120,11 +121,13 @@ function AdminEditProductImagesPage() {
       return
     }
 
-    const confirmDelete = window.confirm('Delete this product image?')
+    // Open the popup first. The image is not deleted until Confirm is clicked.
+    setIsDeletePopUpOpen(true)
+  }
 
-    if (!confirmDelete) {
-      return
-    }
+  async function handleDeleteImage() {
+    // This runs from the Confirm button inside the popup.
+    setIsDeletePopUpOpen(false)
 
     const response = await fetch(`${API_URL}/api/ProductImages/${imageId}`, {
       method: 'DELETE',
@@ -150,6 +153,13 @@ function AdminEditProductImagesPage() {
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
       <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
+      <PopUpDialog
+        isOpen={isDeletePopUpOpen}
+        onClose={() => setIsDeletePopUpOpen(false)}
+        onConfirm={handleDeleteImage}
+        title="Delete Product Image"
+        message="Are you sure you want to delete this product image?"
+      />
 
       <section className="mx-auto max-w-4xl md:max-w-5xl lg:max-w-6xl">
         <h1 className="font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
@@ -260,7 +270,7 @@ function AdminEditProductImagesPage() {
 
             <button
               type="button"
-              onClick={handleDeleteImage}
+              onClick={handleDeleteImageClick}
               className="cursor-pointer rounded-md border border-ap-brown px-5 py-3 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
             >
               Delete
