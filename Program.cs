@@ -15,7 +15,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:5173") 
+        builder.WithOrigins(
+            "http://localhost:5173",
+            "https://atelier-pascale-website-official.vercel.app"
+            ) 
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials();
@@ -74,5 +77,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/", () => "Atelier Pascale is running");
 
 app.Run();
