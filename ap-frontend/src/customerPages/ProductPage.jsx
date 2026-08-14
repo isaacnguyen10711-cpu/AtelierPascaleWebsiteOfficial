@@ -7,9 +7,18 @@ const API_URL = import.meta.env.VITE_API_URL
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
-  const role = GetUserRole();
+  const [role, setRole] = useState(null);
 
   const { categoryName } = useParams();
+
+  useEffect(() => {
+    async function fetchUserRole() {
+      const userRole = await GetUserRole()
+      setRole(userRole)
+    }
+
+    fetchUserRole()
+  }, [])
 
   useEffect(() => {
     async function loadProducts() {
@@ -73,9 +82,14 @@ function ProductPage() {
       <main className="bg-ap-tan px-6 py-10 text-ap-brown md:px-12 lg:px-20">
         <div className="mx-auto mb-10 flex max-w-6xl items-center justify-between">
           {role == "Admin" ? (
-            <Link to="/admin/add-product" className="cursor-pointer border border-ap-brown bg-ap-tan px-2 py-1 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale md:px-5 md:py-2 md:text-base">
-              Add product
-            </Link>
+            <div className="flex gap-3 md:gap-4 lg:gap-5">
+              <Link to="/admin/add-product" className="cursor-pointer border border-ap-brown bg-ap-tan px-2 py-1 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale md:px-5 md:py-2 md:text-base">
+                Add product
+              </Link>
+              <Link to="/admin/product-image" className="cursor-pointer border border-ap-brown bg-ap-tan px-2 py-1 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale md:px-5 md:py-2 md:text-base">
+                Product images
+              </Link>
+            </div>
           ) : (
             <div></div>
           )}
