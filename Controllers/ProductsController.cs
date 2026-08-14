@@ -30,6 +30,7 @@ public class ProductsController : ControllerBase
                 Description = p.Description,
                 Price = p.Price,
                 CategoryId = p.CategoryId,
+                IsNewArrival = p.IsNewArrival,
                 Images = p.Images.Select(i => new ProductImageDTO
                 {
                     Id = i.Id,
@@ -91,6 +92,7 @@ public class ProductsController : ControllerBase
                 Description = p.Description,
                 Price = p.Price,
                 CategoryId = p.CategoryId,
+                IsNewArrival = p.IsNewArrival,
                 Images = p.Images.Select(i => new ProductImageDTO
                 {
                     Id = i.Id,
@@ -181,6 +183,7 @@ public class ProductsController : ControllerBase
             Description = newProduct.Description,
             Price = newProduct.Price,
             CategoryId = newProduct.CategoryId,
+            IsNewArrival = newProduct.IsNewArrival,
             Images = new List<ProductImageDTO>()
         });
     }

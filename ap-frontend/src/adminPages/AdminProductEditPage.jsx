@@ -58,7 +58,7 @@ function AdminProductDetailsPage() {
       description: newDescription,
       price: Number(newPrice),
       categoryId: Number(newCategoryId),
-      isNewArrival: Boolean(isNewArrival),
+      isNewArrival,
     }
 
     // Send a PUT request to update the product details
@@ -194,19 +194,16 @@ function AdminProductDetailsPage() {
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm leading-7 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base md:leading-8 lg:px-5 lg:py-4 lg:text-lg lg:leading-9"
             />
           </div>
-          <div>
-            <label htmlFor="isNewArrival" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">Is New Arrival</label>
-            <select
+          <div className="flex items-center gap-3">
+            <input
               id="isNewArrival"
-              value={isNewArrival}
-              onChange={(event) => setIsNewArrival(event.target.value)}
+              type="checkbox"
+              checked={isNewArrival}
+              onChange={(event) => setIsNewArrival(event.target.checked)}
               disabled={!isEditing}
-              required
-              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
-            >
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
+              className="h-4 w-4 cursor-pointer accent-ap-brown disabled:cursor-not-allowed md:h-5 md:w-5 lg:h-6 lg:w-6"
+            />
+            <label htmlFor="isNewArrival" className="text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">Is New Arrival</label>
           </div>
 
           <div className="flex flex-col gap-3 pt-2 md:col-span-2 md:flex-row lg:gap-4">

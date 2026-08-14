@@ -28,7 +28,7 @@ function AdminAddProductPage() {
       description,
       price: Number(price),
       categoryId: Number(categoryId),
-      isNewArrival: Boolean(isNewArrival)
+      isNewArrival
     };
 
     const response = await fetch(`${API_URL}/api/products`, {
@@ -54,6 +54,7 @@ function AdminAddProductPage() {
     setDescription("");
     setPrice("");
     setCategoryId("");
+    setIsNewArrival(false);
   }
 
   return (
@@ -123,21 +124,18 @@ function AdminAddProductPage() {
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
             </div>
-            <div>
-              <label htmlFor="isNewArrival" className="block text-sm font-medium uppercase tracking-widest md:text-base lg:text-base">
-                Is New Arrival
-              </label>
-              <select
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
                 name="isNewArrival"
                 id="isNewArrival"
-                value={isNewArrival}
-                onChange={(e) => setIsNewArrival(e.target.value)}
-                required
-                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
-              >
-                <option value={true}>Yes</option>
-                <option value={false}>No</option>
-              </select>
+                checked={isNewArrival}
+                onChange={(e) => setIsNewArrival(e.target.checked)}
+                className="h-4 w-4 cursor-pointer accent-ap-brown md:h-5 md:w-5 lg:h-6 lg:w-6"
+              />
+              <label htmlFor="isNewArrival" className="text-sm font-medium uppercase tracking-widest md:text-base lg:text-base">
+                Is New Arrival
+              </label>
             </div>
             <div>
               <button
