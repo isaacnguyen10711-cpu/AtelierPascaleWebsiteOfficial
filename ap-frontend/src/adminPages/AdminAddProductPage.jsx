@@ -10,6 +10,8 @@ function AdminAddProductPage() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [isNewArrival, setIsNewArrival] = useState(false);
+
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popUpTitle, setPopUpTitle] = useState("");
   const [popUpMessage, setPopUpMessage] = useState("");
@@ -26,6 +28,7 @@ function AdminAddProductPage() {
       description,
       price: Number(price),
       categoryId: Number(categoryId),
+      isNewArrival: Boolean(isNewArrival)
     };
 
     const response = await fetch(`${API_URL}/api/products`, {
@@ -74,6 +77,7 @@ function AdminAddProductPage() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
 
@@ -87,6 +91,7 @@ function AdminAddProductPage() {
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                required
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-4 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-4 md:text-base lg:px-5 lg:py-5 lg:text-base"
               />
             </div>
@@ -100,6 +105,7 @@ function AdminAddProductPage() {
                 id="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                required
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
             </div>
@@ -113,8 +119,25 @@ function AdminAddProductPage() {
                 id="categoryId"
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)} 
+                required
                 className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
               />
+            </div>
+            <div>
+              <label htmlFor="isNewArrival" className="block text-sm font-medium uppercase tracking-widest md:text-base lg:text-base">
+                Is New Arrival
+              </label>
+              <select
+                name="isNewArrival"
+                id="isNewArrival"
+                value={isNewArrival}
+                onChange={(e) => setIsNewArrival(e.target.value)}
+                required
+                className="mt-2 w-full rounded-md border border-ap-brown bg-white px-4 py-3 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
+              >
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
+              </select>
             </div>
             <div>
               <button

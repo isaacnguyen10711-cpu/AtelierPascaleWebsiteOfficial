@@ -129,6 +129,7 @@ public class ProductsController : ControllerBase
         existingProduct.Description = product.Description;
         existingProduct.Price = product.Price;
         existingProduct.CategoryId = product.CategoryId;
+        existingProduct.IsNewArrival = product.IsNewArrival;
 
         try
         {
@@ -166,7 +167,8 @@ public class ProductsController : ControllerBase
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            CategoryId = product.CategoryId
+            CategoryId = product.CategoryId,
+            IsNewArrival = product.IsNewArrival
         };
 
         _context.Products.Add(newProduct);

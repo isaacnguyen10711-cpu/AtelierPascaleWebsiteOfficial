@@ -172,6 +172,7 @@ function AdminEditProductImagesPage() {
               type="number"
               value={productId}
               onChange={(event) => setProductId(event.target.value)}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
@@ -185,6 +186,7 @@ function AdminEditProductImagesPage() {
               type="text"
               value={imageUrl}
               onChange={(event) => setImageUrl(event.target.value)}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
@@ -215,6 +217,7 @@ function AdminEditProductImagesPage() {
               type="number"
               value={imageId}
               onChange={(event) => setImageId(event.target.value)}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
@@ -228,6 +231,7 @@ function AdminEditProductImagesPage() {
               type="number"
               value={newProductId}
               onChange={(event) => setNewProductId(event.target.value)}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
@@ -241,6 +245,7 @@ function AdminEditProductImagesPage() {
               type="text"
               value={newImageUrl}
               onChange={(event) => setNewImageUrl(event.target.value)}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>

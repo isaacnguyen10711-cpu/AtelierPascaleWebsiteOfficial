@@ -10,8 +10,7 @@ function AdminProductDetailsPage() {
   const [newDescription, setNewDescription] = useState('')
   const [newPrice, setNewPrice] = useState('')
   const [newCategoryId, setNewCategoryId] = useState('')
-
-  const [images, setImages] = useState([])
+  const [isNewArrival, setIsNewArrival] = useState(false)
 
   const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
@@ -42,7 +41,7 @@ function AdminProductDetailsPage() {
       setNewDescription(selectedProduct.description)
       setNewPrice(selectedProduct.price)
       setNewCategoryId(selectedProduct.categoryId)
-      setImages(selectedProduct.images)
+      setIsNewArrival(selectedProduct.isNewArrival)
       setIsLoading(false)
     }
 
@@ -59,6 +58,7 @@ function AdminProductDetailsPage() {
       description: newDescription,
       price: Number(newPrice),
       categoryId: Number(newCategoryId),
+      isNewArrival: Boolean(isNewArrival),
     }
 
     // Send a PUT request to update the product details
@@ -150,6 +150,7 @@ function AdminProductDetailsPage() {
               value={newName}
               onChange={(event) => setNewName(event.target.value)}
               disabled={!isEditing}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
@@ -163,6 +164,7 @@ function AdminProductDetailsPage() {
               value={newPrice}
               onChange={(event) => setNewPrice(event.target.value)}
               disabled={!isEditing}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
@@ -175,6 +177,7 @@ function AdminProductDetailsPage() {
               value={newCategoryId}
               onChange={(event) => setNewCategoryId(event.target.value)}
               disabled={!isEditing}
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4"
             />
           </div>
@@ -187,8 +190,23 @@ function AdminProductDetailsPage() {
               onChange={(event) => setNewDescription(event.target.value)}
               disabled={!isEditing}
               rows="6"
+              required
               className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm leading-7 outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base md:leading-8 lg:px-5 lg:py-4 lg:text-lg lg:leading-9"
             />
+          </div>
+          <div>
+            <label htmlFor="isNewArrival" className="block text-xs font-medium uppercase tracking-widest md:text-sm lg:text-base">Is New Arrival</label>
+            <select
+              id="isNewArrival"
+              value={isNewArrival}
+              onChange={(event) => setIsNewArrival(event.target.value)}
+              disabled={!isEditing}
+              required
+              className="mt-2 w-full rounded-md border border-ap-brown bg-white px-3 py-2 text-sm outline-none transition duration-300 focus:border-ap-beige focus:shadow-md disabled:cursor-not-allowed disabled:bg-ap-pale md:px-4 md:py-3 md:text-base lg:px-5 lg:py-4 lg:text-base"
+            >
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
+            </select>
           </div>
 
           <div className="flex flex-col gap-3 pt-2 md:col-span-2 md:flex-row lg:gap-4">
