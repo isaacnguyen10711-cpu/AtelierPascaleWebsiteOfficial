@@ -1,12 +1,5 @@
 import { Link } from 'react-router-dom'
 
-const images = {
-  newArrival: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/NewArrivalbg.jpg',
-  homeDecor: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/HomeDecorbg.jpg',
-  gifts: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Giftsbg.jpg',
-  jewelry: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Jewelrybg.jpg',
-  art: 'https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Artbg.jpg',
-}
 
 const newArrivalImages = [
   'https://atelierpascaleimages.blob.core.windows.net/product-images/NewArrival/Pic 1.jpg',
@@ -70,7 +63,7 @@ function HomePage() {
           <div className="mx-auto mt-5 grid w-full gap-10 md:mt-7 md:grid-cols-2 md:gap-12 md:w-[90%] lg:mt-9 lg:gap-15 lg:w-[80%]">
             <div className="transition duration-300 hover:-translate-y-1">
               <div className="overflow-hidden rounded">
-                <img src={images.newArrival} alt="New arrival collection" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
+                <img src={giftsImages[0]} alt="New arrival collection" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
               </div>
               <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold transition duration-300 hover:text-ap-beige md:text-5xl lg:text-6xl">Latest Pieces</h3>
               <p className="mt-2 text-sm leading-7 text-ap-brown md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -80,7 +73,7 @@ function HomePage() {
 
             <div className="transition duration-300 hover:-translate-y-1">
               <div className="overflow-hidden rounded">
-                <img src={images.art} alt="Featured art arrival" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
+                <img src={artImages[2]} alt="Featured art arrival" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
               </div>
               <h3 className="mx-auto mt-5 font-['Tangerine'] text-4xl font-bold transition duration-300 hover:text-ap-beige md:text-5xl lg:text-6xl">Collected Forms</h3>
               <p className="mt-2 text-sm leading-7 text-ap-brown md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -91,7 +84,7 @@ function HomePage() {
 
           <div className="mx-auto mt-10 w-full text-center md:mt-12 md:w-[45%] lg:mt-14 lg:w-[40%]">
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
-              <img src={images.homeDecor} alt="Centered new arrival feature" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
+              <img src={giftsImages[3]} alt="Centered new arrival feature" className="mx-auto h-[240px] w-full object-cover object-center lg:h-[270px]" />
             </div>
             <Link to="/products/new-arrival" className="mt-8 inline-block cursor-pointer border border-ap-brown px-7 py-3 text-xs uppercase tracking-[0.2em] transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-8 md:text-sm lg:px-9 lg:py-4">
               Discover More
