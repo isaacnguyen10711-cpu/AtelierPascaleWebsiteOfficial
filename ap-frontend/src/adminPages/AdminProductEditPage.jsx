@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -18,6 +18,7 @@ function AdminProductDetailsPage() {
   const [popUpTitle, setPopUpTitle] = useState('')
   const [popUpMessage, setPopUpMessage] = useState('')
   const { categoryName, productId } = useParams()
+  const navigate = useNavigate()
 
   function handleClosePopUp() {
     setIsPopUpOpen(false)
@@ -87,12 +88,6 @@ function AdminProductDetailsPage() {
   }
 
   async function handleDelete() {
-    const confirmDelete = window.confirm('Delete this product?')
-
-    if (!confirmDelete) {
-      return
-    }
-
     // Send a DELETE request to delete the product
     const response = await fetch(`${API_URL}/api/products/${productId}`, {
       method: 'DELETE',
@@ -106,9 +101,7 @@ function AdminProductDetailsPage() {
       return
     }
 
-    setPopUpTitle('Success')
-    setPopUpMessage('Product deleted successfully')
-    setIsPopUpOpen(true)
+    navigate(`/products/${categoryName}`)
   }
 
   if (isLoading) {
