@@ -15,6 +15,7 @@ function AdminProductDetailsPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
   const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+  const [isDeletePopUpOpen, setIsDeletePopUpOpen] = useState(false)
   const [popUpTitle, setPopUpTitle] = useState('')
   const [popUpMessage, setPopUpMessage] = useState('')
   const { categoryName, productId } = useParams()
@@ -22,6 +23,11 @@ function AdminProductDetailsPage() {
 
   function handleClosePopUp() {
     setIsPopUpOpen(false)
+  }
+
+  function handleDeleteClick() {
+    // Open the popup first. The product is not deleted until Confirm is clicked.
+    setIsDeletePopUpOpen(true)
   }
 
   useEffect(() => {
@@ -88,6 +94,9 @@ function AdminProductDetailsPage() {
   }
 
   async function handleDelete() {
+    // This runs from the Confirm button inside the popup.
+    setIsDeletePopUpOpen(false)
+
     // Send a DELETE request to delete the product
     const response = await fetch(`${API_URL}/api/products/${productId}`, {
       method: 'DELETE',
@@ -126,6 +135,13 @@ function AdminProductDetailsPage() {
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
       <PopUpDialog isOpen={isPopUpOpen} onClose={handleClosePopUp} title={popUpTitle} message={popUpMessage} />
+      <PopUpDialog
+        isOpen={isDeletePopUpOpen}
+        onClose={() => setIsDeletePopUpOpen(false)}
+        onConfirm={handleDelete}
+        title="Delete Product"
+        message="Are you sure you want to delete this product?"
+      />
       <section className="mx-auto max-w-4xl md:max-w-5xl lg:max-w-6xl">
         <Link to={`/products/${categoryName}`} className="mb-6 inline-block text-xs uppercase tracking-widest transition duration-300 hover:text-ap-beige md:mb-8 md:text-sm lg:mb-10">
           Back To Products
@@ -216,7 +232,7 @@ function AdminProductDetailsPage() {
             </button>
             <button
               type="button"
-              onClick={handleDelete}
+              onClick={handleDeleteClick}
               className="cursor-pointer rounded-md border border-ap-brown px-5 py-3 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
             >
               Delete

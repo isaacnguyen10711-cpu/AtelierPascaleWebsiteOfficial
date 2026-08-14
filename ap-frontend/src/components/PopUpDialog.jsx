@@ -1,4 +1,5 @@
-function PopUpDialog({ isOpen, title = 'Message', message, onClose }) {
+// Passing onConfirm changes this from a normal OK popup into a Cancel/Confirm popup.
+function PopUpDialog({ isOpen, title = 'Message', message, onClose, onConfirm }) {
   if (!isOpen) {
     return null
   }
@@ -18,13 +19,26 @@ function PopUpDialog({ isOpen, title = 'Message', message, onClose }) {
           {message}
         </p>
 
-        <button
-          type="button"
-          onClick={onClose}
-          className="mt-6 w-full cursor-pointer rounded border border-ap-brown bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-pale hover:text-ap-brown active:translate-y-0 md:mt-7 md:px-6 md:text-sm lg:mt-8 lg:px-7 lg:py-4"
-        >
-          OK
-        </button>
+        {/* If onConfirm is provided, show Cancel and Confirm buttons. Otherwise, show a single OK button. */}
+        <div className={`mt-6 grid gap-3 md:mt-7 lg:mt-8 ${onConfirm ? 'grid-cols-2' : 'grid-cols-1'}`}>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full cursor-pointer rounded border border-ap-brown bg-ap-brown px-5 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-pale hover:text-ap-brown active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
+          >
+            {onConfirm ? 'Cancel' : 'OK'}
+          </button>
+
+          {onConfirm ? (
+            <button
+              type="button"
+              onClick={onConfirm}
+              className="w-full cursor-pointer rounded border border-ap-brown px-5 py-3 text-xs uppercase tracking-widest transition duration-300 hover:-translate-y-1 hover:bg-ap-brown hover:text-ap-tan active:translate-y-0 md:px-6 md:text-sm lg:px-7 lg:py-4"
+            >
+              Confirm
+            </button>
+          ) : null}
+        </div>
       </div>
     </div>
   )
