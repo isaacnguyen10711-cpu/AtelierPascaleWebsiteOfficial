@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import HandleExpiredCookies from '../components/HandleExpiredCookies'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -16,6 +17,10 @@ function OrderConfirmationPage() {
           'Content-Type': 'application/json',
         },
       })
+
+      if (HandleExpiredCookies(response)) {
+        return
+      }
 
       if (!response.ok) {
         setOrder(null)

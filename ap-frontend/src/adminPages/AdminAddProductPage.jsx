@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"; 
 import PopUpDialog from "../components/PopUpDialog";
+import HandleExpiredCookies from "../components/HandleExpiredCookies";
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -39,6 +40,10 @@ function AdminAddProductPage() {
       },
       body: JSON.stringify(newProduct),
     });
+
+    if (HandleExpiredCookies(response)) {
+      return;
+    }
 
     if (!response.ok) {
       setPopUpTitle("Error");

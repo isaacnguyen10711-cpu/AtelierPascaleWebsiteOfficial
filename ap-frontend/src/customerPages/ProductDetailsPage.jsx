@@ -2,6 +2,8 @@
 import { Link, useParams } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 
+import HandleExpiredCookies from '../components/HandleExpiredCookies'
+
 const API_URL = import.meta.env.VITE_API_URL
 
 function ProductDetailsPage() {
@@ -48,14 +50,13 @@ function ProductDetailsPage() {
       body: JSON.stringify({ productId: product.id }),
     })
 
+    if (HandleExpiredCookies(response)) {
+      return
+    }
+
     if (response.ok) {
       setPopUpTitle("Success")
       setPopUpMessage("Product added to cart successfully!")
-      setIsPopUpOpen(true)
-    }
-    else if (response.status === 401) {
-      setPopUpTitle("Login Required")
-      setPopUpMessage("Please log in first to add this item to your cart")
       setIsPopUpOpen(true)
     }
     else {

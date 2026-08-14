@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Trash2, Plus, Minus } from 'lucide-react'
+import HandleExpiredCookies from '../components/HandleExpiredCookies'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -15,6 +16,11 @@ function ShoppingCartPage() {
           'Content-Type': 'application/json'
         }
       })
+
+      if (HandleExpiredCookies(response)) {
+        return
+      }
+
       const data = await response.json()
       setCartItems(data)
     }
@@ -31,6 +37,10 @@ function ShoppingCartPage() {
       },
       body: JSON.stringify({ quantity: newQuantity })
     })
+
+    if (HandleExpiredCookies(response)) {
+      return
+    }
 
     if (response.ok) {
       if (newQuantity <= 0) {
@@ -51,6 +61,10 @@ function ShoppingCartPage() {
         'Content-Type': 'application/json'
       }
     })
+
+    if (HandleExpiredCookies(response)) {
+      return
+    }
 
     if (response.ok) {
       setCartItems(cartItems.filter((item) => item.id !== itemId))

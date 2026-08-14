@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import PopUpDialog from '../components/PopUpDialog'
+import HandleExpiredCookies from '../components/HandleExpiredCookies'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -20,7 +21,13 @@ function AdminEditProductImagesPage() {
   }, [])
 
   async function loadProductImages() {
-    const response = await fetch(`${API_URL}/api/ProductImages`)
+    const response = await fetch(`${API_URL}/api/ProductImages`, {
+      credentials: 'include',
+    })
+
+    if (HandleExpiredCookies(response)) {
+      return
+    }
 
     if (!response.ok) {
       setPopUpTitle('Error')
@@ -56,6 +63,10 @@ function AdminEditProductImagesPage() {
       },
       body: JSON.stringify(newProductImage),
     })
+
+    if (HandleExpiredCookies(response)) {
+      return
+    }
 
     if (!response.ok) {
       setPopUpTitle('Error')
@@ -97,6 +108,10 @@ function AdminEditProductImagesPage() {
       body: JSON.stringify(updatedImage),
     })
 
+    if (HandleExpiredCookies(response)) {
+      return
+    }
+
     if (!response.ok) {
       setPopUpTitle('Error')
       setPopUpMessage('Failed to update product image')
@@ -133,6 +148,10 @@ function AdminEditProductImagesPage() {
       method: 'DELETE',
       credentials: 'include',
     })
+
+    if (HandleExpiredCookies(response)) {
+      return
+    }
 
     if (!response.ok) {
       setPopUpTitle('Error')

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
+import HandleExpiredCookies from '../components/HandleExpiredCookies'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -78,6 +79,10 @@ function AdminProductDetailsPage() {
       body: JSON.stringify(updatedProduct),
     })
 
+    if (HandleExpiredCookies(response)) {
+      return
+    }
+
     if (!response.ok) {
       setPopUpTitle('Error')
       setPopUpMessage('Failed to save product')
@@ -102,6 +107,10 @@ function AdminProductDetailsPage() {
       method: 'DELETE',
       credentials: 'include',
     })
+
+    if (HandleExpiredCookies(response)) {
+      return
+    }
 
     if (!response.ok) {
       setPopUpTitle('Error')

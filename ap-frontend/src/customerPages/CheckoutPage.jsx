@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import PopUpDialog from '../components/PopUpDialog'
+import HandleExpiredCookies from '../components/HandleExpiredCookies'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -28,6 +29,11 @@ function CheckoutPage() {
           'Content-Type': 'application/json'
         }
       })
+
+      if (HandleExpiredCookies(response)) {
+        return
+      }
+
       const data = await response.json()
       setCartItems(data)
     }
@@ -54,6 +60,10 @@ function CheckoutPage() {
         postalCode: postcode
       }),
     });
+
+    if (HandleExpiredCookies(response)) {
+      return;
+    }
 
     if (!response.ok) {
       setPopUpTitle('Error')
