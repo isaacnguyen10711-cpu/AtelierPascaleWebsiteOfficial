@@ -8,16 +8,15 @@
       "applicationUrl": "https://localhost:7215;",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-
-      "http": {
-        "commandName": "Project",
-        "dotnetRunMessages": true,
-        "launchBrowser": false,
-        "applicationUrl": "http://localhost:5107",
-        "environmentVariables": {
-          "ASPNETCORE_ENVIRONMENT": "Development"
-        }
+      }
+    },
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5107",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

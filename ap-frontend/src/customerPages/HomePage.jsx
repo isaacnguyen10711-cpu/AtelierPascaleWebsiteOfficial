@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 
 const newArrivalImages = [
   'https://atelierpascaleimages.blob.core.windows.net/product-images/Home Decor/Pic 9.jpg',
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Gifts/Pic 14.jpg',
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Gifts/Pic 19.jpg'
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Gifts/Pic 11.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Gifts/Pic 16.jpg'
 ];
 
 const homeDecorImages = [
