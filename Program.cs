@@ -18,7 +18,8 @@ builder.Services.AddCors(options =>
         builder.WithOrigins(
             "http://localhost:5173",
             "https://atelierpascaleboutique.com",
-            "https://www.atelierpascaleboutique.com"
+            "https://www.atelierpascaleboutique.com",
+            "https://atelier-pascale-website-official.vercel.app"
             )
                .AllowAnyMethod()
                .AllowAnyHeader()
