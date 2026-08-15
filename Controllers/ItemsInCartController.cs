@@ -29,6 +29,7 @@ public class ItemsInCartController : ControllerBase
                 Id = p.Id,
                 ProductId = p.Product!.Id,
                 ProductName = p.Product!.Name,
+                CategoryName = p.Product.Category.Name,
                 Price = p.Product.Price,
                 Quantity = p.Quantity,
                 ProductImageUrl = p.Product.Images
@@ -70,7 +71,10 @@ public class ItemsInCartController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ItemsInCartResponseDTO>> PostItemsInCart(ItemsInCartCreateRequestDTO itemsincart)
     {
-        var product = await _context.Products.FindAsync(itemsincart.ProductId);
+        var product = await _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.Images)
+            .FirstOrDefaultAsync(p => p.Id == itemsincart.ProductId);
         if (product == null)
         {
             return NotFound("Product not found.");
@@ -98,6 +102,7 @@ public class ItemsInCartController : ControllerBase
                 Id = existingItem.Id,
                 ProductId = product.Id,
                 ProductName = product.Name,
+                CategoryName = product.Category.Name,
                 Price = product.Price,
                 Quantity = existingItem.Quantity,
                 ProductImageUrl = product.Images
@@ -122,6 +127,7 @@ public class ItemsInCartController : ControllerBase
             Id = newItem.Id,
             ProductId = product.Id,
             ProductName = product.Name,
+            CategoryName = product.Category.Name,
             Price = product.Price,
             Quantity = newItem.Quantity,
             ProductImageUrl = product.Images

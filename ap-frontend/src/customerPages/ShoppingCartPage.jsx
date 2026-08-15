@@ -73,6 +73,10 @@ function ShoppingCartPage() {
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
+  function formatCategoryUrl(categoryName) {
+    return categoryName.toLowerCase().replaceAll(' ', '-')
+  }
+
   return (
     <main className="min-h-screen bg-ap-tan px-6 py-22 text-ap-brown md:px-10 md:py-24 lg:px-16 lg:py-28">
       <section className="mx-auto max-w-6xl">
@@ -95,19 +99,21 @@ function ShoppingCartPage() {
           <section className="space-y-5 md:space-y-6">
             {cartItems.map((item) => (
               <div key={item.id} className="grid grid-cols-[2fr_3fr] gap-4 border-b border-ap-brown pb-5 transition duration-300 hover:translate-x-1 md:grid-cols-[1fr_2fr] md:gap-5 lg:grid-cols-[1fr_3fr] lg:pb-6">
-                <div className="overflow-hidden rounded">
+                <Link to={`/products/${formatCategoryUrl(item.categoryName)}/${item.productId}`} className="block overflow-hidden rounded">
                   <img
                     src={item.productImageUrl}
                     alt={item.productName}
                     className="aspect-square w-full object-cover object-center transition duration-300 hover:scale-105"
                   />
-                </div>
+                </Link>
 
                 <div className="flex flex-col justify-between gap-4 md:flex-row md:gap-5 lg:gap-6">
                   <div>
-                    <h2 className="font-['Tangerine'] text-4xl font-bold md:text-4xl lg:text-5xl">
-                      {item.productName}
-                    </h2>
+                    <Link to={`/products/${formatCategoryUrl(item.categoryName)}/${item.productId}`} className="block">
+                      <h2 className="font-['Tangerine'] text-4xl font-bold transition duration-300 hover:text-ap-beige md:text-4xl lg:text-5xl">
+                        {item.productName}
+                      </h2>
+                    </Link>
                     <p className="mt-2 text-xs uppercase tracking-widest md:text-sm">
                       Quantity: {item.quantity}
                     </p>
