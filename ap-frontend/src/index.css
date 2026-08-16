@@ -56,7 +56,7 @@ body {
 .bg-jewelry {
     width: 100%;
     height: 100vh;
-    background-image: url("https://atelierpascaleimages.blob.core.windows.net/product-images/Background/Jewelrybg.jpg");
+    background-image: url("https://atelierpascaleimages.blob.core.windows.net/product-images/Background/JewelryBackground.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center 70%;
@@ -66,7 +66,7 @@ body {
 .bg-art {
     width: 100%;
     height: 100vh;
-    background-image: url("https://atelierpascaleimages.blob.core.windows.net/product-images/Background/ArtBackground.jpg");
+    background-image: url("https://atelierpascaleimages.blob.core.windows.net/product-images/Background/ArtBackground2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center 50%;
