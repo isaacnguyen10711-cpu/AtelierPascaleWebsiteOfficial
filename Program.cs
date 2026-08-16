@@ -74,12 +74,14 @@ builder.Services.AddScoped<EmailSender>();
 
 builder.Services.AddRateLimiter(options =>
 {
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
     options.AddFixedWindowLimiter("Fixed", option =>
     {
-        option.PermitLimit = 5;
-        option.Window = TimeSpan.FromSeconds(10);
+        option.PermitLimit = 3;
+        option.Window = TimeSpan.FromSeconds(20);
         option.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        option.QueueLimit = 3;
+        option.QueueLimit = 1;
     });
 });
 
