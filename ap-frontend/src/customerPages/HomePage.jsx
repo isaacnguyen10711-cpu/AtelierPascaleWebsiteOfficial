@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 
 const newArrivalImages = [
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Home Decor/Pic 9.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Home Decor/Pic 11.jpg',
   'https://atelierpascaleimages.blob.core.windows.net/product-images/Gifts/Pic 11.jpg',
   'https://atelierpascaleimages.blob.core.windows.net/product-images/Gifts/Pic 16.jpg'
 ];
@@ -34,7 +34,7 @@ const jewelryImages = [
 const artImages = [
   'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 1.jpg',
   'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 2.jpg',
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 3.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 3 (2).jpg',
   'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 4.jpg'
 ]
 

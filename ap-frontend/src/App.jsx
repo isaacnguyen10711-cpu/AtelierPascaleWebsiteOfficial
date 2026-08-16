@@ -22,6 +22,7 @@ function App() {
   const [role, setRole] = useState(null)
   const [isRoleLoading, setIsRoleLoading] = useState(true)
 
+  // Fetch the user role when the component mounts so that we can conditionally render routes based on the user's role.
   useEffect(() => {
     async function fetchUserRole() {
       const userRole = await GetUserRole()
