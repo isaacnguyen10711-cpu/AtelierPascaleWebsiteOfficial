@@ -66,10 +66,11 @@ function OrderConfirmationPage() {
           </p>
         )}
 
-        <div className="mx-auto mt-8 max-w-xl border-y border-ap-brown py-6 text-left md:mt-10 lg:mt-12">
-          <p className="text-xs uppercase tracking-[0.3em] md:text-sm">
-            Order Receipt
-          </p>
+        {order && (
+          <div className="mx-auto mt-8 max-w-xl border-y border-ap-brown py-6 text-left md:mt-10 lg:mt-12">
+            <p className="text-xs uppercase tracking-[0.3em] md:text-sm">
+              Order Receipt
+            </p>
 
           <div className="mt-6 space-y-5 text-sm md:text-base lg:text-lg">
             <div className="flex items-start justify-between gap-6 border-b border-ap-brown pb-4">
@@ -93,8 +94,8 @@ function OrderConfirmationPage() {
               </p>
             </div>
           </div>
-
         </div>
+        )}
 
         <div className="mt-8 flex flex-col justify-center gap-3 md:mt-10 md:flex-row lg:mt-12">
           <Link to="/" className="cursor-pointer rounded bg-ap-brown px-6 py-3 text-xs uppercase tracking-widest text-ap-tan transition duration-300 hover:-translate-y-1 hover:bg-ap-beige hover:text-white active:translate-y-0 md:px-8 md:text-sm lg:px-9 lg:py-4">

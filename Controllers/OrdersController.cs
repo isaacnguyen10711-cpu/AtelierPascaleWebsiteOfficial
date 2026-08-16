@@ -74,8 +74,10 @@ public class OrdersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<OrderResponseDTO>> PostOrder(OrderCreateRequestDTO order)
     {
-        // Get the user's shopping cart to calculate the total price of the order
-        var shoppingCart = await _context.ShoppingCarts
+        try
+        {
+            // Get the user's shopping cart to calculate the total price of the order
+            var shoppingCart = await _context.ShoppingCarts
             .Include(sc => sc.ItemsInCarts)
             .ThenInclude(iic => iic.Product)
             .FirstOrDefaultAsync(sc => sc.UserId == GetCurrentUserId());
@@ -117,7 +119,9 @@ public class OrdersController : ControllerBase
                 PriceAtPurchase = item.Product!.Price
             };
             _context.ItemsInOrders.Add(itemInOrder);
-        }
+        } 
+        await _context.SaveChangesAsync();
+
         // Remove items from the shopping cart after creating the order
         _context.ItemsInCarts.RemoveRange(shoppingCart.ItemsInCarts);
         await _context.SaveChangesAsync();
@@ -142,6 +146,18 @@ public class OrdersController : ControllerBase
             OrderId = confirmedOrder.Id,
             OrderDate = confirmedOrder.OrderDate
         });
+    }
+        catch (Exception ex)
+        {
+            Console.WriteLine("ERROR CREATING ORDER:");
+            Console.WriteLine(ex);
+
+            return StatusCode(500, new
+            {
+                message = "Failed to create order",
+                error = ex.Message
+            });
+        }
     }
 
     private int GetCurrentUserId()
