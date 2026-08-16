@@ -1,3 +1,5 @@
+import { motion } from 'motion/react'
+
 // Passing onConfirm changes this from a normal OK popup into a Cancel/Confirm popup.
 function PopUpDialog({ isOpen, title = 'Message', message, onClose, onConfirm }) {
   if (!isOpen) {
@@ -6,7 +8,12 @@ function PopUpDialog({ isOpen, title = 'Message', message, onClose, onConfirm })
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40">
-      <div className="w-full max-w-sm rounded border border-ap-brown bg-ap-pale p-5 text-center text-ap-brown shadow-2xl transition duration-300 md:max-w-md md:p-6 lg:max-w-lg lg:p-7">
+      <motion.div
+        initial={{ opacity: 0, filter: 'blur(6px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="w-full max-w-sm rounded border border-ap-brown bg-ap-pale p-5 text-center text-ap-brown shadow-2xl transition duration-300 md:max-w-md md:p-6 lg:max-w-lg lg:p-7"
+      >
         <p className="text-xs uppercase tracking-[0.3em] md:text-sm">
           Atelier Pascale
         </p>
@@ -39,7 +46,7 @@ function PopUpDialog({ isOpen, title = 'Message', message, onClose, onConfirm })
             </button>
           ) : null}
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }
