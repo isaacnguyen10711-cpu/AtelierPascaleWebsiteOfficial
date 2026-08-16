@@ -46,13 +46,17 @@ function HomePage() {
 
         {/* Stack 2 h1 in flex-col and push them to the end */}
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
+          <Reveal>
           <h1 className="pr-15 font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
             Atelier
-          </h1>
+            </h1>
+          </Reveal>
 
+          <Reveal delay={0.3}>
           <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:mt-[0.2rem] md:text-[5rem] lg:mt-[0.5rem] lg:text-[7rem]">
             Pascale
-          </h1>
+            </h1>
+          </Reveal>
         </div>
       </section>
 
