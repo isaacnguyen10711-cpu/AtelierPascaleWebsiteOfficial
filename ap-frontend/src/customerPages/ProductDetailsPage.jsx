@@ -52,6 +52,9 @@ function ProductDetailsPage() {
     })
 
     if (HandleExpiredCookies(response)) {
+      setPopUpTitle("Session Expired")
+      setPopUpMessage("Your session has expired. Please log in again.")
+      setIsPopUpOpen(true)
       return
     }
 

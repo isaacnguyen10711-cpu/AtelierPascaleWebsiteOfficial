@@ -46,7 +46,8 @@ function ShoppingCartPage() {
     if (response.ok) {
       if (newQuantity <= 0) {
         handleRemoveItem(itemId)
-      } else {
+      }
+      else {
         setCartItems(cartItems.map((item) => (
           item.id === itemId ? { ...item, quantity: newQuantity } : item
         )))
