@@ -76,7 +76,7 @@ function ProductPage() {
             {categoryTitle}
             </h1>
           </Reveal>
-          <Reveal delay={0.3} key={`${categoryName}-description`}>
+          <Reveal delay={0.4} key={`${categoryName}-description`}>
           <p className="mt-4 max-w-xs pr-0 text-right text-sm font-light leading-7 transition duration-300 hover:translate-x-2 md:max-w-xl md:pr-30 md:text-base md:leading-8 lg:max-w-2xl lg:pr-50 lg:text-lg lg:leading-9">
             {categoryDescription}
             </p>

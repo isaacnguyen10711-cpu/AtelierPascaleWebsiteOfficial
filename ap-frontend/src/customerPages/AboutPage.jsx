@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal.jsx'
 
 const companyImages = [
   'https://atelierpascaleimages.blob.core.windows.net/product-images/About/Pic 2.jpg',
@@ -13,17 +14,22 @@ function AboutPage() {
         <div className="absolute inset-0 bg-about" />
         <div className="absolute top-50 left-0 right-0 flex items-center justify-end pr-10 text-right text-white md:pr-20 lg:pr-30">
           <div className="max-w-xs md:max-w-lg lg:max-w-2xl">
+            <Reveal key="about-title">
             <p className="mb-4 text-xs uppercase tracking-[0.3em] md:text-sm lg:text-base">
               Atelier Pascale
-            </p>
+              </p>
+            </Reveal>
+            <Reveal delay={0.5} key="about-description">
             <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:text-[6rem] lg:text-[8rem]">
               About Us
-            </h1>
+              </h1>
+            </Reveal>
           </div>
         </div>
       </section>
 
       <main className="bg-ap-tan px-6 py-16 text-ap-brown md:px-12 md:py-20 lg:px-20 lg:py-24">
+        <Reveal key="about-intro">
         <section className="mx-auto grid max-w-6xl gap-10 border-b border-ap-brown pb-14 md:grid-cols-[1fr_1.4fr] md:gap-14 md:pb-16 lg:gap-20 lg:pb-20">
           <h2 className="font-['Tangerine'] text-[3rem] font-light leading-none md:text-[4rem] lg:text-[5rem]">
             Made to feel collected, not crowded.
@@ -36,8 +42,10 @@ function AboutPage() {
               Every product is selected with attention to texture, proportion, and mood, so each piece can sit naturally inside a home while still feeling special.
             </p>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
+        <Reveal key="about-team">
         <section className="mx-auto max-w-6xl py-14 md:py-16 lg:py-20">
           <div className="mb-8 grid gap-6 md:grid-cols-[1fr_1.4fr] md:gap-10 lg:mb-10 lg:gap-14">
             <h2 className="text-2xl font-light md:text-3xl lg:text-4xl">
@@ -59,14 +67,18 @@ function AboutPage() {
               ) 
             )}
           </div>
-        </section>
+          </section>
+        </Reveal>
 
+        <Reveal key="about-quote">
         <section className="mx-auto max-w-6xl border-y border-ap-brown py-12 text-center md:py-14 lg:py-16">
           <p className="mx-auto max-w-3xl font-['Tangerine'] text-[2.8rem] font-light leading-none md:text-[4rem] lg:text-[5rem]">
             A home should hold the things you love slowly.
           </p>
-        </section>
+          </section>
+        </Reveal>
 
+        <Reveal key="about-explore">
         <section className="mx-auto grid max-w-6xl gap-8 pt-14 md:grid-cols-[1.2fr_1fr] md:gap-12 md:pt-16 lg:gap-16 lg:pt-20">
           <div>
             <h2 className="mb-5 text-2xl font-light md:text-3xl lg:text-4xl">
@@ -84,7 +96,8 @@ function AboutPage() {
               View Art
             </Link>
           </div>
-        </section>
+          </section>
+        </Reveal>
       </main>
     </>
   )

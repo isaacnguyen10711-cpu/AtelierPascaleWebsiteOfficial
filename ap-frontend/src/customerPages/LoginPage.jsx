@@ -2,6 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import PopUpDialog from '../components/PopUpDialog';
+import Reveal from '../components/Reveal';
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -44,6 +45,7 @@ function LoginPage() {
   }
 
   return (
+    <Reveal key="login-form" duration={0.7}>
     <main className="flex min-h-screen items-center justify-center bg-ap-tan px-6 py-28 text-ap-brown md:px-12 lg:px-20">
       <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
       <section className="w-full max-w-sm rounded border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:max-w-md md:p-7 lg:max-w-lg lg:p-8">
@@ -89,8 +91,9 @@ function LoginPage() {
             </button>
           </div>
         </form>
-      </section>
-    </main>
+        </section>
+      </main>
+    </Reveal>
   );
 }
 

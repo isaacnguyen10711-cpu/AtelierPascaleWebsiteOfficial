@@ -52,7 +52,7 @@ function HomePage() {
             </h1>
           </Reveal>
 
-          <Reveal delay={0.3}>
+          <Reveal delay={0.4}>
           <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:mt-[0.2rem] md:text-[5rem] lg:mt-[0.5rem] lg:text-[7rem]">
             Pascale
             </h1>

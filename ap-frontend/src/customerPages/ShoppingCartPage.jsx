@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Trash2, Plus, Minus } from 'lucide-react'
 import HandleExpiredCookies from '../components/HandleExpiredCookies'
+import Reveal from '../components/Reveal'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -96,6 +97,7 @@ function ShoppingCartPage() {
         </div>
 
         <div className="grid gap-7 pt-7 md:grid-cols-[5fr_2fr] md:gap-8 md:pt-9 lg:gap-10 lg:pt-10">
+          <Reveal key="cart-items">
           <section className="space-y-5 md:space-y-6">
             {cartItems.map((item) => (
               <div key={item.id} className="grid grid-cols-[2fr_3fr] gap-4 border-b border-ap-brown pb-5 transition duration-300 hover:translate-x-1 md:grid-cols-[1fr_2fr] md:gap-5 lg:grid-cols-[1fr_3fr] lg:pb-6">
@@ -137,8 +139,10 @@ function ShoppingCartPage() {
                 </div>
               </div>
             ))}
-          </section>
+            </section>
+          </Reveal>
 
+          <Reveal key="order-summary" delay={0.3}>
           <section className="h-fit rounded border border-ap-brown bg-ap-pale p-4 transition duration-300 hover:shadow-lg md:sticky md:top-24 md:p-5 lg:top-28 lg:p-6">
             <h2 className="text-xs uppercase tracking-widest md:text-sm">
               Order Summary
@@ -168,6 +172,7 @@ function ShoppingCartPage() {
               </button>
             </Link>
           </section>
+        </Reveal>
         </div>
       </section>
     </main>
