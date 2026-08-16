@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Models.DTOs;
 using AtelierPascaleWebsite.Data;
+using Microsoft.AspNetCore.RateLimiting;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -51,6 +52,7 @@ public class ProductImagesController : ControllerBase
     // PUT: api/ProductImage/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
+    [EnableRateLimiting("Fixed")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutProductImage(int? id, ProductImageDTO productimage)
     {
@@ -91,6 +93,7 @@ public class ProductImagesController : ControllerBase
     // POST: api/ProductImage
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
+    [EnableRateLimiting("Fixed")]
     [HttpPost]
     public async Task<ActionResult<ProductImageDTO>> PostProductImage(ProductImageDTO productimage)
     {
@@ -115,6 +118,7 @@ public class ProductImagesController : ControllerBase
 
     // DELETE: api/ProductImage/5
     [Authorize(Roles = "Admin")]
+    [EnableRateLimiting("Fixed")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProductImage(int? id)
     {

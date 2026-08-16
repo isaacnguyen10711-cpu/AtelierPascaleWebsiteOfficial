@@ -3,6 +3,8 @@ using AtelierPascaleWebsite.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using AtelierPascaleWebsite.Services;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.RateLimiting;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,13 +72,26 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<EmailSender>();
 
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("Fixed", option =>
+    {
+        option.PermitLimit = 5;
+        option.Window = TimeSpan.FromSeconds(10);
+        option.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        option.QueueLimit = 3;
+    });
+});
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseCors();
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseRateLimiter();
+
 
 app.MapControllers();
 

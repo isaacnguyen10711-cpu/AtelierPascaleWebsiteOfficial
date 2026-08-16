@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using AtelierPascaleWebsite.Models.DTOs;
+using Microsoft.AspNetCore.RateLimiting;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -42,6 +43,7 @@ public class ItemsInCartController : ControllerBase
     }
 
     // PUT: api/ItemsInCart/5
+    [EnableRateLimiting("Fixed")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutItemsInCart(int id, ItemsInCartUpdateRequestDTO itemsincart)
     {
@@ -68,6 +70,7 @@ public class ItemsInCartController : ControllerBase
 
     // POST: api/ItemsInCart
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [EnableRateLimiting("Fixed")]
     [HttpPost]
     public async Task<ActionResult<ItemsInCartResponseDTO>> PostItemsInCart(ItemsInCartCreateRequestDTO itemsincart)
     {
@@ -137,6 +140,7 @@ public class ItemsInCartController : ControllerBase
     }
 
     // DELETE: api/ItemsInCart/5
+    [EnableRateLimiting("Fixed")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteItemsInCart(int? id)
     {

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
+using Microsoft.AspNetCore.RateLimiting;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -41,6 +42,7 @@ public class UsersController : ControllerBase
 
     // PUT: api/User/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [EnableRateLimiting("Fixed")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutUser(int? id, User user)
     {
@@ -72,6 +74,7 @@ public class UsersController : ControllerBase
 
     // POST: api/User
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [EnableRateLimiting("Fixed")]
     [HttpPost]
     public async Task<ActionResult<User>> PostUser(User user)
     {
@@ -82,6 +85,7 @@ public class UsersController : ControllerBase
     }
 
     // DELETE: api/User/5
+    [EnableRateLimiting("Fixed")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int? id)
     {

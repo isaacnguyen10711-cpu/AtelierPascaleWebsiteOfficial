@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using AtelierPascaleWebsite.Services;
+using Microsoft.AspNetCore.RateLimiting;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -69,6 +70,7 @@ public class OrdersController : ControllerBase
 
     // POST: api/Order
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [EnableRateLimiting("Fixed")]
     [HttpPost]
     public async Task<ActionResult<OrderResponseDTO>> PostOrder(OrderCreateRequestDTO order)
     {

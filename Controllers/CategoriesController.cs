@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using AtelierPascaleWebsite.Models;
 using AtelierPascaleWebsite.Data;
+using Microsoft.AspNetCore.RateLimiting;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -38,6 +39,7 @@ public class CategoriesController : ControllerBase
     // PUT: api/Category/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
+    [EnableRateLimiting("Fixed")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutCategory(int? id, Category category)
     {
@@ -70,6 +72,7 @@ public class CategoriesController : ControllerBase
     // POST: api/Category
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [Authorize(Roles = "Admin")]
+    [EnableRateLimiting("Fixed")]
     [HttpPost]
     public async Task<ActionResult<Category>> PostCategory(Category category)
     {
@@ -81,6 +84,7 @@ public class CategoriesController : ControllerBase
 
     // DELETE: api/Category/5
     [Authorize(Roles = "Admin")]
+    [EnableRateLimiting("Fixed")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCategory(int? id)
     {

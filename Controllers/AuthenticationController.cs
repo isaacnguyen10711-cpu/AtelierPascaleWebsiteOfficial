@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using AtelierPascaleWebsite.Models.DTOs;
+using Microsoft.AspNetCore.RateLimiting;
 
 
 namespace AtelierPascaleWebsite.Controllers
@@ -27,6 +28,7 @@ namespace AtelierPascaleWebsite.Controllers
         }
 
         [AllowAnonymous]
+        [EnableRateLimiting("Fixed")]
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
         {
@@ -94,6 +96,7 @@ namespace AtelierPascaleWebsite.Controllers
         }
 
         [AllowAnonymous]
+        [EnableRateLimiting("Fixed")]
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] RegisterRequest request)
         {
