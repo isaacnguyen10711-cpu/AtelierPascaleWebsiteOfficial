@@ -120,7 +120,7 @@ function ProductDetailsPage() {
 
         {/* Make the details section stick to the top when scrolling for multiple images and scrollable when 
           texts go over the component height by using overflow */}
-        <div className="px-6 py-12 md:sticky md:top-0 md:h-screen md:overflow-y-auto md:px-12 md:pb-24 md:pt-28 lg:px-18">
+        <div className="px-6 md:sticky md:top-20 md:h-screen md:overflow-y-auto md:px-12 md:py-12 lg:px-18">
           <p className="text-sm uppercase tracking-widest">{productCode}</p>
 
           <h1 className="mt-4 font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">

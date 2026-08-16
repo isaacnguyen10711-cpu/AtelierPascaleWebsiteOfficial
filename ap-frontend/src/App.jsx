@@ -20,14 +20,24 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [role, setRole] = useState(null)
+  const [isRoleLoading, setIsRoleLoading] = useState(true)
 
   useEffect(() => {
     async function fetchUserRole() {
       const userRole = await GetUserRole()
       setRole(userRole)
+      setIsRoleLoading(false)
     }
     fetchUserRole()
   }, [])
+
+  if (isRoleLoading) {
+    return (
+      <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">
+        Loading...
+      </main>
+    )
+  }
 
   return (
     <>

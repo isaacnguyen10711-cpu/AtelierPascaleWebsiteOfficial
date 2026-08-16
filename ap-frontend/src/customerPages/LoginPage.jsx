@@ -33,8 +33,14 @@ function LoginPage() {
       return;
     }
 
-    navigate('/');
-    window.location.reload();
+    setPopUpTitle('Login successful');
+    setPopUpMessage('You will be redirected to the home page shortly.');
+    setIsPopUpOpen(true);
+
+    setTimeout(() => {
+      navigate('/');
+      window.location.reload();
+    }, 5000);
   }
 
   return (
