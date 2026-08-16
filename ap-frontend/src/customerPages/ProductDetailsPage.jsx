@@ -103,7 +103,7 @@ function ProductDetailsPage() {
 
           {/* Place images */}
           <Reveal key={`${productId}-images`}>
-            <div>
+            <div className="grid gap-4 md:gap-6">
               {images.length > 0 ? (
                 images.map((image) => (
                   <div key={image.id} className="overflow-hidden rounded">
