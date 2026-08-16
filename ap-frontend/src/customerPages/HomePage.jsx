@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/Reveal'
 
 const newArrivalImages = [
   'https://atelierpascaleimages.blob.core.windows.net/product-images/Home Decor/Pic 9.jpg',
@@ -56,6 +57,7 @@ function HomePage() {
       </section>
 
       <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
+        <Reveal>
         <section id="new-arrival" className="mx-auto max-w-5xl lg:max-w-6xl">
           <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
             New Arrival
@@ -92,7 +94,9 @@ function HomePage() {
             </Link>
           </div>
         </section>
+        </Reveal>
 
+        <Reveal>
         <section id="home-decor" className="mx-auto mt-24 grid max-w-6xl gap-8 md:mt-28 md:grid-cols-2 md:items-center md:gap-10 lg:mt-32 lg:gap-12">
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Timeless Elegance</p>
@@ -116,7 +120,9 @@ function HomePage() {
             </div>
           </div>
         </section>
+        </Reveal>
 
+        <Reveal>
         <section id="gifts" className="mx-auto mt-24 max-w-6xl md:mt-28 lg:mt-32">
           <div className="mb-8 text-center md:mb-10 lg:mb-12">
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Thoughtful Gestures</p>
@@ -149,7 +155,9 @@ function HomePage() {
             </Link>
           </div>
         </section>
+        </Reveal>
 
+        <Reveal>
         <section id="jewelry" className="mx-auto mt-24 grid max-w-6xl gap-8 md:mt-28 md:grid-cols-2 md:items-center md:gap-12 lg:mt-32 lg:gap-16">
           <div className="overflow-hidden rounded order-2 transition duration-300 hover:-translate-y-1 md:order-1">
             <img src={jewelryImages[2]} alt="Jewelry collection" className="mx-auto h-[400px] w-full object-cover object-center md:h-[340px] lg:h-[550px]" />
@@ -168,7 +176,9 @@ function HomePage() {
             </Link>
           </div>
         </section>
+        </Reveal>
 
+        <Reveal>
         <section id="art" className="mx-auto mt-24 max-w-6xl pb-10 md:mt-28 md:pb-12 lg:mt-32 lg:pb-14">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-7 lg:gap-8">
             <div className="col-span-2 m-1 md:col-span-1 md:m-2 lg:m-3">
@@ -201,6 +211,7 @@ function HomePage() {
             </div>
           </div>
         </section>
+        </Reveal>
       </main>
     </>
   )

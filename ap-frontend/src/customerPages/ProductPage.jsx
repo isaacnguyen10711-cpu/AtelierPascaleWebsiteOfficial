@@ -1,6 +1,7 @@
 ﻿import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import GetUserRole from '../components/GetUserRole.jsx';
+import Reveal from '../components/Reveal.jsx';
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -108,9 +109,10 @@ function ProductPage() {
         </div>
 
         {products.length > 0 ? (
-          <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-7 md:gap-8 lg:gap-10 ${productLayout.gridColumns}`}>
+          <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-4 md:gap-6 lg:gap-8 ${productLayout.gridColumns}`}>
             {products.map((product) => (
-              <div key={product.id} className="group transition duration-300 hover:-translate-y-1">
+              <Reveal key={product.id}>
+              <div className="group transition duration-300 hover:-translate-y-1">
                 <Link to={`/products/${categoryName}/${product.id}`} className="block">
 
                   <div className="overflow-hidden rounded">
@@ -142,6 +144,7 @@ function ProductPage() {
                   </p>
                 </Link>
               </div>
+              </Reveal>
             ))}
           </div>
         ) : (
