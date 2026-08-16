@@ -1,6 +1,7 @@
 ﻿import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
+import Reveal from '../components/Reveal'
 
 import HandleExpiredCookies from '../components/HandleExpiredCookies'
 
@@ -94,33 +95,38 @@ function ProductDetailsPage() {
       <PopUpDialog isOpen={isPopUpOpen} onClose={() => setIsPopUpOpen(false)} title={popUpTitle} message={popUpMessage} />
       <section className="grid min-h-screen md:grid-cols-[5fr_4fr] md:gap-10">
         <div className="px-6 pb-12 pt-23 md:px-5 lg:px-15">
+          <Reveal key={`${productId}-back-link`}>
           <Link to={`/products/${categoryName}`} className="mb-6 inline-block text-sm uppercase tracking-widest transition duration-200 hover:text-ap-beige">
             Back To Products
           </Link>
+          </Reveal>
 
           {/* Place images */}
-          <div>
-            {images.length > 0 ? (
-              images.map((image) => (
-                <div key={image.id} className="overflow-hidden rounded">
-                  <img
-                    src={image.imageUrl}
-                    alt={product.name}
-                    className="aspect-square w-full object-cover object-center transition duration-500 hover:scale-105"
-                  />
+          <Reveal key={`${productId}-images`}>
+            <div>
+              {images.length > 0 ? (
+                images.map((image) => (
+                  <div key={image.id} className="overflow-hidden rounded">
+                    <img
+                      src={image.imageUrl}
+                      alt={product.name}
+                      className="aspect-square w-full object-cover object-center transition duration-500 hover:scale-105"
+                    />
+                  </div>
+                ))
+              ) : (
+                <div className="flex aspect-square w-full items-center justify-center border border-ap-brown bg-ap-tan">
+                  No image available
                 </div>
-              ))
-            ) : (
-              <div className="flex aspect-square w-full items-center justify-center border border-ap-brown bg-ap-tan">
-                No image available
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          </Reveal>
         </div>
 
         {/* Make the details section stick to the top when scrolling for multiple images and scrollable when 
           texts go over the component height by using overflow */}
         <div className="px-6 md:sticky md:top-20 md:h-screen md:overflow-y-auto md:px-12 md:py-12 lg:px-18">
+          <Reveal key={`${productId}-details-main`}>
           <p className="text-sm uppercase tracking-widest">{productCode}</p>
 
           <h1 className="mt-4 font-['Tangerine'] text-5xl font-bold md:text-6xl lg:text-7xl">
@@ -139,8 +145,10 @@ function ProductDetailsPage() {
             onClick={handleAddToCart}>
             Add To Cart
           </button>
+          </Reveal>
 
           {/* Additional information section */ }
+          <Reveal key={`${productId}-details-extra`} delay={0.2}>
           <section className="mt-12 border-t border-ap-brown">
             <div className="border-b border-ap-brown py-5 transition duration-300 hover:translate-x-1">
               <h2 className="text-sm uppercase tracking-widest">Product Details</h2>
@@ -163,6 +171,7 @@ function ProductDetailsPage() {
               <p>Returns: Contact Atelier Pascale for order support.</p>
             </div>
           </section>
+          </Reveal>
         </div>
       </section>
     </main>
