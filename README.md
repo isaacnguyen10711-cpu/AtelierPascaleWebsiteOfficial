@@ -51,6 +51,7 @@ The React frontend is deployed through Vercel, while the ASP.NET Core backend is
 
 ## Future Improvements
 
+- Forgot password reset function
 - Online payment integration
 - Improved search and filtering
 - More admin functionality
