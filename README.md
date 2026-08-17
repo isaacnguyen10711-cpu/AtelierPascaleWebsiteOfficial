@@ -8,9 +8,9 @@ The project was inspired by my family's business, which traditionally relied on 
 
 [View Atelier Pascale](https://www.atelierpascaleboutique.com/)
 
-# Testing customer login account
-email: example.test@gmail.com
-password: example@123
+## Testing customer login account
+- email: example.test@gmail.com
+- password: example@123
 
 ## Features
 
