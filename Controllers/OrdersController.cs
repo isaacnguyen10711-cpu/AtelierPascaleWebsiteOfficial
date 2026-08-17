@@ -22,11 +22,16 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Order
-    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderResponseDTO>>> GetOrder()
     {
-        return await _context.Orders
+        // Get all orders for the current user
+        var orders = await _context.Orders
+            .Where(o => o.UserId == GetCurrentUserId())
+            .OrderByDescending(o => o.OrderDate)
+            .ToListAsync();
+
+        return orders
             .Select(o => new OrderResponseDTO
             {
                 OrderId = o.Id,
@@ -37,7 +42,7 @@ public class OrdersController : ControllerBase
                 TotalPrice = o.TotalPrice,
                 OrderDate = o.OrderDate
             })
-            .ToListAsync();
+            .ToList();
     }
 
     // GET: api/Order/5
