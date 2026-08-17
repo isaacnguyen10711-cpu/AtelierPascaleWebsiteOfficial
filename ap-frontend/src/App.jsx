@@ -8,7 +8,7 @@ import ProductDetailsPage from './customerPages/ProductDetailsPage.jsx'
 import ShoppingCartPage from './customerPages/ShoppingCartPage.jsx'
 import CheckoutPage from './customerPages/CheckoutPage.jsx'
 import OrderConfirmationPage from './customerPages/OrderConfirmationPage.jsx'
-import OrdersPage from './customerPages/OrdersPage.jsx'
+import MyOrdersPage from './customerPages/MyOrdersPage.jsx'
 import UnauthorizedPage from './customerPages/UnauthorizedPage.jsx'
 import AdminProductEditPage from './adminPages/AdminProductEditPage.jsx'
 import AdminAddProductPage from './adminPages/AdminAddProductPage.jsx'
@@ -54,7 +54,7 @@ function App() {
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
         <Route path="/checkout" element={role == "Customer" ? <CheckoutPage /> : <Navigate to="/unauthorized" replace />} />
         <Route path="/order-confirmation/:orderId" element={role == "Customer" ? <OrderConfirmationPage /> : <Navigate to="/unauthorized" replace />} />
-        <Route path="/orders" element={<OrdersPage /> } />
+        <Route path="/orders" element={<MyOrdersPage /> } />
         <Route path="/products/:categoryName" element={<ProductPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/products/:categoryName/:productId" element={role == "Admin" ? < AdminProductEditPage /> : <ProductDetailsPage />} />

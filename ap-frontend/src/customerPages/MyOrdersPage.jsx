@@ -6,7 +6,7 @@ import GetUserRole from '../components/GetUserRole'
 
 const API_URL = import.meta.env.VITE_API_URL
 
-function CustomerOrdersPage() {
+function MyOrdersPage() {
 
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -87,7 +87,7 @@ function CustomerOrdersPage() {
         </h1>
 
         <p className="mt-2 text-sm uppercase tracking-widest md:text-base">
-          View your previous and current orders
+          Previous and current orders
         </p>
 
         <div className="mt-6 grid gap-6 md:mt-8 lg:mt-10">
@@ -215,4 +215,4 @@ function CustomerOrdersPage() {
   )
 }
 
-export default CustomerOrdersPage
+export default MyOrdersPage
