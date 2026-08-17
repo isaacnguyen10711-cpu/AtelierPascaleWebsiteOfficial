@@ -131,7 +131,7 @@ function ProductPage() {
           </div>
 
           {products.length > 0 ? (
-            <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-4 md:gap-6 lg:gap-8 ${productLayout.gridColumns}`}>
+            <div className={`mx-auto grid max-w-6xl grid-cols-2 gap-6 lg:gap-8 ${productLayout.gridColumns}`}>
               {products.map((product) => (
                 <Reveal key={product.id} duration={1}>
                   <div className="group transition duration-300 hover:-translate-y-1">
