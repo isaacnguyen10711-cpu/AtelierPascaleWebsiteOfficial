@@ -8,6 +8,10 @@ The project was inspired by my family's business, which traditionally relied on 
 
 [View Atelier Pascale](https://www.atelierpascaleboutique.com/)
 
+## Testing customer login account
+- email: example.test@gmail.com
+- password: example@123
+
 ## Features
 
 - Browse products across different categories
@@ -47,6 +51,7 @@ The React frontend is deployed through Vercel, while the ASP.NET Core backend is
 
 ## Future Improvements
 
+- Forgot password reset function
 - Online payment integration
 - Improved search and filtering
 - More admin functionality
