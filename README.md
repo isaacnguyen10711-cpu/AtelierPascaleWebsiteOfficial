@@ -6,7 +6,7 @@ The project was inspired by my family's business, which traditionally relied on 
 
 ## Live Website
 
-[View Atelier Pascale](https://atelier-pascale-website-official.vercel.app/)
+[View Atelier Pascale](https://www.atelierpascaleboutique.com/)
 
 ## Features
 
