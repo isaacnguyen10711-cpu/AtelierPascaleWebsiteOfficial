@@ -56,10 +56,6 @@ function CustomerOrdersPage() {
 
   function handlePopUpClose() {
     setIsPopUpOpen(false)
-
-    if (popUpTitle === 'Login Required') {
-      navigate('/login')
-    }
   }
 
   if (isLoading) {
@@ -97,7 +93,7 @@ function CustomerOrdersPage() {
                 key={order.orderId}
                 className="rounded-md border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:p-6 lg:p-8"
               >
-                <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-6 lg:items-center lg:gap-6">
+                <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-4 lg:items-center lg:gap-6">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
                       Order ID

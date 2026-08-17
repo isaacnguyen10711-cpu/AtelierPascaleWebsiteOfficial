@@ -28,6 +28,8 @@ public class OrdersController : ControllerBase
         // Get all orders for the current user
         var orders = await _context.Orders
             .Where(o => o.UserId == GetCurrentUserId())
+            .Include(o => o.OrderItems)
+            .ThenInclude(oi => oi.Product)
             .OrderByDescending(o => o.OrderDate)
             .ToListAsync();
 
@@ -40,7 +42,14 @@ public class OrdersController : ControllerBase
                 LastName = o.LastName,
                 Status = o.Status,
                 TotalPrice = o.TotalPrice,
-                OrderDate = o.OrderDate
+                OrderDate = o.OrderDate,
+                OrderItems = o.OrderItems.Select(oi => new ItemsInOrderResponseDTO
+                {
+                    ProductId = oi.ProductId,
+                    OrderId = oi.OrderId,
+                    Quantity = oi.Quantity,
+                    PriceAtPurchase = oi.PriceAtPurchase
+                }).ToList()
             })
             .ToList();
     }
