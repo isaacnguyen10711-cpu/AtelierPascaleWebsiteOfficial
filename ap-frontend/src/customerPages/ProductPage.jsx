@@ -9,9 +9,11 @@ function ProductPage() {
   const [products, setProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [role, setRole] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { categoryName } = useParams();
 
+  // Fetch the user role when the component mounts so that we can conditionally render admin features based on the user's role.
   useEffect(() => {
     async function fetchUserRole() {
       const userRole = await GetUserRole()
@@ -33,6 +35,7 @@ function ProductPage() {
 
       const data = await response.json();
       setProducts(data);
+      setIsLoading(false);
     }
 
     loadProducts();
@@ -84,10 +87,16 @@ function ProductPage() {
         </div>
       </section>
 
-      <main className="bg-ap-tan px-6 py-10 text-ap-brown md:px-12 lg:px-20">
-        <div className="mx-auto mb-10 flex max-w-6xl items-center justify-between">
-          {role == "Admin" ? (
-            <div className="flex gap-3 md:gap-4 lg:gap-5">
+      {/* Use a loading state to show a loading message while products are being fetched so that users don't see an empty page with no products */}
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <p>Loading products...</p>
+        </div>
+      ) : (
+        <main className="bg-ap-tan px-6 py-10 text-ap-brown md:px-12 lg:px-20">
+          <div className="mx-auto mb-10 flex max-w-6xl items-center justify-between">
+            {role == "Admin" ? (
+              <div className="flex gap-3 md:gap-4 lg:gap-5">
               <Link to="/admin/add-product" className="cursor-pointer border border-ap-brown bg-ap-tan px-2 py-1 text-sm text-ap-brown transition duration-300 hover:bg-ap-pale md:px-5 md:py-2 md:text-base">
                 Add product
               </Link>
@@ -154,7 +163,8 @@ function ProductPage() {
         ) : (
           <p className="text-center">No products found.</p>
         )}
-      </main >
+          </main >
+      )}
     </>
   );
 }
