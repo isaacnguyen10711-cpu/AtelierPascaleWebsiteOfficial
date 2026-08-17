@@ -22,7 +22,6 @@ function CustomerOrdersPage() {
   async function loadOrders() {
     const userRole = await GetUserRole()
 
-    // Check if the user is logged in
     if (!userRole) {
       setPopUpTitle('Login Required')
       setPopUpMessage('Please log in to view your orders.')
@@ -56,6 +55,10 @@ function CustomerOrdersPage() {
 
   function handlePopUpClose() {
     setIsPopUpOpen(false)
+
+    if (popUpTitle === 'Login Required') {
+      navigate('/login')
+    }
   }
 
   if (isLoading) {
@@ -86,14 +89,15 @@ function CustomerOrdersPage() {
           View your previous and current orders
         </p>
 
-        <div className="mt-6 grid gap-5 md:mt-8 lg:mt-10 lg:gap-6">
+        <div className="mt-6 grid gap-6 md:mt-8 lg:mt-10">
           {orders.length > 0 ? (
             orders.map((order) => (
               <div
                 key={order.orderId}
-                className="rounded-md border border-ap-brown bg-ap-pale p-5 transition duration-300 hover:shadow-lg md:p-6 lg:p-8"
+                className="overflow-hidden rounded-md border border-ap-brown bg-ap-pale transition duration-300 hover:shadow-lg"
               >
-                <div className="grid gap-5 md:grid-cols-3 lg:grid-cols-4 lg:items-center lg:gap-6">
+                {/* Order information */}
+                <div className="grid gap-5 p-5 md:grid-cols-2 md:p-6 lg:grid-cols-[1fr_2.5fr_1.2fr_1fr_1fr] lg:items-center lg:gap-6 lg:p-8">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
                       Order ID
@@ -132,6 +136,58 @@ function CustomerOrdersPage() {
                     <p className="mt-2 text-sm font-medium md:text-base lg:text-lg">
                       ${Number(order.totalPrice).toFixed(2)}
                     </p>
+                  </div>
+                </div>
+
+                {/* Items in the order */}
+                <div className="border-t border-ap-brown/30 px-5 py-5 md:px-6 lg:px-8">
+                  <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
+                    Items
+                  </p>
+
+                  <div className="mt-4 grid gap-3">
+                    {order.orderItems.length > 0 ? (
+                      order.orderItems.map((item) => (
+                        <div
+                          key={item.productId}
+                          className="grid gap-3 rounded-md border border-ap-brown/30 bg-white p-4 md:grid-cols-3 md:items-center"
+                        >
+                          <div>
+                            <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
+                              Product ID
+                            </p>
+
+                            <p className="mt-1 text-sm md:text-base">
+                              #{item.productId}
+                            </p>
+                          </div>
+
+                          <div>
+                            <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
+                              Quantity
+                            </p>
+
+                            <p className="mt-1 text-sm md:text-base">
+                              {item.quantity}
+                            </p>
+                          </div>
+
+                          <div>
+                            <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
+                              Price
+                            </p>
+
+                            <p className="mt-1 text-sm font-medium md:text-base">
+                              ${Number(item.priceAtPurchase).toFixed(2)}
+                            </p>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-sm uppercase tracking-widest">
+                        No items found for this order.
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

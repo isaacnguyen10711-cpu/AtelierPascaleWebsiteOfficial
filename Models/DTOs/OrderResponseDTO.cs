@@ -17,3 +17,4 @@ namespace AtelierPascaleWebsite.Models.DTOs
         public string Status { get; set; } = string.Empty;
         public ICollection<ItemsInOrderResponseDTO> OrderItems { get; set; } = new List<ItemsInOrderResponseDTO>();
     }
+}
