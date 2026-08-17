@@ -25,6 +25,39 @@ public class OrdersController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderResponseDTO>>> GetOrder()
     {
+        if (User.IsInRole("Admin"))
+        {
+            // If the user is an admin, return all orders
+            var allOrders = await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .ThenInclude(p => p.Images)
+                .OrderByDescending(o => o.OrderDate)
+                .ToListAsync();
+
+            return allOrders
+                .Select(o => new OrderResponseDTO
+                {
+                    OrderId = o.Id,
+                    Email = o.Email,
+                    FirstName = o.FirstName,
+                    LastName = o.LastName,
+                    Status = o.Status,
+                    TotalPrice = o.TotalPrice,
+                    OrderDate = o.OrderDate,
+                    OrderItems = o.OrderItems.Select(oi => new ItemsInOrderResponseDTO
+                    {
+                        ProductId = oi.ProductId,
+                        OrderId = oi.OrderId,
+                        Quantity = oi.Quantity,
+                        PriceAtPurchase = oi.PriceAtPurchase,
+                        ProductName = oi.Product!.Name,
+                        ImageUrl = oi.Product!.Images.FirstOrDefault()?.ImageUrl ?? string.Empty
+                    }).ToList()
+                })
+                .ToList();
+        }
+
         // Get all orders for the current user
         var orders = await _context.Orders
             .Where(o => o.UserId == GetCurrentUserId())
@@ -101,55 +134,55 @@ public class OrdersController : ControllerBase
             .ThenInclude(iic => iic.Product)
             .FirstOrDefaultAsync(sc => sc.UserId == GetCurrentUserId());
 
-        if (shoppingCart == null || shoppingCart.ItemsInCarts.Count == 0)
-        {
-            return BadRequest("Shopping cart is empty or does not exist.");
-        }
-
-        var totalPrice = shoppingCart.ItemsInCarts.Sum(iic => iic.Product!.Price * iic.Quantity);
-
-        // Create a new order with the provided details and the calculated total price
-        var confirmedOrder = new Order
-        {
-            UserId = GetCurrentUserId(),
-            FirstName = order.FirstName,
-            LastName = order.LastName,
-            Email = order.Email,
-            ShippingAddress = order.ShippingAddress,
-            City = order.City,
-            State = order.State,
-            PostalCode = order.PostalCode,
-            TotalPrice = totalPrice,
-            OrderDate = DateTime.UtcNow,
-            Status = "Pending"
-        };
-
-        _context.Orders.Add(confirmedOrder);
-        await _context.SaveChangesAsync();
-
-        // Add items from the shopping cart into the ItemsInOrder table directly after creating the order
-        foreach (var item in shoppingCart.ItemsInCarts)
-        {
-            var itemInOrder = new ItemInOrder
+            if (shoppingCart == null || shoppingCart.ItemsInCarts.Count == 0)
             {
-                OrderId = confirmedOrder.Id,
-                ProductId = item.ProductId,
-                Quantity = item.Quantity,
-                PriceAtPurchase = item.Product!.Price
+                return BadRequest("Shopping cart is empty or does not exist.");
+            }
+
+            var totalPrice = shoppingCart.ItemsInCarts.Sum(iic => iic.Product!.Price * iic.Quantity);
+
+            // Create a new order with the provided details and the calculated total price
+            var confirmedOrder = new Order
+            {
+                UserId = GetCurrentUserId(),
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                Email = order.Email,
+                ShippingAddress = order.ShippingAddress,
+                City = order.City,
+                State = order.State,
+                PostalCode = order.PostalCode,
+                TotalPrice = totalPrice,
+                OrderDate = DateTime.UtcNow,
+                Status = "Pending"
             };
-            _context.ItemsInOrders.Add(itemInOrder);
-        } 
-        await _context.SaveChangesAsync();
 
-        // Remove items from the shopping cart after creating the order
-        _context.ItemsInCarts.RemoveRange(shoppingCart.ItemsInCarts);
-        await _context.SaveChangesAsync();
+            _context.Orders.Add(confirmedOrder);
+            await _context.SaveChangesAsync();
 
-        // Send a confirmation email to the user
-        var receiverName = confirmedOrder.FirstName;
-        var receiverEmail = confirmedOrder.Email;
-        var subject = "Order Confirmation";
-        var body = $@"
+            // Add items from the shopping cart into the ItemsInOrder table directly after creating the order
+            foreach (var item in shoppingCart.ItemsInCarts)
+            {
+                var itemInOrder = new ItemInOrder
+                {
+                    OrderId = confirmedOrder.Id,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    PriceAtPurchase = item.Product!.Price
+                };
+                _context.ItemsInOrders.Add(itemInOrder);
+            }
+            await _context.SaveChangesAsync();
+
+            // Remove items from the shopping cart after creating the order
+            _context.ItemsInCarts.RemoveRange(shoppingCart.ItemsInCarts);
+            await _context.SaveChangesAsync();
+
+            // Send a confirmation email to the user
+            var receiverName = confirmedOrder.FirstName;
+            var receiverEmail = confirmedOrder.Email;
+            var subject = "Order Confirmation";
+            var body = $@"
             <h2>Dear {confirmedOrder.FirstName},</h2>
             <p>Thank you for your order!</p>
             <p>Your order ID is <strong>{confirmedOrder.Id}</strong>.</p>
@@ -158,14 +191,14 @@ public class OrdersController : ControllerBase
             <br />
             <p>Best regards,<br />Atelier Pascale</p>";
 
-        await _emailSender.SendEmailAsync(receiverName, receiverEmail, subject, body);
+            await _emailSender.SendEmailAsync(receiverName, receiverEmail, subject, body);
 
-        return CreatedAtAction("GetOrder", new { id = confirmedOrder.Id }, new OrderResponseDTO
-        {
-            OrderId = confirmedOrder.Id,
-            OrderDate = confirmedOrder.OrderDate
-        });
-    }
+            return CreatedAtAction("GetOrder", new { id = confirmedOrder.Id }, new OrderResponseDTO
+            {
+                OrderId = confirmedOrder.Id,
+                OrderDate = confirmedOrder.OrderDate
+            });
+        }
         catch (Exception ex)
         {
             Console.WriteLine("ERROR CREATING ORDER:");
