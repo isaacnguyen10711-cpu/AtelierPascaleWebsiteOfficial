@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 import HandleExpiredCookies from '../components/HandleExpiredCookies'
 import GetUserRole from '../components/GetUserRole'
@@ -12,6 +13,8 @@ function CustomerOrdersPage() {
   const [isPopUpOpen, setIsPopUpOpen] = useState(false)
   const [popUpTitle, setPopUpTitle] = useState('')
   const [popUpMessage, setPopUpMessage] = useState('')
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadOrders()
@@ -55,6 +58,10 @@ function CustomerOrdersPage() {
     setIsPopUpOpen(false)
   }
 
+  function navigateToProduct(categoryName, productId) {
+    navigate(`/products/${categoryName}/${productId}`)
+  }
+
   if (isLoading) {
     return (
       <main className="min-h-screen bg-ap-tan px-6 pt-32 text-center text-ap-brown">
@@ -88,7 +95,7 @@ function CustomerOrdersPage() {
             orders.map((order) => (
               <div
                 key={order.orderId}
-                className="overflow-hidden rounded-md border border-ap-brown bg-ap-pale transition duration-300 hover:shadow-lg"
+                className="overflow-hidden rounded-md border border-ap-brown bg-ap-pale transition duration-300 hover:shadow-md"
               >
                 {/* Order information */}
                 <div className="grid gap-5 p-5 md:grid-cols-2 md:p-6 lg:grid-cols-[1fr_2.5fr_1.2fr_1fr_1fr] lg:items-center lg:gap-6 lg:p-8">
@@ -144,7 +151,8 @@ function CustomerOrdersPage() {
                       order.orderItems.map((item) => (
                         <div
                           key={item.productId}
-                          className="grid grid-cols-2 gap-3 rounded-md border border-ap-brown bg-white p-4 md:grid-cols-4 md:items-center"
+                          className="grid grid-cols-2 gap-3 rounded-md border border-ap-brown bg-white transition duration-300 hover:shadow-md hover:cursor-pointer p-4 md:grid-cols-4 md:items-center"
+                          onClick={() => navigateToProduct(item.categoryName, item.productId)}
                         >
                           <div>
                             <img
