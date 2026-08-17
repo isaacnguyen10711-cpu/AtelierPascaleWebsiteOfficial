@@ -140,7 +140,7 @@ function CustomerOrdersPage() {
                 </div>
 
                 {/* Items in the order */}
-                <div className="border-t border-ap-brown/30 px-5 py-5 md:px-6 lg:px-8">
+                <div className="border-t border-ap-brown px-5 py-5 md:px-6 lg:px-8">
                   <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
                     Items
                   </p>
@@ -150,15 +150,23 @@ function CustomerOrdersPage() {
                       order.orderItems.map((item) => (
                         <div
                           key={item.productId}
-                          className="grid gap-3 rounded-md border border-ap-brown/30 bg-white p-4 md:grid-cols-3 md:items-center"
+                          className="grid grid-cols-2 gap-3 rounded-md border border-ap-brown bg-white p-4 md:grid-cols-4 md:items-center"
                         >
                           <div>
+                            <img
+                              src={item.imageUrl}
+                              alt={item.productName}
+                              className="aspect-square w-15 rounded-md object-cover md:w-20 lg:w-25"
+                            />
+                          </div>
+                          
+                          <div>
                             <p className="text-xs font-medium uppercase tracking-widest md:text-sm">
-                              Product ID
+                              Product Name
                             </p>
 
                             <p className="mt-1 text-sm md:text-base">
-                              #{item.productId}
+                              #{item.productName}
                             </p>
                           </div>
 

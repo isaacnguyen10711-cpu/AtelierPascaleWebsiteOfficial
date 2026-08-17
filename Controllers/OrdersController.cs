@@ -30,6 +30,7 @@ public class OrdersController : ControllerBase
             .Where(o => o.UserId == GetCurrentUserId())
             .Include(o => o.OrderItems)
             .ThenInclude(oi => oi.Product)
+            .ThenInclude(p => p.Images)
             .OrderByDescending(o => o.OrderDate)
             .ToListAsync();
 
@@ -48,7 +49,9 @@ public class OrdersController : ControllerBase
                     ProductId = oi.ProductId,
                     OrderId = oi.OrderId,
                     Quantity = oi.Quantity,
-                    PriceAtPurchase = oi.PriceAtPurchase
+                    PriceAtPurchase = oi.PriceAtPurchase,
+                    ProductName = oi.Product!.Name,
+                    ImageUrl = oi.Product!.Images.FirstOrDefault()?.ImageUrl ?? string.Empty
                 }).ToList()
             })
             .ToList();
