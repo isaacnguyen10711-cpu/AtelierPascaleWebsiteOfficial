@@ -37,9 +37,16 @@ function RegisterPage() {
       setPopUpMessage('Registration failed');
       setIsPopUpOpen(true);
       return;
-    } else {
-      navigate('/login');
-      window.location.reload();
+    }
+
+    else {
+      setIsPopUpOpen(true)
+      setPopUpTitle("Successful!")
+      setPopUpMessage("Your account has been successfully registered. Navigating to log in page...")
+      setTimeout(() => {
+        navigate('/login');
+        window.location.reload();
+      }, 5000)
     }
   }
 
