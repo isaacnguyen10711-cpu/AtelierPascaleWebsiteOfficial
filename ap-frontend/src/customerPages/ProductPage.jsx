@@ -75,12 +75,12 @@ function ProductPage() {
         <div className={categoryBackground} />
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
           <Reveal key={`${categoryName}-title`}>
-          <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
+          <h1 className="font-['Mea_Culpa'] text-[3rem] font-thin tracking-[0.15em] transition duration-500 hover:translate-x-2 md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
             {categoryTitle}
             </h1>
           </Reveal>
           <Reveal delay={0.4} key={`${categoryName}-description`}>
-          <p className="mt-4 max-w-xs pr-0 text-right text-sm font-light leading-7 transition duration-300 hover:translate-x-2 md:max-w-xl md:pr-30 md:text-base md:leading-8 lg:max-w-2xl lg:pr-50 lg:text-lg lg:leading-9">
+          <p className="mt-4 max-w-xs pr-0 text-right text-sm font-light leading-7 transition duration-500 hover:translate-x-2 md:max-w-xl md:pr-30 md:text-base md:leading-8 lg:max-w-2xl lg:pr-50 lg:text-lg lg:leading-9">
             {categoryDescription}
             </p>
           </Reveal>

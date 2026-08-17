@@ -28,6 +28,7 @@ public class OrdersController : ControllerBase
         // Get all orders for the current user
         var orders = await _context.Orders
             .Where(o => o.UserId == GetCurrentUserId())
+            // Include the related OrderItems and their associated Products and Product Images
             .Include(o => o.OrderItems)
             .ThenInclude(oi => oi.Product)
             .ThenInclude(p => p.Images)
@@ -51,6 +52,7 @@ public class OrdersController : ControllerBase
                     Quantity = oi.Quantity,
                     PriceAtPurchase = oi.PriceAtPurchase,
                     ProductName = oi.Product!.Name,
+                    // Get the first image URL of the product, or an empty string if there are no images
                     ImageUrl = oi.Product!.Images.FirstOrDefault()?.ImageUrl ?? string.Empty
                 }).ToList()
             })

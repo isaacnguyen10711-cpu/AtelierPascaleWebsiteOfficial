@@ -20,7 +20,7 @@ function AboutPage() {
               </p>
             </Reveal>
             <Reveal delay={0.5} key="about-description">
-            <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:text-[6rem] lg:text-[8rem]">
+            <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-500 hover:translate-x-2 md:text-[6rem] lg:text-[8rem]">
               About Us
               </h1>
             </Reveal>

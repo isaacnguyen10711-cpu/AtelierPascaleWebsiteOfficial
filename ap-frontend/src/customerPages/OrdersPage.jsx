@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import PopUpDialog from '../components/PopUpDialog'
 import HandleExpiredCookies from '../components/HandleExpiredCookies'
 import GetUserRole from '../components/GetUserRole'
@@ -7,7 +6,6 @@ import GetUserRole from '../components/GetUserRole'
 const API_URL = import.meta.env.VITE_API_URL
 
 function CustomerOrdersPage() {
-  const navigate = useNavigate()
 
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -55,10 +53,6 @@ function CustomerOrdersPage() {
 
   function handlePopUpClose() {
     setIsPopUpOpen(false)
-
-    if (popUpTitle === 'Login Required') {
-      navigate('/login')
-    }
   }
 
   if (isLoading) {

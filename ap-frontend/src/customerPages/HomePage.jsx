@@ -47,13 +47,13 @@ function HomePage() {
         {/* Stack 2 h1 in flex-col and push them to the end */}
         <div className="absolute inset-0 flex flex-col items-end justify-center pr-10 text-white md:pr-20 lg:pr-30">
           <Reveal>
-          <h1 className="pr-15 font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
+          <h1 className="pr-15 font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-500 hover:translate-x-2 md:pr-30 md:text-[5rem] lg:pr-50 lg:text-[7rem]">
             Atelier
             </h1>
           </Reveal>
 
           <Reveal delay={0.4}>
-          <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-300 hover:translate-x-2 md:mt-[0.2rem] md:text-[5rem] lg:mt-[0.5rem] lg:text-[7rem]">
+          <h1 className="font-['Mea_Culpa'] text-[4rem] font-thin tracking-[0.15em] transition duration-500 hover:translate-x-2 md:mt-[0.2rem] md:text-[5rem] lg:mt-[0.5rem] lg:text-[7rem]">
             Pascale
             </h1>
           </Reveal>
@@ -63,7 +63,7 @@ function HomePage() {
       <main className="bg-ap-tan px-6 py-20 text-ap-brown md:px-12 lg:px-20">
         <Reveal>
         <section id="new-arrival" className="mx-auto max-w-5xl lg:max-w-6xl">
-          <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
+          <h2 className="mt-[-2rem] text-center font-['Tangerine'] text-5xl font-bold transition duration-500 hover:-translate-y-1 md:text-6xl lg:text-7xl">
             New Arrival
           </h2>
 
@@ -104,7 +104,7 @@ function HomePage() {
         <section id="home-decor" className="mx-auto mt-24 grid max-w-6xl gap-8 md:mt-28 md:grid-cols-2 md:items-center md:gap-10 lg:mt-32 lg:gap-12">
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Timeless Elegance</p>
-            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
+            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-500 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Home Decor
             </h2>
             <p className="mt-5 text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -130,7 +130,7 @@ function HomePage() {
         <section id="gifts" className="mx-auto mt-24 max-w-6xl md:mt-28 lg:mt-32">
           <div className="mb-8 text-center md:mb-10 lg:mb-12">
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Thoughtful Gestures</p>
-            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
+            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-500 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Gifts
             </h2>
             <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -169,7 +169,7 @@ function HomePage() {
 
           <div className="order-1 md:order-2">
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Personal Details</p>
-            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
+            <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-500 hover:-translate-y-1 md:text-6xl lg:text-7xl">
               Jewelry
             </h2>
             <p className="mt-5 text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
@@ -187,7 +187,7 @@ function HomePage() {
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-7 lg:gap-8">
             <div className="col-span-2 m-1 md:col-span-1 md:m-2 lg:m-3">
               <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Moments Become Art</p>
-              <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-300 hover:-translate-y-1 md:text-6xl lg:text-7xl">
+              <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-500 hover:-translate-y-1 md:text-6xl lg:text-7xl">
                 Art
               </h2>
               <p className="mt-5 text-sm leading-7 text-ap-brown md:mt-6 md:text-base md:leading-8 lg:text-lg lg:leading-9">
