@@ -9,9 +9,6 @@ public class User
     public string PasswordHash { get; set; } = string.Empty;
 
     public string Role { get; set; } = "Customer";
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public DateTime? DateOfBirth { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

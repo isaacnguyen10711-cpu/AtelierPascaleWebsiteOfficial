@@ -11,8 +11,10 @@ function ProductPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   const { categoryName } = useParams();
+
+  // Use the useSearchParams hook to get the sortBy query parameter from the URL. If it's not present, default to an empty string.
   const [searchParams, setSearchParams] = useSearchParams();
-  const sortBy = searchParams.get("sortBy" ?? "")
+  const sortBy = searchParams.get("sortBy") ?? "";
 
   // Fetch the user role when the component mounts so that we can conditionally render admin features based on the user's role.
   useEffect(() => {

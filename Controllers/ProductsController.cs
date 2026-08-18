@@ -50,7 +50,7 @@ public class ProductsController : ControllerBase
 
     // Filter products by category name
     [HttpGet("category/{categoryName}")] 
-    public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetProductsByCategory(string categoryName, string? sortBy)
+    public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetProductsByCategory([FromRoute] string categoryName, [FromQuery] string? sortBy)
     {
         if (string.IsNullOrWhiteSpace(categoryName))
         {
