@@ -117,10 +117,10 @@ function HomePage() {
 
           <div className="grid gap-4 md:grid-cols-[5fr_4fr] md:gap-5 lg:gap-6">
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1">
-              <img src={homeDecorImages[0]} alt="Home decor collection" className="mx-auto h-[450px] w-full object-cover object-center md:h-[320px] lg:h-[420px]" />
+              <img src={homeDecorImages[0]} alt="Home decor collection" className="mx-auto h-[420px] w-full object-cover object-center md:h-[320px] lg:h-[420px]" />
             </div>
             <div className="overflow-hidden rounded transition duration-300 hover:-translate-y-1 md:mt-10">
-              <img src={homeDecorImages[1]} alt="Home decor detail" className="mx-auto h-[450px] w-full object-cover object-center md:h-[270px] lg:h-[350px]" />
+              <img src={homeDecorImages[1]} alt="Home decor detail" className="mx-auto h-[420px] w-full object-cover object-center md:h-[270px] lg:h-[350px]" />
             </div>
           </div>
         </section>
@@ -185,7 +185,7 @@ function HomePage() {
         <Reveal>
         <section id="art" className="mx-auto mt-24 max-w-6xl pb-10 md:mt-28 md:pb-12 lg:mt-32 lg:pb-14">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-7 lg:gap-8">
-            <div className="col-span-2 m-1 md:col-span-1 md:m-2 lg:m-3">
+            <div className="col-span-2 md:col-span-1 m-1 md:m-2 lg:m-3">
               <p className="mb-4 text-xs uppercase tracking-[0.3em] text-ap-brown md:text-sm lg:text-base">Moments Become Art</p>
               <h2 className="font-['Tangerine'] text-5xl font-bold transition duration-500 hover:-translate-y-1 md:text-6xl lg:text-7xl">
                 Art
