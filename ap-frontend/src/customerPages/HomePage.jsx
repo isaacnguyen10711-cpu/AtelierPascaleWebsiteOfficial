@@ -32,10 +32,10 @@ const jewelryImages = [
 ]
 
 const artImages = [
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 1.jpg',
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 2.jpg',
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 3 (2).jpg',
-  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 4.jpg'
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 5.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 6.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 7.jpg',
+  'https://atelierpascaleimages.blob.core.windows.net/product-images/Art/Pic 8.jpg'
 ]
 
 function HomePage() {
