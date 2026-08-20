@@ -41,6 +41,16 @@ function ProductDetailsPage() {
       console.error('Product not found')
       return
     }
+
+    // Check if the user is logged in before adding to cart
+    const userRole = await GetUserRole()
+    if (!userRole) {
+      setPopUpTitle("Login Required")
+      setPopUpMessage("Please log in to add products to your cart.")
+      setIsPopUpOpen(true)
+      return
+    }
+
     // Implement the logic to add the product to the cart
     const response = await fetch(`${API_URL}/api/ItemsInCart`, {
       method: 'POST',
@@ -51,6 +61,7 @@ function ProductDetailsPage() {
       body: JSON.stringify({ productId: product.id }),
     })
 
+    
     if (HandleExpiredCookies(response)) {
       setPopUpTitle("Session Expired")
       setPopUpMessage("Your session has expired. Please log in again.")
